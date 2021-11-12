@@ -1,0 +1,11 @@
+Style/Documentation:
+  Enabled: False
+AllCops:
+  Exclude:
+    - bin/*
+    - node_modules/*
+    - vendor/bundle/**/*
+    - config/*
+    - config/*/*
+    - db/*
+    - db/*/*
