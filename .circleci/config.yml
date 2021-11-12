@@ -7,15 +7,15 @@ executors:
     docker:
       - image: circleci/ruby:2.7.4-browsers
         environment:
-          BUNDLE_PATH: $BUNDLE_PATH
-          PGHOST: $HOST
-          PGUSER: $USERNAME
-          RAILS_ENV: $RAILS_ENV
+          BUNDLE_PATH: vendor/bundle
+          PGHOST: 127.0.0.1
+          PGUSER: postgres
+          RAILS_ENV: test
       - image: circleci/postgres:12
         environment:
-          POSTGRES_USER: $USERNAME
-          POSTGRES_DB: $DB
-          POSTGRES_PASSWORD: $PASSWORD
+          POSTGRES_USER: postgres
+          POSTGRES_DB: bookstore_test
+          POSTGRES_PASSWORD: postgres
 
 commands:
   defaults:
@@ -42,7 +42,7 @@ commands:
             - ~/.cache/yarn
           key: yarn-cache-v4-{{ arch }}-{{ .Branch }}-{{ checksum "yarn.lock" }}
       - run: dockerize -wait tcp://localhost:5432 -timeout 1m
-      # - run: bin/rails db:schema:load --trace
+      - run: bin/rails db:schema:load --trace
       - store_test_results:
           path: test_results
 

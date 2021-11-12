@@ -7,7 +7,6 @@ RSpec.describe HomePageController do
     it { expect(page).to have_content(I18n.t(:welcome)) }
     it { expect(page).to have_content(I18n.t(:phone)) }
     it { expect(page).to have_content(I18n.t(:email_support)) }
-    it { expect(page.has_button?(I18n.t(:buy_now))).to be_truthy }
     it { expect(page.has_link?(I18n.t(:my_account))).to be_truthy }
   end
 end

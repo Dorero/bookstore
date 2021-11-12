@@ -4,7 +4,7 @@
       .col-sm-9
         %ul.list-inline.general-align.mb-25
           %li
-            = link_to(I18n.t(:home), '/', class: 'nav-link')
+            = link_to(I18n.t(:home), root_path, class: 'nav-link')
           %li
             = link_to(I18n.t(:shop), '/shop', class: 'nav-link')
           %li
@@ -17,13 +17,13 @@
         %ul.list-inline.general-align
           %li
             = link_to('/facebook', class: 'nav-link') do
-              %i.fa.fa-facebook{'aria-hidden': "true"}
+              %i.fab.fa-facebook-f{'aria-hidden': "true"}
           %li
             = link_to('/twitter', class: 'nav-link') do
-              %i.fa.fa-twitter{'aria-hidden': "true"}
+              %i.fab.fa-twitter{'aria-hidden': "true"}
           %li
             = link_to('/google-plus', class: 'nav-link') do
-              %i.fa.fa-google-plus{'aria-hidden': "true"}
+              %i.fab.fa-google-plus{'aria-hidden': "true"}
           %li
             = link_to('/instagram', class: 'nav-link') do
-              %i.fa.fa-instagram{'aria-hidden': "true"}
+              %i.fab.fa-instagram{'aria-hidden': "true"}

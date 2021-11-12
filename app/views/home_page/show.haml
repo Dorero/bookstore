@@ -1,0 +1,23 @@
+%main.container
+  #slider.carousel.slide{'data-ride': "carousel"}
+    %ol.carousel-indicators
+      - @books.length.times do |index|
+        %li{ class: "#{'active' if index.zero?}"  ,'data-target': "#slider", 'data-slide-to': "#{index}"}
+    .carousel-inner{role: "listbox"}
+      = render('layouts/partials/latest_books', books: @books)
+    %a.left.carousel-control{href: "#slider", role: "button", 'data-slide': "prev"}
+      %span.icon-prev{'aria-hidden': "true"}
+      %span.sr-only= I18n.t(:previous_button)
+    %a.right.carousel-control{href: "#slider", role: "button", 'data-slide': "next"}
+      %span.icon-next{'aria-hidden': "true"}
+      %span.sr-only= I18n.t(:next_button)
+  .container
+    .jumbotron.text-center.mb-0
+      %h2.h1= I18n.t(:welcome)
+      .mb-res-50
+        %p= I18n.t(:we_pore)
+      %button.btn.btn-default= I18n.t(:get_started)
+    .mb-35
+      %h3= I18n.t(:best_sellers)
+      .row
+        = render('layouts/partials/bestsellers')

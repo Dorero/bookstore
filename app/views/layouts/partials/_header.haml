@@ -6,7 +6,7 @@
         %span.icon-bar
         %span.icon-bar
         %span.icon-bar
-      = link_to(I18n.t(:title), '/', class: 'navbar-brand')
+      = link_to(I18n.t(:title), root_path, class: 'navbar-brand')
     = link_to('/shop', class: 'shop-link pull-right visible-xs') do
       %span.shop-icon
         %span.shop-quantity 3
@@ -19,7 +19,7 @@
           %span{'aria-hidden': "true"} &times;
         %ul.nav.navbar-nav
           %li
-            = link_to(I18n.t(:home), '/')
+            = link_to(I18n.t(:home), root_path)
           %li
             = link_to(I18n.t(:shop), '/menu', data_toggle: "collapse", class: "article", type: 'button', aria_expanded: 'false', aria_controls: 'menu')
             %ul#menu.collapse.list-unstyled.pl-30.mb-10{'aria-expanded': "false"}
@@ -34,7 +34,7 @@
       .hidden-xs
         %ul.nav.navbar-nav
           %li
-            = link_to('Home', '/')
+            = link_to('Home', root_path)
           %li.dropdown
             = link_to(I18n.t(:shop), '/menu', data_toggle: "collapse", class: "article", type: 'button', aria_expanded: 'false', aria_controls: 'menu')
             %ul.dropdown-menu

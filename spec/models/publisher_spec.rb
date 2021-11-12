@@ -1,5 +1,5 @@
 # frozen_string_literal: true
 
-RSpec.describe 'home_page/show.haml', type: :view do
+RSpec.describe Publisher, type: :model do
   pending "add some examples to (or delete) #{__FILE__}"
 end

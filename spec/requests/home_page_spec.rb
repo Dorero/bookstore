@@ -1,9 +1,9 @@
 # frozen_string_literal: true
 
 RSpec.describe 'HomePages', type: :request do
-  describe 'GET /index' do
+  describe 'GET /' do
     it 'returns http success' do
-      get '/home_page/index'
+      get '/'
       expect(response).to have_http_status(:success)
     end
   end
