@@ -11,13 +11,16 @@
 names = ['Leon', 'Jason', 'Mike', 'Michael', 'Ursula', 'Vadim', 'Rob', 'Oleg']
 
 
+Category.create(name: 'Mobile development')
+Category.create(name: 'Photo')
+Category.create(name: 'Web design')
+
 10.times do
   author = Author.create(first_name: "Author ##{rand(10)}", last_name: "#{names[rand(names.length )]}")
   book_id = rand(10)
   book = Book.create(name: "Book ##{book_id}", description: "describe book ##{book_id}",
-                     image: 'http://jonathantweedy.com/resources/thumbs/SmashingBook5ResponsiveWebDesign.jpg',)
+                     image: 'http://jonathantweedy.com/resources/thumbs/SmashingBook5ResponsiveWebDesign.jpg',
+                     category_id: rand(3) + 1, price: rand(11.2...76.9).round(2))
   Publisher.create(author: author, book: book)
 end
-
-
 

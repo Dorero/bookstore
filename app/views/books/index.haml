@@ -1,0 +1,84 @@
+%main.container
+  %h1.general-title-margin= I18n.t(:title_catalog)
+  .hidden-xs.clearfix
+    .dropdowns.pull-right
+      .dropdown.width-240
+        %a.dropdown-toggle.lead.small{href: "#", 'data-toggle': "dropdown", role: "button", 'aria-haspopup': "true", 'aria-expanded': "false"}
+          = I18n.t(:newest_first)
+          %i.fas.fa-angle-down.dropdown-icon.pull-right
+        %ul.dropdown-menu
+          %li
+            %a{href: "#"}= I18n.t(:newest_first)
+          %li
+            %a{href: "#"}= I18n.t(:popular_first)
+          %li
+            %a{href: "#"}= I18n.t(:sort_price, start: 'low', end: 'hight')
+          %li
+            %a{href: "#"}= I18n.t(:sort_price, start: 'hight', end: 'low')
+          %li
+            %a{href: "#"}= I18n.t(:sort_title, start: 'A', end: 'Z')
+          %li
+            %a{href: "#"}= I18n.t(:sort_title, start: 'Z', end: 'A')
+    %ul.list-inline.pt-10.mb-25.mr-240
+      %li.mr-35
+        = link_to('/books', class: 'filter-link') do
+          = I18n.t(:all_books)
+          %span.badge.general-badge= @total_quantity
+        - @categories.each do |category|
+          %li.mr-35
+            = link_to("/catalog/category/#{category.id}", class: 'filter-link') do
+              = I18n.t(category.name.downcase.sub(' ', '_').to_sym)
+              %span.badge.general-badge= category.books.length
+  .dropdowns.mb-25
+    %p.lead.small.mb-10= I18n.t(:filter_by_category)
+    .dropdown
+      %a.dropdown-toggle.lead.small{href: "#", 'data-toggle': "dropdown", role: "button", 'aria-haspopup': "true", 'aria-expanded': "false"}
+        = I18n.t(:newest_first)
+        %i.fa.fa-angle-down.dropdown-icon.pull-right
+      %ul.dropdown-menu
+        %li
+          %a{href: "#"}= I18n.t(:newest_first)
+        %li
+          %a{href: "#"}= I18n.t(:popular_first)
+        %li
+          %a{href: "#"}= I18n.t(:sort_price, start: 'low', end: 'hight')
+        %li
+          %a{href: "#"}= I18n.t(:sort_price, start: 'hight', end: 'low')
+    %p.lead.small.mb-10= I18n.t(:sort_by)
+    .dropdown
+      %a.dropdown-toggle.lead.small{href: "#", 'data-toggle': "dropdown", role: "button", 'aria-haspopup': "true", 'aria-expanded': "false"}
+        = I18n.t(:newest_first)
+        %i.fa.fa-angle-down.dropdown-icon.pull-right
+      %ul.dropdown-menu
+        %li
+          %a{href: "#"}= I18n.t(:newest_first)
+        %li
+          %a{href: "#"}= I18n.t(:popular_first)
+        %li
+          %a{href: "#"}= I18n.t(:sort_price, start: 'low', end: 'hight')
+        %li
+          %a{href: "#"}= I18n.t(:sort_price, start: 'hight', end: 'low')
+        %li
+          %a{href: "#"}= I18n.t(:sort_title, start: 'A', end: 'Z')
+        %li
+          %a{href: "#"}= I18n.t(:sort_title, start: 'Z', end: 'A')
+  .mb-120
+    .row
+      - @books.each do |book|
+        .col-xs-6.col-sm-3
+          .general-thumb-wrap
+            .thumbnail.general-thumbnail
+              %img.img-shadow.general-thumbnail-img{src: "http://jonathantweedy.com/resources/thumbs/SmashingBook5ResponsiveWebDesign.jpg", alt: "design-book"}
+              .thumb-hover
+                .general-thumb-link-wrap
+                  = link_to("/catalog/#{book.id}", class: "thumb-hover-link") do
+                    %i.fas.fa-eye.thumb-icon{'aria-hidden': "true"}
+                  %a.thumb-hover-link{href: "#"}
+                    %i.fas.fa-shopping-cart.thumb-icon
+          .general-thumb-info
+            %p.title= book.name
+            %p.font-16.in-gold-500= "€ #{book.price || 'no price yet'}"
+            %span.divider-sm
+            = render('layouts/partials/authors_name', authors: book.authors)
+    .text-center
+      %button.btn.btn-primary= I18n.t(:view_more)

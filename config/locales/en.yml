@@ -30,7 +30,30 @@
 # available at https://guides.rubyonrails.org/i18n.html.
 
 en:
-  title: Bookstore
+  sort_title: "Title: %{start} - %{end}"
+  sort_price: "Price: %{start} to %{end}"
+  view_more: View More
+  score: Score
+  write_review: Write a Review
+  materials: Materials
+  dimensions: Dimensions
+  year_publication: Year of publication
+  read_more: Read More
+  description: Description
+  add_to_cart: Add to Cart
+  back_to_results: Back to results
+  sort_by: Sort by
+  filter_by_category: Filter by category
+  all_books: All
+  popular_first: Popular first
+  newest_first: Newest first
+  title_catalog: Сatalog
+  title_store: Bookstore
+  title: Title
+  review: Review
+  reviews: Reviews
+  verified_reviewer: Verified Reviewer
+  post: Post
   home: Home
   welcome: Welcome to our amazing Bookstore!
   we_pore: We pore through hundreds of new books each month and select the five best we can find to share with our members.
