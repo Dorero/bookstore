@@ -38,12 +38,18 @@ gem 'bootstrap', '~> 5.0.2'
 gem 'haml', '~> 5.2', '>= 5.2.2'
 gem 'haml-rails', '~> 2.0', '>= 2.0.1'
 
+# pagination
+gem 'pagy', '~> 5.3', '>= 5.3.1'
+
 group :development, :test do
   # Check style in tests
   gem 'rspec-rails', '~> 5.0', '>= 5.0.2', require: false
   gem 'rubocop-rspec', '~> 2.6', require: false
   # RSpec results that continuous integration service can read.
   gem 'rspec_junit_formatter', '~> 0.4.1'
+  # fake data
+  gem 'factory_bot_rails', '~> 6.2'
+  gem 'faker', '~> 2.19'
 end
 
 group :development do

@@ -19,13 +19,13 @@
       = render('layouts/partials/authors_name', authors: @book.authors)
       .row
         .col-xs-12.col-md-4
-          %p.h1.in-gold-500.mt-10 €32.90
+          %p.h1.in-gold-500.mt-10= "€#{@book.price}"
         .col-xs-5.col-md-3
           .input-group.general-position
-            %a.input-link{href: "#"}
+            %a.input-link{href: "/books/#{@book.id}?price=decrement"}
               %i.fa.fa-minus.line-height-40
             %input.form-control.quantity-input{type: "text"}
-            %a.input-link{href: "#"}
+            %a.input-link{href: "/books/#{@book.id}?price=increment"}
               %i.fa.fa-plus.line-height-40
         .col-xs-7.col-md-5
           %button.btn.btn-default.pull-right.general-position= I18n.t(:add_to_cart)

@@ -2,21 +2,17 @@
 
 class BooksController < ApplicationController
   def index
-    all_books = Book.all
-    @total_quantity = all_books.count
-    @books = AllBooksQuery.new(12, all_books).call
+    params.permit(:sort, :category)
+    filtered_books = BooksByCategoryQuery.new(params[:category]).call
+    sorted_books = SortBooksQuery.new(params[:sort], filtered_books).call
+    @pagy, @books = pagy(sorted_books)
+    @total_quantity = Book.all.count
     @categories = Category.all.includes(:books)
   end
 
   def show
+    params.permit(:id)
     @book = Book.includes(:authors).find_by(id: params[:id])
-  end
-
-  def category
-    @total_quantity = Book.all.count
-    category_books = BooksByCategoryQuery.new(params[:id]).call
-    @books = AllBooksQuery.new(12, category_books).call
-    @categories = Category.all.includes(:books)
-    render('books/index')
+    redirect_to('/404') unless @book
   end
 end

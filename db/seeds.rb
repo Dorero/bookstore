@@ -8,19 +8,19 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
-names = ['Leon', 'Jason', 'Mike', 'Michael', 'Ursula', 'Vadim', 'Rob', 'Oleg']
-
-
+#
 Category.create(name: 'Mobile development')
 Category.create(name: 'Photo')
 Category.create(name: 'Web design')
 
 10.times do
-  author = Author.create(first_name: "Author ##{rand(10)}", last_name: "#{names[rand(names.length )]}")
-  book_id = rand(10)
-  book = Book.create(name: "Book ##{book_id}", description: "describe book ##{book_id}",
+  name_author = Faker::Book.author.split(' ')
+  user = User.create(name: Faker::Artist.name)
+  author = Author.create(first_name: name_author.first, last_name: name_author.last)
+  book = Book.create(name: Faker::Book.title, description: Faker::Books::Lovecraft.paragraph,
                      image: 'http://jonathantweedy.com/resources/thumbs/SmashingBook5ResponsiveWebDesign.jpg',
                      category_id: rand(3) + 1, price: rand(11.2...76.9).round(2))
   Publisher.create(author: author, book: book)
+  UserBook.create(user: user, book: book)
 end
 
