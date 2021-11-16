@@ -13,14 +13,13 @@ Category.create(name: 'Mobile development')
 Category.create(name: 'Photo')
 Category.create(name: 'Web design')
 
-10.times do
-  name_author = Faker::Book.author.split(' ')
-  user = User.create(name: Faker::Artist.name)
-  author = Author.create(first_name: name_author.first, last_name: name_author.last)
-  book = Book.create(name: Faker::Book.title, description: Faker::Books::Lovecraft.paragraph,
+30.times do
+  author = Author.create(first_name: FFaker::Name.first_name, last_name: FFaker::Name.last_name, description: FFaker::Book.description)
+  book = Book.create(name: FFaker::Book.title, description: FFaker::Book.description,
                      image: 'http://jonathantweedy.com/resources/thumbs/SmashingBook5ResponsiveWebDesign.jpg',
-                     category_id: rand(3) + 1, price: rand(11.2...76.9).round(2))
+                     category_id: rand(3) + 1, price: rand(11.2...76.9).round(2), year: rand(500) + 1521,
+                     dimensions: "H: #{rand(1.0...10.9).round(2)} x W: #{rand(1.0...6.9).round(2)} x D: #{rand(1.0...5.0).round(2)}",
+                     materials: FFaker::Product.product)
   Publisher.create(author: author, book: book)
-  UserBook.create(user: user, book: book)
 end
 

@@ -30,7 +30,8 @@
 # available at https://guides.rubyonrails.org/i18n.html.
 
 en:
-  sort_title: "Title: %{start} - %{end}"
+  sort_title_asc: "Title: A - Z"
+  sort_title_desc: "Title: Z - A"
   sort_price: "Price: %{start} to %{end}"
   view_more: View More
   score: Score

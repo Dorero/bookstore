@@ -7,8 +7,14 @@ class BooksByCategoryQuery
   end
 
   def call
-    return @relation.includes(:authors) unless @category_id
+    return collection unless @category_id
 
-    @relation.includes(:authors).where(category_id: @category_id)
+    collection.where(category_id: @category_id)
+  end
+
+  private
+
+  def collection
+    @collection ||= @relation.includes(:authors)
   end
 end

@@ -49,7 +49,7 @@ group :development, :test do
   gem 'rspec_junit_formatter', '~> 0.4.1'
   # fake data
   gem 'factory_bot_rails', '~> 6.2'
-  gem 'faker', '~> 2.19'
+  gem 'ffaker', '~> 2.20'
 end
 
 group :development do
@@ -87,6 +87,7 @@ group :test do
   gem 'webdrivers', '~> 5.0'
   # Tests
   gem 'rspec', '~> 3.10'
+  gem 'shoulda-matchers', '~> 5.0'
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem

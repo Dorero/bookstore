@@ -16,7 +16,9 @@
 #
 # See http://rubydoc.info/gems/rspec-core/RSpec/Core/Configuration
 require 'rails_helper'
+require './spec/helpers/constants'
 RSpec.configure do |config|
+  include Constants
   config.include Capybara::DSL
   Capybara.javascript_driver = :selenium_chrome
   # rspec-expectations config goes here. You can use an alternate
@@ -98,4 +100,12 @@ RSpec.configure do |config|
   #   Kernel.srand config.seed
   # factory bot
   config.include FactoryBot::Syntax::Methods
+
+  # should matchers
+  Shoulda::Matchers.configure do |configuration|
+    configuration.integrate do |with|
+      with.test_framework :rspec
+      with.library :rails
+    end
+  end
 end

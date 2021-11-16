@@ -54,8 +54,8 @@ Pagy::DEFAULT[:items]  = 12                                 # default
 
 # Countless extra: Paginate without any count, saving one query per rendering
 # See https://ddnexus.github.io/pagy/extras/countless
-# require 'pagy/extras/countless'
-# Pagy::DEFAULT[:countless_minimal] = false   # default (eager loading)
+require 'pagy/extras/countless'
+Pagy::DEFAULT[:countless_minimal] = false   # default (eager loading)
 
 # Elasticsearch Rails extra: Paginate `ElasticsearchRails::Results` objects
 # See https://ddnexus.github.io/pagy/extras/elasticsearch_rails
@@ -158,7 +158,7 @@ Pagy::DEFAULT[:items]  = 12                                 # default
 
 # Support extra: Extra support for features like: incremental, infinite, auto-scroll pagination
 # See https://ddnexus.github.io/pagy/extras/support
-# require 'pagy/extras/support'
+require 'pagy/extras/support'
 
 # Trim extra: Remove the page=1 param from links
 # See https://ddnexus.github.io/pagy/extras/trim

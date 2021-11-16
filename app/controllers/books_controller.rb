@@ -2,17 +2,22 @@
 
 class BooksController < ApplicationController
   def index
-    params.permit(:sort, :category)
-    filtered_books = BooksByCategoryQuery.new(params[:category]).call
-    sorted_books = SortBooksQuery.new(params[:sort], filtered_books).call
-    @pagy, @books = pagy(sorted_books)
+    check_permit
     @total_quantity = Book.all.count
+    @pagy, @books = pagy_countless(FilteredSortBooksQuery.new(params[:category], params[:sort]).call,
+                                   count: @total_quantity, items: 12, cycle: true)
     @categories = Category.all.includes(:books)
   end
 
   def show
-    params.permit(:id)
-    @book = Book.includes(:authors).find_by(id: params[:id])
-    redirect_to('/404') unless @book
+    check_permit
+    @book = Book.all.includes(:authors).find_by(id: params[:id])
+    redirect_to controller: :error, action: :not_found unless @book
+  end
+
+  private
+
+  def check_permit
+    params.permit(:sort, :category, :id)
   end
 end
