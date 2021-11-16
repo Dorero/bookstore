@@ -2,12 +2,7 @@
 
 FactoryBot.define do
   factory :author do
-    first_name { 'John' }
-    last_name  { 'Doe' }
-  end
-
-  factory :book do
-    name { 'One War' }
-    description { 'This is a war!' }
+    first_name { FFaker::Name.first_name }
+    last_name  { FFaker::Name.last_name }
   end
 end

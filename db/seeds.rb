@@ -10,9 +10,8 @@
 
 
 10.times do
-  name = Faker::Book.author.split(' ')
-  author = Author.create(first_name: name.first, last_name: name.last)
-  book = Book.create(name: Faker::Books::CultureSeries.book, description: Faker::Books::Lovecraft.paragraph,
+  author = Author.create(first_name: FFaker::Name.first_name, last_name: FFaker::Name.last_name)
+  book = Book.create(name: FFaker::Book.title, description: FFaker::Book.description,
                      image: 'http://jonathantweedy.com/resources/thumbs/SmashingBook5ResponsiveWebDesign.jpg',)
   AuthorBook.create(author: author, book: book)
 end

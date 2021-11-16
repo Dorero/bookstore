@@ -11,6 +11,6 @@
 #  updated_at :datetime         not null
 #
 class AuthorBook < ApplicationRecord
-  belongs_to :author, dependent: :destroy
-  belongs_to :book, dependent: :destroy
+  belongs_to :author
+  belongs_to :book
 end

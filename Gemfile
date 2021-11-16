@@ -46,7 +46,7 @@ group :development, :test do
   # RSpec results that continuous integration service can read.
   gem 'rspec_junit_formatter', '~> 0.4.1'
   # fake data
-  gem 'faker', '~> 2.19'
+  gem 'ffaker', '~> 2.20'
 end
 
 group :development do
