@@ -2,17 +2,17 @@
 
 # == Schema Information
 #
-# Table name: authors
+# Table name: author_books
 #
 #  id         :bigint           not null, primary key
-#  first_name :string
-#  last_name  :string
+#  author_id  :bigint
+#  book_id    :bigint
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
 #
-RSpec.describe Author, type: :model do
+RSpec.describe AuthorBook, type: :model do
   describe 'model relations' do
-    it { is_expected.to have_many(:author_books) }
-    it { is_expected.to have_many(:books).through(:author_books) }
+    it { is_expected.to belong_to(:author) }
+    it { is_expected.to belong_to(:book) }
   end
 end

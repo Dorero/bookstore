@@ -8,15 +8,13 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
-names = ['Leon', 'Jason', 'Mike', 'Michael', 'Ursula', 'Vadim', 'Rob', 'Oleg']
-
 
 10.times do
-  author = Author.create(first_name: "Author ##{rand(10)}", last_name: "#{names[rand(names.length )]}")
-  book_id = rand(10)
-  book = Book.create(name: "Book ##{book_id}", description: "describe book ##{book_id}",
+  name = Faker::Book.author.split(' ')
+  author = Author.create(first_name: name.first, last_name: name.last)
+  book = Book.create(name: Faker::Books::CultureSeries.book, description: Faker::Books::Lovecraft.paragraph,
                      image: 'http://jonathantweedy.com/resources/thumbs/SmashingBook5ResponsiveWebDesign.jpg',)
-  Publisher.create(author: author, book: book)
+  AuthorBook.create(author: author, book: book)
 end
 
 
