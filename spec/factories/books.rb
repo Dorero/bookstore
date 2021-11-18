@@ -13,7 +13,9 @@
 #  category_id :bigint
 #  price       :decimal(, )
 #  year        :string
-#  dimensions  :string
+#  height      :string
+#  width       :string
+#  depth       :string
 #  materials   :string
 #
 FactoryBot.define do
