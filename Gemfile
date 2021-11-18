@@ -41,6 +41,12 @@ gem 'haml-rails', '~> 2.0', '>= 2.0.1'
 # pagination
 gem 'pagy', '~> 5.3', '>= 5.3.1'
 
+# fake data
+gem 'ffaker', '~> 2.20'
+
+#  presentation logic
+gem 'draper', '~> 4.0', '>= 4.0.2'
+
 group :development, :test do
   # Check style in tests
   gem 'rspec-rails', '~> 5.0', '>= 5.0.2', require: false
@@ -49,7 +55,6 @@ group :development, :test do
   gem 'rspec_junit_formatter', '~> 0.4.1'
   # fake data
   gem 'factory_bot_rails', '~> 6.2'
-  gem 'ffaker', '~> 2.20'
 end
 
 group :development do

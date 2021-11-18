@@ -11,6 +11,7 @@ RSpec.describe 'Books', type: :request do
 
   describe 'GET #show' do
     let!(:book) { create(:book) }
+
     before { get book_path(book.id) }
 
     it 'returns http success show book' do

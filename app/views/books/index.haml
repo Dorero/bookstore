@@ -4,21 +4,21 @@
     .dropdowns.pull-right
       .dropdown.width-240
         %a.dropdown-toggle.lead.small{'data-toggle': "dropdown", role: "button", 'aria-haspopup': "true", 'aria-expanded': "false"}
-          = params[:sort] || I18n.t(:newest_first)
+          = params[:sort_name] || I18n.t(:newest_first)
           %i.fas.fa-angle-down.dropdown-icon.pull-right
         %ul.dropdown-menu
           %li
-            = link_to(I18n.t(:newest_first), books_path(sort: I18n.t(:newest_first), category: params[:category]))
+            = link_to(I18n.t(:newest_first), books_path(sort: :newest_first, sort_name: I18n.t(:newest_first), category: params[:category]))
           %li
-            = link_to(I18n.t(:popular_first),  books_path(sort: I18n.t(:popular_first), category: params[:category]))
+            = link_to(I18n.t(:popular_first),  books_path(sort: :popular_first, sort_name: I18n.t(:popular_first), category: params[:category]))
           %li
-            = link_to(I18n.t(:sort_price, start: 'low', end: 'hight'),  books_path(sort: I18n.t(:sort_price, start: 'low', end: 'hight'), category: params[:category]))
+            = link_to(I18n.t(:sort_price, start: 'low', end: 'hight'),  books_path(sort: :price_low, sort_name: I18n.t(:sort_price, start: 'low', end: 'hight'), category: params[:category]))
           %li
-            = link_to(I18n.t(:sort_price, start: 'hight', end: 'low'),  books_path(sort: I18n.t(:sort_price, start: 'hight', end: 'low'), category: params[:category]))
+            = link_to(I18n.t(:sort_price, start: 'hight', end: 'low'),  books_path(sort: :price_hight, sort_name: I18n.t(:sort_price, start: 'hight', end: 'low'), category: params[:category]))
           %li
-            = link_to(I18n.t(:sort_title_asc),  books_path(sort: I18n.t(:sort_title_asc), category: params[:category]))
+            = link_to(I18n.t(:sort_title_asc),  books_path(sort: :title_asc, sort_name: I18n.t(:sort_title_asc), category: params[:category]))
           %li
-            = link_to(I18n.t(:sort_title_desc), books_path(sort: I18n.t(:sort_title_desc), category: params[:category]))
+            = link_to(I18n.t(:sort_title_desc), books_path(sort: :title_desc, sort_name: I18n.t(:sort_title_desc), category: params[:category]))
     %ul.list-inline.pt-10.mb-25.mr-240
       %li.mr-35
         = link_to(books_path(sort: params[:sort]), class: 'filter-link') do
@@ -30,22 +30,8 @@
               = I18n.t(category.name.downcase.sub(' ', '_').to_sym)
               %span.badge.general-badge= category.books.length
   .mb-120
-    .row
-      - @books.each do |book|
-        .col-xs-6.col-sm-3
-          .general-thumb-wrap
-            .thumbnail.general-thumbnail
-              %img.img-shadow.general-thumbnail-img{src: "http://jonathantweedy.com/resources/thumbs/SmashingBook5ResponsiveWebDesign.jpg", alt: "design-book"}
-              .thumb-hover
-                .general-thumb-link-wrap
-                  = link_to(book_path(book.id, category: params[:category], sort: params[:sort]), class: "thumb-hover-link") do
-                    %i.fas.fa-eye.thumb-icon{'aria-hidden': "true"}
-                  %a.thumb-hover-link{href: "#"}
-                    %i.fas.fa-shopping-cart.thumb-icon
-          .general-thumb-info
-            %p.title= book.name
-            %p.font-16.in-gold-500= number_to_currency(book.price, locale: :fr)
-            %span.divider-sm
-            = render('layouts/partials/authors_name', authors: book.authors)
+    .row#books_list
+      = render('layouts/partials/books', books: @books)
     .text-center
-      = raw pagy_next_link(@pagy, text: I18n.t(:view_more))
+      %button{class: 'btn btn-primary', category: "#{params[:category]}", sort: "#{params[:sort] }", page:  @page}= I18n.t(:view_more)
+

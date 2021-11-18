@@ -10,6 +10,8 @@ import "channels"
 require("@popperjs/core")
 import('../src/CountPriceBook')
 import('../src/ShowFullDescriptionBook')
+import('../src/LoadBooks')
+import('../src/pagy')
 import('bootstrap')
 Rails.start()
 Turbolinks.start()

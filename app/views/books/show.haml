@@ -24,7 +24,8 @@
           .input-group.general-position
             = link_to(book_path(@book.id), class: 'input-link') do
               %i.fa.fa-minus.line-height-40
-            %input.form-control.quantity-input{type: "text"}
+            %input.form-control.quantity-input{type: "text", value: 1}
+            %input{:type=>"hidden", class: 'hidden-amount', value: @book.price}
             = link_to(book_path(@book.id), class: 'input-link') do
               %i.fa.fa-plus.line-height-40
         .col-xs-7.col-md-5
@@ -32,8 +33,8 @@
       .general-info-wrap.divider-lg
         %p= I18n.t(:description)
         %p.lead.small.line-height-2
-          - if @book.description.length > 250
-            = "#{@book.description[0...250]}..."
+          - if @book.description.length > BooksController::MAX_SIZE_DESCRIPTION
+            = "#{@book.description[0...BooksController::MAX_SIZE_DESCRIPTION]}..."
             %a.in-gold-500.ml-10{href: "#"}= I18n.t(:read_more)
             %input{:type=>"hidden", class: 'hidden-description', value: @book.description}
           - else
@@ -49,6 +50,6 @@
       .general-info-wrap.divider-lg
         .clearfix
           %p.pull-left= I18n.t(:materials)
-          %p.lead.small.pull-right= @book.materials.sub(' ', ', ')
+          %p.lead.small.pull-right= @book.materials
   = render('layouts/partials/reviews')
 

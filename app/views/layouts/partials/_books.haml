@@ -1,0 +1,16 @@
+- books.each do |book|
+  .col-xs-6.col-sm-3
+    .general-thumb-wrap
+      .thumbnail.general-thumbnail
+        %img.img-shadow.general-thumbnail-img{src: "http://jonathantweedy.com/resources/thumbs/SmashingBook5ResponsiveWebDesign.jpg", alt: "design-book"}
+        .thumb-hover
+          .general-thumb-link-wrap
+            = link_to(book_path(book.id, category: params[:category], sort: params[:sort]), class: "thumb-hover-link") do
+              %i.fas.fa-eye.thumb-icon{'aria-hidden': "true"}
+            %a.thumb-hover-link{href: "#"}
+              %i.fas.fa-shopping-cart.thumb-icon
+    .general-thumb-info
+      %p.title= book.name
+      %p.font-16.in-gold-500= number_to_currency(book.price, locale: :fr)
+      %span.divider-sm
+      = render('layouts/partials/authors_name', authors: book.authors)

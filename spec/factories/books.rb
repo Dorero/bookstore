@@ -22,7 +22,9 @@ FactoryBot.define do
     description { FFaker::Book.description }
     price { rand(11.2...76.9).round(2) }
     year { rand(1521..2020) }
-    dimensions { "H: #{rand(1.0...10.9).round(2)} x W: #{rand(1.0...6.9).round(2)} x D: #{rand(1.0...5.0).round(2)}" }
+    height { rand(1.0...10.9).round(2) }
+    width { rand(1.0...6.9).round(2) }
+    depth { rand(1.0...5.0).round(2) }
     materials { FFaker::Product.product }
     category
   end

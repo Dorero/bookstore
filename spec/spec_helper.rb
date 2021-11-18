@@ -16,9 +16,7 @@
 #
 # See http://rubydoc.info/gems/rspec-core/RSpec/Core/Configuration
 require 'rails_helper'
-require './spec/helpers/constants'
 RSpec.configure do |config|
-  include Constants
   config.include Capybara::DSL
   Capybara.javascript_driver = :selenium_chrome
   # rspec-expectations config goes here. You can use an alternate

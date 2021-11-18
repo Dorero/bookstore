@@ -1,0 +1,5 @@
+:javascript
+  $('#books_list').append("#{j(render 'layouts/partials/books', books: @books)}");
+  $('.page.next').html("#{j(render 'layouts/partials/next_link')}");
+
+
