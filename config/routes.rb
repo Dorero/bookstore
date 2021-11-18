@@ -4,6 +4,4 @@ Rails.application.routes.draw do
   get '/404', to: 'error#not_found'
 
   resources :books, only: [:index, :show]
-
-  get 'api/books', to: 'books#load'
 end

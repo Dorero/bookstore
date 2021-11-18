@@ -1,5 +1,2 @@
-:javascript
-  $('#books_list').append("#{j(render 'layouts/partials/books', books: @books)}");
-  $('.page.next').html("#{j(render 'layouts/partials/next_link')}");
-
-
+$('#books_list').append('#{j(render partial: "layouts/partials/books", locals: { books: @books})}');
+$('#div_next_link').html('#{j(render partial: "layouts/partials/next_link", locals: { pagy: @pagy })}');

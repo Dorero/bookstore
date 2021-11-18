@@ -83,9 +83,9 @@ Pagy::DEFAULT[:countless_minimal] = false   # default (eager loading)
 # See https://ddnexus.github.io/pagy/extras/metadata
 # you must require the shared internal extra (BEFORE the metadata extra) ONLY if you need also the :sequels
 # require 'pagy/extras/shared'
-# require 'pagy/extras/metadata'
+require 'pagy/extras/metadata'
 # For performance reason, you should explicitly set ONLY the metadata you use in the frontend
-# Pagy::DEFAULT[:metadata] = %i[scaffold_url count page prev next last]   # example
+Pagy::DEFAULT[:metadata] = %i[scaffold_url count page prev next last]   # example
 
 # Searchkick extra: Paginate `Searchkick::Results` objects
 # See https://ddnexus.github.io/pagy/extras/searchkick
@@ -177,7 +177,7 @@ require 'pagy/extras/support'
 # Rails: extras assets path required by the helpers that use javascript
 # (pagy*_nav_js, pagy*_combo_nav_js, and pagy_items_selector_js)
 # See https://ddnexus.github.io/pagy/extras#javascript
-# Rails.application.config.assets.paths << Pagy.root.join('javascripts')
+Rails.application.config.assets.paths << Pagy.root.join('javascripts')
 
 
 # I18n

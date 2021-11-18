@@ -11,7 +11,7 @@
 #  created_at  :datetime         not null
 #  updated_at  :datetime         not null
 #  category_id :bigint
-#  price       :decimal(, )
+#  price       :decimal(8, 2)
 #  year        :string
 #  height      :string
 #  width       :string

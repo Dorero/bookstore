@@ -8,6 +8,6 @@ class BookDecorator < Draper::Decorator
   end
 
   def dimensions
-    "H: #{object.height} x W: #{object.width} x D: #{object.depth}"
+    "#{I18n.t(:hegiht)}: #{object.height} x #{I18n.t(:width)}: #{object.width} x #{I18n.t(:depth)}: #{object.depth}"
   end
 end

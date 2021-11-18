@@ -30,6 +30,9 @@
 # available at https://guides.rubyonrails.org/i18n.html.
 
 en:
+  hegiht: H
+  width: W
+  depth: D
   sort_title_asc: "Title: A - Z"
   sort_title_desc: "Title: Z - A"
   sort_price: "Price: %{start} to %{end}"
