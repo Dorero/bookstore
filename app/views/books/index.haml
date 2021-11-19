@@ -1,0 +1,36 @@
+%main.container
+  %h1.general-title-margin= I18n.t(:title_catalog)
+  .hidden-xs.clearfix
+    .dropdowns.pull-right
+      .dropdown.width-240
+        %a.dropdown-toggle.lead.small{'data-toggle': "dropdown", role: "button", 'aria-haspopup': "true", 'aria-expanded': "false"}
+          = params[:sort_name] || I18n.t(:newest_first)
+          %i.fas.fa-angle-down.dropdown-icon.pull-right
+        %ul.dropdown-menu
+          %li
+            = link_to(I18n.t(:newest_first), books_path(sort: :newest_first, sort_name: I18n.t(:newest_first), category: params[:category]))
+          %li
+            = link_to(I18n.t(:popular_first),  books_path(sort: :popular_first, sort_name: I18n.t(:popular_first), category: params[:category]))
+          %li
+            = link_to(I18n.t(:sort_price, start: 'low', end: 'hight'),  books_path(sort: :price_low, sort_name: I18n.t(:sort_price, start: 'low', end: 'hight'), category: params[:category]))
+          %li
+            = link_to(I18n.t(:sort_price, start: 'hight', end: 'low'),  books_path(sort: :price_hight, sort_name: I18n.t(:sort_price, start: 'hight', end: 'low'), category: params[:category]))
+          %li
+            = link_to(I18n.t(:sort_title_asc),  books_path(sort: :title_asc, sort_name: I18n.t(:sort_title_asc), category: params[:category]))
+          %li
+            = link_to(I18n.t(:sort_title_desc), books_path(sort: :title_desc, sort_name: I18n.t(:sort_title_desc), category: params[:category]))
+    %ul.list-inline.pt-10.mb-25.mr-240
+      %li.mr-35
+        = link_to(books_path(sort: params[:sort]), class: 'filter-link') do
+          = I18n.t(:all_books)
+          %span.badge.general-badge= @total_quantity
+        - @categories.each do |category|
+          %li.mr-35
+            = link_to(books_path(category: category.id, sort: params[:sort]), class: 'filter-link') do
+              = I18n.t(category.name.downcase.sub(' ', '_').to_sym)
+              %span.badge.general-badge= category.books.length
+  .mb-120
+    .row#books_list
+      = render('layouts/partials/books', books: @books)
+    .text-center#div_next_link
+      != pagy_bootstrap_nav(@pagy)
