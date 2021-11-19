@@ -54,12 +54,6 @@ group :development, :test do
   gem 'rubocop-rspec', '~> 2.6', require: false
   # RSpec results that continuous integration service can read.
   gem 'rspec_junit_formatter', '~> 0.4.1'
-  # fake data
-<<<<<<< HEAD
-  gem 'factory_bot_rails', '~> 6.2'
-=======
-  gem 'ffaker', '~> 2.20'
->>>>>>> step_1
 end
 
 group :development do
