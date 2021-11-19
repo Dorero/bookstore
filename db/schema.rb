@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_11_16_074854) do
+ActiveRecord::Schema.define(version: 2021_11_18_165216) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -29,6 +29,7 @@ ActiveRecord::Schema.define(version: 2021_11_16_074854) do
     t.string "last_name"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "description"
   end
 
   create_table "books", force: :cascade do |t|
@@ -38,7 +39,12 @@ ActiveRecord::Schema.define(version: 2021_11_16_074854) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.bigint "category_id"
-    t.float "price"
+    t.decimal "price", precision: 8, scale: 2
+    t.string "year"
+    t.string "height"
+    t.string "width"
+    t.string "depth"
+    t.string "materials"
     t.index ["category_id"], name: "index_books_on_category_id"
   end
 
@@ -48,33 +54,7 @@ ActiveRecord::Schema.define(version: 2021_11_16_074854) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
-  create_table "publishers", force: :cascade do |t|
-    t.bigint "author_id"
-    t.bigint "book_id"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["author_id"], name: "index_publishers_on_author_id"
-    t.index ["book_id"], name: "index_publishers_on_book_id"
-  end
-
-  create_table "user_books", force: :cascade do |t|
-    t.bigint "user_id"
-    t.bigint "book_id"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["book_id"], name: "index_user_books_on_book_id"
-    t.index ["user_id"], name: "index_user_books_on_user_id"
-  end
-
-  create_table "users", force: :cascade do |t|
-    t.string "name"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-  end
-
   add_foreign_key "author_books", "authors"
   add_foreign_key "author_books", "books"
   add_foreign_key "books", "categories"
-  add_foreign_key "publishers", "authors"
-  add_foreign_key "publishers", "books"
 end

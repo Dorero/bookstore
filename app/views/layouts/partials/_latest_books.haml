@@ -8,8 +8,6 @@
         .mb-60
           %h1= book.name
           %p.lead= book.description
-          %p.lead.small
-            - book.authors.each_with_index do |author, index|
-              = "#{index != book.authors.length - 1 ? author.first_name + ',' : author.first_name}"
+          = render('layouts/partials/authors_name', authors: book.authors)
           .general-align
             %button.btn-primary= I18n.t(:buy_now)

@@ -97,8 +97,9 @@ RSpec.configure do |config|
   #   # as the one that triggered the failure.
   #   Kernel.srand config.seed
 
-  # factory_bot
+  # factory bot
   config.include FactoryBot::Syntax::Methods
+
   # tests matchers
   Shoulda::Matchers.configure do |configuration|
     configuration.integrate do |with|
