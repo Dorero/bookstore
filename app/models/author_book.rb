@@ -2,7 +2,7 @@
 
 # == Schema Information
 #
-# Table name: publishers
+# Table name: author_books
 #
 #  id         :bigint           not null, primary key
 #  author_id  :bigint
@@ -10,7 +10,7 @@
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
 #
-class Publisher < ApplicationRecord
-  belongs_to :author, dependent: :destroy
-  belongs_to :book, dependent: :destroy
+class AuthorBook < ApplicationRecord
+  belongs_to :author
+  belongs_to :book
 end

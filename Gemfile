@@ -48,13 +48,18 @@ gem 'ffaker', '~> 2.20'
 gem 'draper', '~> 4.0', '>= 4.0.2'
 
 group :development, :test do
+  gem 'factory_bot_rails', '~> 6.2'
   # Check style in tests
   gem 'rspec-rails', '~> 5.0', '>= 5.0.2', require: false
   gem 'rubocop-rspec', '~> 2.6', require: false
   # RSpec results that continuous integration service can read.
   gem 'rspec_junit_formatter', '~> 0.4.1'
   # fake data
+<<<<<<< HEAD
   gem 'factory_bot_rails', '~> 6.2'
+=======
+  gem 'ffaker', '~> 2.20'
+>>>>>>> step_1
 end
 
 group :development do

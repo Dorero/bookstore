@@ -12,6 +12,6 @@
 #  updated_at  :datetime         not null
 #
 class Author < ApplicationRecord
-  has_many :publishers
-  has_many :books, through: :publishers
+  has_many :author_books, dependent: :destroy
+  has_many :books, through: :author_books
 end

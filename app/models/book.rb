@@ -20,6 +20,6 @@
 #
 class Book < ApplicationRecord
   belongs_to :category
-  has_many :publishers
-  has_many :authors, through: :publishers, dependent: :destroy
+  has_many :author_books, dependent: :destroy
+  has_many :authors, through: :author_books
 end

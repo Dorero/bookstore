@@ -7,6 +7,6 @@ class LatestBooksQuery
   end
 
   def call
-    @relation.includes(:authors).group(%i[id name]).order(id: :desc).limit(@quantity)
+    @relation.includes(:authors).group(%i[id name]).order(created_at: :desc).limit(@quantity)
   end
 end
