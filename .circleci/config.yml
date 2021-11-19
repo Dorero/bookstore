@@ -1,0 +1,93 @@
+version: 2.1
+
+executors:
+  default:
+    working_directory: ~/bookstore
+    description: The official CircleCI Ruby Docker image
+    docker:
+      - image: circleci/ruby:2.7.4-browsers
+        environment:
+          BUNDLE_PATH: vendor/bundle
+          PGHOST: 127.0.0.1
+          PGUSER: postgres
+          RAILS_ENV: test
+      - image: circleci/postgres:12
+        environment:
+          POSTGRES_USER: postgres
+          POSTGRES_DB: bookstore_test
+          POSTGRES_PASSWORD: postgres
+
+commands:
+  defaults:
+    steps:
+      - checkout
+      - run: |
+          sudo apt-get update
+          sudo apt-get install -y postgresql-client
+          sudo apt install nodejs
+          curl -o- -L https://yarnpkg.com/install.sh | bash
+          echo 'export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"' >> $BASH_ENV
+      - restore_cache:
+          keys:
+            - bookstore-bundle-v2-{{ checksum "Gemfile.lock" }}
+            - bookstore-bundle-v2-
+      - run: bundle install
+      - run: yarn install
+      - save_cache:
+          key: bookstore-bundle-v2-{{ checksum "Gemfile.lock" }}
+          paths:
+            - vendor/bundle
+      - save_cache:
+          paths:
+            - ~/.cache/yarn
+          key: yarn-cache-v4-{{ arch }}-{{ .Branch }}-{{ checksum "yarn.lock" }}
+      - run: dockerize -wait tcp://localhost:5432 -timeout 1m
+      - run: bin/rails db:schema:load --trace
+      - store_test_results:
+          path: test_results
+
+  run_linters:
+    description: command to start linters
+    steps:
+      - run:
+          name: gems_audit
+          command: bundle exec bundle-audit
+      - run:
+          name: rubocop
+          command: bundle exec rubocop
+      - run:
+          name: fasterer
+          command: bundle exec fasterer
+  run_specs:
+    steps:
+      - run:
+          name: run spec
+          command: |
+            bundle exec rspec --profile 10 \
+                              --format RspecJunitFormatter \
+                              --out test_results/rspec.xml \
+                              --format progress \
+                              $(circleci tests glob "spec/**/*_spec.rb" | circleci tests split --split-by=timings)
+      - store_test_results:
+          path: test_results
+jobs:
+  lintering:
+    executor: default
+    steps:
+      - defaults
+      - run_linters
+  run_specs:
+    executor: default
+    steps:
+      - defaults
+      - run_specs
+
+workflows:
+  version: 2
+  build:
+    jobs:
+      - lintering
+      - run_specs:
+          requires:
+            - lintering
+

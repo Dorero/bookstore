@@ -38,3 +38,10 @@
 /yarn-error.log
 yarn-debug.log*
 .yarn-integrity
+.idea
+
+/config/credentials/production.key
+
+/config/credentials/development.key
+
+/config/credentials/test.key
