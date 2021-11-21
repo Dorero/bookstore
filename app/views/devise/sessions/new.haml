@@ -1,0 +1,31 @@
+%main.container.general-main-wrap
+  .text-center
+    %h3.general-login-title= I18n.t(:log_in)
+    = link_to(user_facebook_omniauth_authorize_path, class: 'general-login-icon', method: :post) do
+      %i.fab.fa-facebook-square{style: "font-size: 45px"}
+    %p.general-login-text= I18n.t(:or)
+  = form_for(resource, as: resource_name, url: new_session_path(resource_name), html: {class: 'general-form'}) do |form|
+    = render "devise/shared/error_messages", resource: resource
+    .form-group.mb-30
+      = form.label :email, I18n.t(:enter_email), class: 'control-label input-label'
+      %br/
+      = form.email_field :email, autofocus: true, autocomplete: "email", id: 'email', class: 'form-control', placeholder: I18n.t(:enter_email)
+    .form-group.mb-30
+      = form.label :password, I18n.t(:password), class: 'control-label input-label'
+      - if @minimum_password_length
+        %em
+          (#{@minimum_password_length} characters minimum)
+      %br/
+      = form.password_field :password, autocomplete: "new-password", id: 'password', class: 'form-control', placeholder: I18n.t(:password)
+      = link_to(I18n.t(:forgot_password), new_password_path(resource), class: 'help-block in-gold-500')
+    .form-group.checkbox.text-center.mb-30
+      %label.checkbox-label
+        = form.check_box :remember_me, class: 'checkbox-input', hidden: true
+        %span.checkbox-icon
+          %i.fas.fa-check
+        %span.checkbox-text= I18n.t(:remember_me)
+    .text-center
+      %button.btn.btn-default.mb-20= I18n.t(:back_to_store)
+  %p.general-sign-text.text-center
+    = I18n.t(:no_account)
+    = link_to(I18n.t(:sign_up), new_registration_path(resource), class: 'in-gold-500')

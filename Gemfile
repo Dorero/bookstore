@@ -38,7 +38,6 @@ gem 'bootstrap', '~> 5.0.2'
 gem 'haml', '~> 5.2', '>= 5.2.2'
 gem 'haml-rails', '~> 2.0', '>= 2.0.1'
 
-<<<<<<< HEAD
 # pagination
 gem 'pagy', '~> 5.3', '>= 5.3.1'
 
@@ -48,8 +47,11 @@ gem 'ffaker', '~> 2.20'
 #  presentation logic
 gem 'draper', '~> 4.0', '>= 4.0.2'
 
-=======
->>>>>>> origin/develop
+# authentication
+gem 'devise', '~> 4.8'
+gem 'omniauth-facebook', '~> 9.0'
+gem 'omniauth-rails_csrf_protection', '~> 1.0'
+
 group :development, :test do
   gem 'factory_bot_rails', '~> 6.2'
   # Check style in tests
@@ -57,11 +59,6 @@ group :development, :test do
   gem 'rubocop-rspec', '~> 2.6', require: false
   # RSpec results that continuous integration service can read.
   gem 'rspec_junit_formatter', '~> 0.4.1'
-<<<<<<< HEAD
-=======
-  # fake data
-  gem 'ffaker', '~> 2.20'
->>>>>>> origin/develop
 end
 
 group :development do

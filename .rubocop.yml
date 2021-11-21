@@ -10,3 +10,4 @@ AllCops:
     - db/*
     - db/*/*
     - spec/*/*
+    - app/models/*

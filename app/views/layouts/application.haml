@@ -10,5 +10,6 @@
     = javascript_pack_tag 'application', 'data-turbolinks-track': 'reload'
   %body
     = render(partial: 'layouts/partials/header')
+    = render 'layouts/partials/flesh_messages'
     = yield
     = render(partial: 'layouts/partials/footer')

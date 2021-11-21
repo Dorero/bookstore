@@ -100,6 +100,12 @@ RSpec.configure do |config|
   # factory bot
   config.include FactoryBot::Syntax::Methods
 
+  # devise
+  config.include Devise::Test::ControllerHelpers, type: :view
+  config.include Devise::Test::ControllerHelpers, type: :controller
+  config.include Devise::Test::IntegrationHelpers, type: :feature
+  config.include Devise::Test::IntegrationHelpers, type: :request
+
   # tests matchers
   Shoulda::Matchers.configure do |configuration|
     configuration.integrate do |with|
