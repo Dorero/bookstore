@@ -33,4 +33,4 @@
     .row#books_list
       = render('layouts/partials/books', books: @books)
     .text-center#div_next_link
-      != pagy_bootstrap_nav(@pagy)
+      != pagy_bootstrap_nav(@pagy, link_extra: 'style = "background-color: #c59c71; color: white; border-color: transparent"')
