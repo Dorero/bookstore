@@ -6,4 +6,7 @@ Rails.application.routes.draw do
   get '/404', to: 'error#not_found'
 
   resources :books, only: [:index, :show]
+  resources :user, only: [:edit, :update]
+  resources :billing, only: [:edit, :update]
+  resources :shipping, only: [:update]
 end

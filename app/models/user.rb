@@ -1,6 +1,10 @@
 # frozen_string_literal: true
 
 class User < ApplicationRecord
+
+  has_one :billing
+  has_one :shipping
+
   # Include default devise modules. Others available are:
   # :lockable, :timeoutable, :trackable and :confirmable
   devise :database_authenticatable, :registerable, :recoverable, :rememberable, :validatable,

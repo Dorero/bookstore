@@ -1,0 +1,86 @@
+%main.container
+  %h1.general-title-margin= I18n.t(:settings)
+  %ul.nav.clearfix.mb-20{role: "tablist"}
+    %li.tab-item.active{role: "presentation"}
+      %a.tab-link{href: "#address", 'aria-controls': "address", role: "tab", 'data-toggle': "tab"}= I18n.t(:address)
+    %li.tab-item{role: "presentation"}
+      %a.tab-link{href: "#privacy", 'aria-controls': "privacy", role: "tab", 'data-toggle': "tab"}= I18n.t(:privacy)
+  .tab-content
+    #address.tab-pane.fade.in.active.general-main-wrap{role: "tabpanel"}
+      .hidden-xs.hidden-sm
+        .row
+          .col-md-5
+            %h3.general-subtitle.mt-0= I18n.t(:billing_address)
+          .col-md-5.col-md-offset-1
+            %h3.general-subtitle.mt-0= I18n.t(:shipping_address)
+        .row
+          .col-md-5.mb-40
+            .visible-xs.visible-sm
+              %h3.general-subtitle.mt-0= I18n.t(:billing_address)
+            = form_with model: Billing.new, url: billing_path, method: :put do |form|
+              .form-group
+                .form-group{class: "#{'has-error' if params[:first_name]}"}
+                  = form.label :first_name, I18n.t(:first_name), class: 'control-label input-label'
+                  = form.text_field :first_name, name: 'fname', placeholder: I18n.t(:first_name), class: 'form-control'
+                  - if params[:first_name]
+                    %span.help-block= I18n.t(:please_enter_name)
+                .form-group{class: "#{'has-error' if params[:last_name]}"}
+                  = form.label :last_name, I18n.t(:last_name), class: 'control-label input-label'
+                  = form.text_field :last_name, name: 'lname', placeholder: I18n.t(:last_name), class: 'form-control'
+                .form-group{class: "#{'has-error' if params[:address]}"}
+                  = form.label :address, I18n.t(:address), class: 'control-label input-label'
+                  = form.text_field :address, name: 'address', placeholder: I18n.t(:address), class: 'form-control'
+                .form-group{class: "#{'has-error' if params[:city]}"}
+                  = form.label :city, I18n.t(:city), class: 'control-label input-label'
+                  = form.text_field :city, name: 'city', placeholder: I18n.t(:city), class: 'form-control'
+                .form-group{class: "#{'has-error' if params[:zip]}"}
+                  = form.label :zip, I18n.t(:zip), class: 'control-label input-label'
+                  = form.text_field :zip, name: 'zip', placeholder: I18n.t(:zip), class: 'form-control'
+                .form-group{class: "#{'has-error' if params[:country]}"}
+                  = form.label :country, I18n.t(:country), class: 'control-label input-label'
+                  = form.country_select :country_code, {}, { class: 'form-control' }
+                .form-group.mb-60{class: "#{'has-error' if params[:phone]}"}
+                  = form.label :phone, I18n.t(:phone), class: 'control-label input-label'
+                  = form.phone_field :phone, name: 'phone', placeholder: I18n.t(:example_phone), class: 'form-control'
+                .text-center.general-text-align
+                  %button.btn.btn-shipping= I18n.t(:save)
+          .col-md-5.col-md-offset-1.mb-25
+            .visible-xs.visible-sm
+              %h3.general-subtitle.mt-0= I18n.t(:shipping_address)
+            %form{controller: :shipping, action: :update, method: :put}
+              = render('layouts/partials/inputs_address', country_names: @country_names, model: Shipping.new)
+    #privacy.tab-pane.fade{role: "tabpanel"}
+      .row.mb-60
+        .col-sm-5
+          %p.in-gold-500.font-18.mb-25= I18n.t(:email)
+          %form.general-form-md{href: user_path(current_user.id), method: :put}
+            .form-group.mb-35
+              %label.control-label.input-label{for: "email"}= I18n.t(:enter_email)
+              %input#email.form-control{name:"email", type: "email", placeholder: I18n.t(:enter_email)}
+            .general-text-align
+              %button.btn.btn-default.mb-35= I18n.t(:save)
+        .col-sm-5.col-sm-offset-1
+          %p.in-gold-500.font-18.mb-25= I18n.t(:password)
+          %form.general-form-md.divider-lg-bottom.pb-25{href: user_path(current_user.id), method: :put}
+            .form-group.mb-30
+              %label.control-label.input-label{for: "oldPassword"}= I18n.t(:old_password)
+              %input#oldPassword.form-control{name:"password", type: "password", placeholder: I18n.t(:old_password)}
+            .form-group.mb-30
+              %label.control-label.input-label{for: "password"}= I18n.t(:new_password)
+              %input#password.form-control{name:"password", type: "password", placeholder: I18n.t(:new_password)}
+            .form-group.mb-40
+              %label.control-label.input-label{for: "confirmPassword"}= I18n.t(:confirm_password)
+              %input#confirmPassword.form-control{name:"password", type: "password", placeholder: I18n.t(:confirm_password)}
+            .general-text-align
+              %button.btn.disabled.mb-10= I18n.t(:save)
+        .col-sm-12
+          %p.in-gold-500.font-18.mb-25= I18n.t(:remove_account)
+          %form{href: user_path(current_user.id), method: :put}
+            .general-settings-btn
+              %button.btn.disabled.mb-20= I18n.t(:please_remove_account)
+            .form-group.checkbox.general-settings-checkbox
+              %label.checkbox-label
+                %input.checkbox-input{type: "checkbox", hidden: "true"}
+                %span.checkbox-icon
+                  %i.fas.fa-check
+                %span.checkbox-text= I18n.t(:i_understand)

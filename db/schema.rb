@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_11_19_062625) do
+ActiveRecord::Schema.define(version: 2021_11_21_173618) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -30,6 +30,20 @@ ActiveRecord::Schema.define(version: 2021_11_19_062625) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.string "description"
+  end
+
+  create_table "billings", force: :cascade do |t|
+    t.string "first_name"
+    t.string "last_name"
+    t.string "address"
+    t.string "city"
+    t.string "zip"
+    t.string "country"
+    t.string "phone"
+    t.bigint "user_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["user_id"], name: "index_billings_on_user_id"
   end
 
   create_table "books", force: :cascade do |t|
@@ -63,6 +77,20 @@ ActiveRecord::Schema.define(version: 2021_11_19_062625) do
     t.index ["book_id"], name: "index_publishers_on_book_id"
   end
 
+  create_table "shippings", force: :cascade do |t|
+    t.string "first_name"
+    t.string "last_name"
+    t.string "address"
+    t.string "city"
+    t.string "zip"
+    t.string "country"
+    t.string "phone"
+    t.bigint "user_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["user_id"], name: "index_shippings_on_user_id"
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "first_name", default: "", null: false
@@ -82,7 +110,9 @@ ActiveRecord::Schema.define(version: 2021_11_19_062625) do
 
   add_foreign_key "author_books", "authors"
   add_foreign_key "author_books", "books"
+  add_foreign_key "billings", "users"
   add_foreign_key "books", "categories"
   add_foreign_key "publishers", "authors"
   add_foreign_key "publishers", "books"
+  add_foreign_key "shippings", "users"
 end

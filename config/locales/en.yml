@@ -30,6 +30,27 @@
 # available at https://guides.rubyonrails.org/i18n.html.
 
 en:
+  example_phone: Example +355 66 123 4567
+  select_country: Select a country
+  shipping_address: Shipping Address
+  billing_address: Billing Address
+  please_enter_name: Please enter your first name
+  first_name: First Name
+  last_name: Last Name
+  city: City
+  zip: Zip
+  country: Country
+  phone: Phone
+  i_understand: I understand that all data will be lost
+  please_remove_account: Please Remove My Account
+  remove_account: Remove Account
+  new_password: New Password
+  old_password: Old Password
+  save: Save
+  email: Email
+  privacy: Privacy
+  address: Address
+  setings: Settings
   notice_user_password_changed: We're contacting you to notify you that your password has been changed.
   title_change_password_link: Your password won't change until you access the link above and create a new one.
   ignote_email: If you didn't request this, please ignore this email.
@@ -87,7 +108,7 @@ en:
   we_pore: We pore through hundreds of new books each month and select the five best we can find to share with our members.
   get_started: Get Started
   best_sellers: Best Sellers
-  phone: (555)-555-5555
+  number_phone: (555)-555-5555
   email_support: support@bookstore.com
   shop: Shop
   orders: Orders
