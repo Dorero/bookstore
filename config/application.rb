@@ -7,6 +7,12 @@ require 'rails/all'
 # you've limited to :test, :development, or :production.
 Bundler.require(*Rails.groups)
 
+# reform
+require "reform/form/active_model/validations"
+Reform::Form.class_eval do
+  include Reform::Form::ActiveModel::Validations
+end
+
 module Bookstore
   class Application < Rails::Application
     # Initialize configuration defaults for originally generated Rails version.

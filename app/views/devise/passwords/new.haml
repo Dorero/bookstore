@@ -2,10 +2,9 @@
   .text-center
     %h1.mb-30= I18n.t(:forgot_password)
     %p.general-password-text= I18n.t(:send_email_to_reset_password)
-  = form_for(resource, as: resource_name, url: password_path(resource_name), html: {class: 'general-form'}) do |form|
+  = simple_form_for resource, url: password_path(resource_name), defaults: { wrapper_html: { class: 'form-group mb-30' } }, validate: true do |form|
     = render "devise/shared/error_messages", resource: resource
-    .form-group.mb-25
-      = form.email_field :email, autofocus: true, autocomplete: "email", id: 'email', class: 'form-control', placeholder: I18n.t(:enter_email)
+    = form.input :email, label: I18n.t(:enter_email), placeholder: I18n.t(:enter_email)
     %button.btn.btn-default.center-block.mb-20= I18n.t(:email_instruction)
     .text-center
       = link_to(I18n.t(:cancel), new_session_path(resource), class: "in-gold-500 mb-20")

@@ -52,6 +52,15 @@ gem 'devise', '~> 4.8'
 gem 'omniauth-facebook', '~> 9.0'
 gem 'omniauth-rails_csrf_protection', '~> 1.0'
 
+# object from model
+gem 'reform', '~> 2.6', '>= 2.6.1'
+gem 'reform-rails', '~> 0.2.3'
+
+# working with forms
+gem 'simple_form', '~> 5.1'
+gem 'client_side_validations', '~> 19.1', '>= 19.1.1'
+gem 'client_side_validations-simple_form', '~> 14.0', '>= 14.0.1'
+
 group :development, :test do
   gem 'factory_bot_rails', '~> 6.2'
   # Check style in tests
