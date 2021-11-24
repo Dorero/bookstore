@@ -186,7 +186,6 @@ GEM
       character_set (~> 1.4)
       regexp_parser (~> 2.1)
       regexp_property_values (~> 1.0)
-    json (2.6.1)
     jwt (2.3.0)
     lefthook (0.7.7)
     listen (3.7.0)
@@ -365,8 +364,6 @@ GEM
       rexml (~> 3.2, >= 3.2.5)
       rubyzip (>= 1.2.2)
     semantic_range (3.0.0)
-    sendgrid (1.2.4)
-      json
     set (1.0.2)
     sexp_processor (4.16.0)
     shoulda-matchers (5.0.0)
@@ -464,7 +461,6 @@ DEPENDENCIES
   rubocop-rspec (~> 2.6)
   sass-rails (>= 6)
   selenium-webdriver (~> 4.0, >= 4.0.3)
-  sendgrid (~> 1.2, >= 1.2.4)
   shoulda-matchers (~> 5.0)
   simple_form (~> 5.1)
   spring
