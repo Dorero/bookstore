@@ -8,11 +8,11 @@ import Turbolinks from "turbolinks"
 import * as ActiveStorage from "@rails/activestorage"
 import "channels"
 require("@popperjs/core")
+import('bootstrap')
 import('@client-side-validations/simple-form/src')
 import('@client-side-validations/client-side-validations/src')
 import('../src/CountPriceBook')
 import('../src/ShowFullDescriptionBook')
-import('bootstrap')
 Rails.start()
 Turbolinks.start()
 ActiveStorage.start()

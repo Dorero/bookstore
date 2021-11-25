@@ -1,7 +1,7 @@
 %main.container.general-main-wrap
   .text-center
     %h3.general-login-title= I18n.t(:set_new_password)
-  = simple_form_for resource, url: user_password_path, method: :patch,  defaults: { wrapper_html: { class: 'form-group mb-30' }} do |form|
+  = simple_form_for resource, url: user_password_path, method: :patch, validate: true do |form|
     = form.hidden_field :reset_password_token
     = render "devise/shared/error_messages", resource: resource
     = form.input :password, label: I18n.t(:password), placeholder: I18n.t(:password), confirmation: true

@@ -54,15 +54,6 @@ ActiveRecord::Schema.define(version: 2021_11_19_062625) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
-  create_table "publishers", force: :cascade do |t|
-    t.bigint "author_id"
-    t.bigint "book_id"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["author_id"], name: "index_publishers_on_author_id"
-    t.index ["book_id"], name: "index_publishers_on_book_id"
-  end
-
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "first_name", default: "", null: false
@@ -83,6 +74,4 @@ ActiveRecord::Schema.define(version: 2021_11_19_062625) do
   add_foreign_key "author_books", "authors"
   add_foreign_key "author_books", "books"
   add_foreign_key "books", "categories"
-  add_foreign_key "publishers", "authors"
-  add_foreign_key "publishers", "books"
 end

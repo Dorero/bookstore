@@ -1,15 +1,15 @@
 RSpec.describe 'User', type: :feature, js: true do
   let!(:user) { create(:user, password: 'QWEasdzxc123') }
 
-  let(:new_user) { build(:user, email: 'example@gmail.com', password: '12345678Qw')}
+  let(:new_user) { attributes_for(:user, password: '12345678Qw')}
 
   describe '#new' do
     context 'registration new user' do
       before do
         visit(new_user_registration_path)
-        fill_in('user_email', with: new_user.email)
-        fill_in('user_password', with: new_user.password)
-        fill_in('confirm', with: new_user.password)
+        fill_in('user_email', with: new_user[:email])
+        fill_in('user_password', with: new_user[:password])
+        fill_in('confirm', with: new_user[:password])
         click_button(I18n.t(:back_to_store))
       end
 
@@ -18,18 +18,18 @@ RSpec.describe 'User', type: :feature, js: true do
     end
 
     context 'registration with error' do
-      let(:user_with_bad_password) { build(:user, password: '123456Q')}
+      let(:user_with_bad_password) { attributes_for(:user, password: '123456Q')}
 
       before do
         visit(new_user_registration_path)
-        fill_in('user_email', with: user_with_bad_password.email)
-        fill_in('user_password', with: user_with_bad_password.password)
-        fill_in('confirm', with: user_with_bad_password.password)
+        fill_in('user_email', with: user_with_bad_password[:email])
+        fill_in('user_password', with: user_with_bad_password[:password])
+        fill_in('confirm', with: user_with_bad_password[:password])
         click_button(I18n.t(:back_to_store))
       end
 
       it { expect(page).to have_text("Password is invalid")}
-      it { expect(page).to have_current_path('/users') }
+      it { expect(page).to have_current_path(user_registration_path) }
     end
 
     context 'login user' do
@@ -68,11 +68,11 @@ RSpec.describe 'User', type: :feature, js: true do
         visit(new_user_password_path)
         fill_in('user_email', with: user.email)
         click_button(I18n.t(:email_instruction))
-        visit '/users/password/edit?reset_password_token=' + user.reset_password_token
+        visit edit_user_password_path(reset_password_token: user.reset_password_token)
       end
 
       it { expect(page).to have_text(I18n.t(:set_new_password))}
-      it { expect(page).to have_current_path('/users/password/edit?reset_password_token=' + user.reset_password_token)}
+      it { expect(page).to have_current_path(edit_user_password_path(reset_password_token: user.reset_password_token))}
     end
   end
 end

@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class UserCreator
+class FacebookUserCreator
   def initialize(data)
     name = data.info.name.split(' ')
     @first_name = name.first
@@ -10,6 +10,7 @@ class UserCreator
     @email = data.info.email
     @image = data.info.image
     @password = data.password
+    create
   end
 
   def create
@@ -17,7 +18,7 @@ class UserCreator
       user.first_name = @first_name
       user.last_name = @last_name
       user.provider = @provider
-      user.uid = uid
+      user.uid = @uid
       user.email = @email
       user.image = @image
       user.password = Devise.friendly_token[0, 20]
