@@ -1,6 +1,7 @@
-class CreateBillings < ActiveRecord::Migration[6.1]
+class CreateAddresses < ActiveRecord::Migration[6.1]
   def change
-    create_table :billings do |t|
+    create_table :addresses do |t|
+      t.string :type
       t.string :first_name
       t.string :last_name
       t.string :address

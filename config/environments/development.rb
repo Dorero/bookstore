@@ -17,16 +17,6 @@ Rails.application.configure do
   config.action_mailer.default_url_options = { :host => 'localhost:3000', protocol: 'http' }
   config.action_mailer.delivery_method = :smtp
 
-  # SMTP settings for gmail
-  config.action_mailer.smtp_settings = {
-    :address              => "smtp.gmail.com",
-    :port                 => 587,
-    :user_name            => 'domenoer@gmail.com',
-    :password             => '1234567890QWEasdzxc',
-    :authentication       => "plain",
-    :enable_starttls_auto => true
-  }
-
   # Settings specified here will take precedence over those in config/application.rb.
 
   # In the development environment your application's code is reloaded any time
