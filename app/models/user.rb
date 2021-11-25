@@ -3,9 +3,7 @@
 class User < ApplicationRecord
   has_one :address
 
-  # Include default devise modules. Others available are:
-  # :lockable, :timeoutable, :trackable and :confirmable
-  devise :database_authenticatable, :registerable, :recoverable, :rememberable, :validatable,
+  devise :database_authenticatable, :registerable, :recoverable, :rememberable, :validatable, :confirmable,
          :omniauthable, omniauth_providers: %i[facebook]
 
   def self.from_omniauth(auth)

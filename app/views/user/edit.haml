@@ -28,7 +28,7 @@
       .row.mb-60
         .col-sm-5
           %p.in-gold-500.font-18.mb-25= I18n.t(:email)
-          = simple_form_for current_user, as: :edit_email, url: user_path(current_user.id), html: { class: 'general-form-md'} , validate: true do |form|
+          = simple_form_for @email_form, as: :edit_email, url: user_path(current_user.id), html: { class: 'general-form-md'} , validate: true do |form|
             = form.input :email, label: I18n.t(:enter_email), name: 'email', placeholder: I18n.t(:enter_email), id: 'email', wrapper_html: { class: 'form-group mb-35'}
             .text-center.general-text-align
               = form.button :submit, I18n.t(:save)
