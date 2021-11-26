@@ -1,10 +1,16 @@
 .form-group
-  = form.input :first_name, label: I18n.t(:first_name), placeholder: I18n.t(:first_name)
-  = form.input :last_name, label: I18n.t(:last_name), placeholder: I18n.t(:last_name)
-  = form.input :address, label: I18n.t(:address), placeholder: I18n.t(:address)
-  = form.input :city, label:  I18n.t(:city), placeholder: I18n.t(:city)
-  = form.input :zip, label: I18n.t(:zip), placeholder: I18n.t(:zip)
+  = form.input :first_name, label: I18n.t(:first_name), placeholder: I18n.t(:first_name), hint: "#{errors[:first_name]}",
+  wrapper_html: { class: "#{'has-error' if errors[:first_name]}" }
+  = form.input :last_name, label: I18n.t(:last_name), placeholder: I18n.t(:last_name), hint: "#{errors[:last_name]}",
+  wrapper_html: { class: "#{'has-error' if errors[:last_name]}" }
+  = form.input :address, label: I18n.t(:address), placeholder: I18n.t(:address), hint: "#{errors[:address]}",
+  wrapper_html: { class: "#{'has-error' if errors[:address]}" }
+  = form.input :city, label:  I18n.t(:city), placeholder: I18n.t(:city), hint: "#{errors[:city]}",
+  wrapper_html: { class: "#{'has-error' if errors[:city]}" }
+  = form.input :zip, label: I18n.t(:zip), placeholder: I18n.t(:zip), hint: "#{errors[:zip]}",
+  wrapper_html: { class: "#{'has-error' if errors[:zip]}" }
   = form.input :country, label: I18n.t(:country), selected: "GB"
-  = form.input :phone, label: I18n.t(:phone), placeholder: I18n.t(:example_phone), wrapper_html: { class: 'form-group mb-60' }
+  = form.input :phone, label: I18n.t(:phone), placeholder: I18n.t(:example_phone), hint: "#{errors[:phone]}",
+  wrapper_html: { class: "form-group mb-60 #{'has-error' if errors[:phone]}" }
   .text-center.general-text-align
     = form.button :submit, I18n.t(:save)

@@ -16,7 +16,7 @@
 #  updated_at :datetime         not null
 #
 FactoryBot.define do
-  factory :address do
-    type { '' }
+  factory :shipping_address do
+    
   end
 end

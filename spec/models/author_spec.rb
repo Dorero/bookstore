@@ -4,11 +4,12 @@
 #
 # Table name: authors
 #
-#  id         :bigint           not null, primary key
-#  first_name :string
-#  last_name  :string
-#  created_at :datetime         not null
-#  updated_at :datetime         not null
+#  id          :bigint           not null, primary key
+#  first_name  :string
+#  last_name   :string
+#  created_at  :datetime         not null
+#  updated_at  :datetime         not null
+#  description :string
 #
 RSpec.describe Author, type: :model do
   describe 'model relations' do

@@ -15,8 +15,9 @@
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
 #
-FactoryBot.define do
-  factory :address do
-    type { '' }
+
+RSpec.describe BillingAddress, type: :model do
+  describe 'model relations billing address' do
+    it { is_expected.to belong_to(:user)}
   end
 end
