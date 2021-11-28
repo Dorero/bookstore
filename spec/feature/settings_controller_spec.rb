@@ -69,7 +69,7 @@ RSpec.describe 'Settings', type: :feature, js: true do
           click_button('password_button')
         end
 
-        it { expect(page).to have_current_path(edit_setting_path) }
+        it { expect(page).to have_current_path(new_user_session_path) }
       end
     end
 
