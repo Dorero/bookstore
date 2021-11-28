@@ -13,7 +13,10 @@ module Users
     private
 
     def check_errors(errors)
-      return current_user.save(validate: false) if errors.empty?
+      if errors.empty?
+        current_user.save(validate: false)
+        return redirect_to(new_user_session_path, alert: I18n.t(:'devise.passwords.updated'))
+      end
 
       redirect_to(edit_setting_path(errors_password: errors.uniq))
     end
