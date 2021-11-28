@@ -36,10 +36,8 @@ class User < ApplicationRecord
   validates :password, format: { with: /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$/, multiline: true },
                        length: { minimum: MINIMUM_SIZE_PASSWORD }
 
-  has_one :address
+  has_one :address, dependent: :destroy
 
   devise :database_authenticatable, :registerable, :recoverable, :rememberable, :validatable, :confirmable,
          :omniauthable, omniauth_providers: %i[facebook]
-
-  def self.from_omniauth(auth); end
 end
