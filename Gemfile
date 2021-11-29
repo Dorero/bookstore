@@ -64,6 +64,9 @@ gem 'client_side_validations', '~> 19.1', '>= 19.1.1'
 gem 'client_side_validations-simple_form', '~> 14.0', '>= 14.0.1'
 gem 'simple_form', '~> 5.1'
 
+# admin panel
+gem 'activeadmin', '~> 2.9'
+
 group :development, :test do
   gem 'factory_bot_rails', '~> 6.2'
   # Check style in tests
