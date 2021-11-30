@@ -1,6 +1,8 @@
-RSpec.describe "Settings", type: :request do
+# frozen_string_literal: true
+
+RSpec.describe 'Settings', type: :request do
   describe 'GET #edit' do
-    let!(:user) { create(:user, password: '123QWEasd')}
+    let!(:user) { create(:user, password: '123QWEasd') }
 
     context 'login existing user' do
       before do
@@ -17,5 +19,5 @@ RSpec.describe "Settings", type: :request do
 
       it { expect(response).to have_http_status(:found) }
     end
-    end
+  end
 end

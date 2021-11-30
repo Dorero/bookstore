@@ -25,15 +25,17 @@
 class User < ApplicationRecord
   MINIMUM_SIZE_PASSWORD = 8
   MAXIMUM_SIZE_EMAIL = 63
+  VALIDATE_EMAIL = /^(|(([A-Za-z0-9]+_+)|([A-Za-z0-9]+-+)|([A-Za-z0-9]+\.+)|([A-Za-z0-9]+\++))*[A-Za-z0-9]+@((\w+-+)
+|(\w+\.))*\w{1,63}\.[a-zA-Z]{2,6})$/.freeze
+  VALIDATE_PASSWORD = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$/.freeze
 
   validates :email, :password, presence: true
   validates :email,
             format: {
-              with: /^(|(([A-Za-z0-9]+_+)|([A-Za-z0-9]+-+)|([A-Za-z0-9]+\.+)|([A
--Za-z0-9]+\++))*[A-Za-z0-9]+@((\w+-+)|(\w+\.))*\w{1,63}\.[a-zA-Z]{2,6})$/, multiline: true
+              with: VALIDATE_EMAIL, multiline: true
             },
             length: { maximum: MAXIMUM_SIZE_EMAIL }, uniqueness: true
-  validates :password, format: { with: /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$/, multiline: true },
+  validates :password, format: { with: VALIDATE_PASSWORD, multiline: true },
                        length: { minimum: MINIMUM_SIZE_PASSWORD }
 
   has_one :address, dependent: :destroy

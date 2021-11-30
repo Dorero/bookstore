@@ -33,6 +33,9 @@ gem 'bootsnap', '>= 1.4.4', require: false
 # allows the use of locales
 gem 'i18n', '~> 1.8', '>= 1.8.11'
 
+# check missing translations
+gem 'i18n-tasks', '~> 0.9.35'
+
 # Template
 gem 'bootstrap', '~> 5.0.2'
 gem 'haml', '~> 5.2', '>= 5.2.2'

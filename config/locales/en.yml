@@ -30,6 +30,10 @@
 # available at https://guides.rubyonrails.org/i18n.html.
 
 en:
+  long_parameters: is too long (maximum is %{maximum} characters)
+  is_invalid: is invalid
+  phone_not_by_country: Your phone number does not match this country
+  address_success_save: '%{address_name} address success save'
   example_phone: Example +355 66 123 4567
   select_country: Select a country
   shipping_address: Shipping Address

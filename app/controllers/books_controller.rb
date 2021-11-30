@@ -12,10 +12,8 @@ class BooksController < ApplicationController
   end
 
   def show
-    @book = Book.all.includes(:authors).find_by(id: params[:id])
-    return redirect_to controller: :error, action: :not_found unless @book
-
-    @book = @book.decorate
+    @book = Book.all.includes(:authors).find_by(id: params[:id])&.decorate
+    redirect_to controller: :error, action: :not_found unless @book
   end
 
   private

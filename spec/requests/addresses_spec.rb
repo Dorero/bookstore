@@ -1,6 +1,8 @@
-RSpec.describe "Addresses", type: :request do
+# frozen_string_literal: true
+
+RSpec.describe 'Addresses', type: :request do
   describe 'PUT #update' do
-    let!(:user) { create(:user, password: '123QWEasd')}
+    let!(:user) { create(:user, password: '123QWEasd') }
 
     before do
       user.confirm

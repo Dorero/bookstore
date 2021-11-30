@@ -15,27 +15,7 @@
 # it.
 #
 # See http://rubydoc.info/gems/rspec-core/RSpec/Core/Configuration
-
-require 'simplecov'
 require 'rails_helper'
-
-SimpleCov.start 'rails' do
-  add_filter 'app/mailer'
-  add_filter 'app/jobs'
-  add_filter 'app/models/user'
-  add_filter 'app/models/application'
-  add_filter 'app/controllers/application'
-  add_filter 'app/helpers/application'
-  add_filter '/test/'
-  add_filter '/config/'
-
-  add_group 'Controllers', 'app/controllers'
-  add_group 'Models', 'app/models'
-  add_group 'Helpers', 'app/helpers'
-  add_group 'Libraries', 'lib'
-end
-
-SimpleCov.minimum_coverage 95
 
 RSpec.configure do |config|
   config.include Capybara::DSL
