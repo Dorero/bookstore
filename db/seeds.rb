@@ -22,4 +22,4 @@ Category.create(name: 'Web design')
   AuthorBook.create(author: author, book: book)
 end
 
-AdminUser.create!(email: 'admin@example.com', password: 'password', password_confirmation: 'password') if Rails.env.development?
+AdminUser.create!(email: 'admin@example.com', password: 'password', password_confirmation: 'password')
