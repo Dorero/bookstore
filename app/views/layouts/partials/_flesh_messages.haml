@@ -1,0 +1,5 @@
+- flash.each do |key, value|
+  %div{class: "alert alert-#{key} general-login-text", style: "display: flex;justify-content: center;align-content: center;flex-wrap: wrap;flex-direction: column;"}
+    = value
+    %a.close{"data-dismiss" => "alert", href: "#", style: "margin: 0 auto"} x
+

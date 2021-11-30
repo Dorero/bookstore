@@ -16,6 +16,7 @@
 #
 # See http://rubydoc.info/gems/rspec-core/RSpec/Core/Configuration
 require 'rails_helper'
+
 RSpec.configure do |config|
   config.include Capybara::DSL
   Capybara.javascript_driver = :selenium_chrome
@@ -100,6 +101,12 @@ RSpec.configure do |config|
   # factory bot
   config.include FactoryBot::Syntax::Methods
 
+  # devise
+  config.include Devise::Test::ControllerHelpers, type: :view
+  config.include Devise::Test::ControllerHelpers, type: :controller
+  config.include Devise::Test::IntegrationHelpers, type: :feature
+  config.include Devise::Test::IntegrationHelpers, type: :request
+
   # tests matchers
   Shoulda::Matchers.configure do |configuration|
     configuration.integrate do |with|
@@ -107,4 +114,7 @@ RSpec.configure do |config|
       with.library :rails
     end
   end
+
+  # include omniauth mock
+  OmniAuth.config.test_mode = true
 end

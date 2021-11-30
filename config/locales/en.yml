@@ -30,6 +30,55 @@
 # available at https://guides.rubyonrails.org/i18n.html.
 
 en:
+  long_parameters: is too long (maximum is %{maximum} characters)
+  is_invalid: is invalid
+  phone_not_by_country: Your phone number does not match this country
+  address_success_save: '%{address_name} address success save'
+  example_phone: Example +355 66 123 4567
+  select_country: Select a country
+  shipping_address: Shipping Address
+  billing_address: Billing Address
+  please_enter_name: Please enter your first name
+  first_name: First Name
+  last_name: Last Name
+  city: City
+  zip: Zip
+  country: Country
+  phone: Phone
+  i_understand: I understand that all data will be lost
+  please_remove_account: Please Remove My Account
+  remove_account: Remove Account
+  new_password: New Password
+  old_password: Old Password
+  save: Save
+  email: Email
+  privacy: Privacy
+  address: Address
+  setings: Settings
+  notice_user_password_changed: We're contacting you to notify you that your password has been changed.
+  title_change_password_link: Your password won't change until you access the link above and create a new one.
+  ignote_email: If you didn't request this, please ignore this email.
+  change_user_password: Change my password
+  change_user_password_title: Someone has requested a link to change your password. You can do this through the link below.
+  hello_user: Hello, %{user}!
+  close: Close
+  set_new_password: Set new password
+  cancel: Cancel
+  type_new_password: Type a new Password
+  change: Change
+  email_instruction: Email Instructions
+  send_email_to_reset_password: We'll email you instructions on how to reset it
+  log_in: Log In
+  or: or
+  enter_email: Enter Email
+  password: Password
+  forgot_password: Forgot password?
+  confirm_password: Confirm Password
+  remember_me: Remember me
+  back_to_store: Back to Store
+  sign_up: Sign Up
+  no_account: Don’t have an Account?
+  have_account: Have an Account?
   hegiht: H
   width: W
   depth: D
@@ -63,7 +112,7 @@ en:
   we_pore: We pore through hundreds of new books each month and select the five best we can find to share with our members.
   get_started: Get Started
   best_sellers: Best Sellers
-  phone: (555)-555-5555
+  number_phone: (555)-555-5555
   email_support: support@bookstore.com
   shop: Shop
   orders: Orders

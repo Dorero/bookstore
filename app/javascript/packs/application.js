@@ -10,6 +10,8 @@ import "channels"
 require("@popperjs/core")
 import('../src/CountPriceBook')
 import('../src/ShowFullDescriptionBook')
+import '@client-side-validations/simple-form/src'
+import '@client-side-validations/client-side-validations/src'
 import('bootstrap')
 Rails.start()
 Turbolinks.start()

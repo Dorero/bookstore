@@ -47,6 +47,23 @@ gem 'ffaker', '~> 2.20'
 #  presentation logic
 gem 'draper', '~> 4.0', '>= 4.0.2'
 
+# authentication
+gem 'devise', '~> 4.8'
+gem 'omniauth-facebook', '~> 9.0'
+gem 'omniauth-rails_csrf_protection', '~> 1.0'
+
+# country
+gem 'country_select', '~> 6.0'
+
+# form object
+gem 'reform', '~> 2.6', '>= 2.6.1'
+gem 'reform-rails', '~> 0.2.3'
+
+# working with form
+gem 'client_side_validations', '~> 19.1', '>= 19.1.1'
+gem 'client_side_validations-simple_form', '~> 14.0', '>= 14.0.1'
+gem 'simple_form', '~> 5.1'
+
 group :development, :test do
   gem 'factory_bot_rails', '~> 6.2'
   # Check style in tests
@@ -81,6 +98,8 @@ group :development do
   gem 'bundler-audit', '~> 0.9.0.1', require: false
   # annotation in models
   gem 'annotate', '~> 3.1', '>= 3.1.1'
+  # check missing translations
+  gem 'i18n-tasks', '~> 0.9.35', require: false
 end
 
 group :test do
@@ -92,6 +111,8 @@ group :test do
   # Tests
   gem 'rspec', '~> 3.10'
   gem 'shoulda-matchers', '~> 5.0'
+  # check coverage tests
+  gem 'simplecov', '~> 0.21.2', require: false
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem

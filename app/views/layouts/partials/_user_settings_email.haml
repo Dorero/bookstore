@@ -1,0 +1,7 @@
+= simple_form_for current_user, url: user_registration_path(current_user.id), method: :put,
+          html: { class: 'general-form-md', id: 'edit_user_email'} , validate: true do |form|
+  = render('layouts/partials/errors', errors: params[:errors_email] || [])
+  = form.input :email, label: I18n.t(:enter_email), name: 'email', placeholder: I18n.t(:enter_email), id: 'email',
+            wrapper_html: { class: "form-group mb-35 #{'has-error' if params[:errors_email]}"}, hint: "#{params[:success_change_email]}"
+  .text-center.general-text-align
+    = form.button :submit, I18n.t(:save), name: 'email_button'

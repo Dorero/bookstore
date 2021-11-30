@@ -4,48 +4,34 @@
       %button.navbar-toggle.pull-left{type: "button", 'data-toggle': "collapse", 'data-target': "#navbar"}
         %span.sr-only
         %span.icon-bar
-        %span.icon-bar
-        %span.icon-bar
       = link_to(I18n.t(:title_store), root_path, class: 'navbar-brand')
-    = link_to(books_path, class: 'shop-link pull-right visible-xs') do
-      %span.shop-icon
-        %span.shop-quantity 3
-    = link_to(books_path, class: 'shop-link pull-right hidden-xs') do
-      %span.shop-icon
+    = link_to('/cart', class: 'shop-link pull-right') do
+      %span.shop-icon{style: "background-color: #fff"}
         %span.shop-quantity 3
     #navbar.navbar-collapse.collapse.pl-30{'aria-expanded': "false"}
-      .visible-xs
-        %button.close{type: "button", 'aria-label': "Close"}
-          %span{'aria-hidden': "true"} &times;
+      - unless user_signed_in?
         %ul.nav.navbar-nav
           %li
             = link_to(I18n.t(:home), root_path)
           %li
             = link_to(I18n.t(:shop), books_path, data_toggle: "collapse", class: "article", type: 'button', aria_expanded: 'false', aria_controls: 'menu')
-            %ul#menu.collapse.list-unstyled.pl-30.mb-10{'aria-expanded': "false"}
-              %li
-                = link_to(I18n.t(:mobile_development), '/mobile_develop', class: 'collapse-link')
-              %li
-                = link_to(I18n.t(:photo), '/photo', class: 'collapse-link')
-              %li
-                = link_to(I18n.t(:web_design), '/web_design', class: 'collapse-link')
           %li
-            = link_to(I18n.t(:my_account), '/account')
-      .hidden-xs
+            = link_to(I18n.t(:log_in), new_session_path(User))
+          %li
+            = link_to(I18n.t(:sign_up), new_registration_path(User))
+      - else
         %ul.nav.navbar-nav
           %li
-            = link_to('Home', root_path)
-          %li.dropdown
+            = link_to(I18n.t(:home), root_path)
+          %li
             = link_to(I18n.t(:shop), books_path, data_toggle: "collapse", class: "article", type: 'button', aria_expanded: 'false', aria_controls: 'menu')
+          %li.dropdown
+            %a.dropdown-toggle{href: "#", 'data-toggle': "dropdown", role: "button", 'aria-haspopup': "true", 'aria-expanded': "false"}= I18n.t(:my_account)
             %ul.dropdown-menu
               %li
-                = link_to(I18n.t(:mobile_development), '/mobile_develop', class: 'collapse-link')
+                = link_to(I18n.t(:orders), '/orders')
               %li
-                = link_to(I18n.t(:photo), '/photo', class: 'collapse-link')
-              %li
-                = link_to(I18n.t(:web_design), '/web_design', class: 'collapse-link')
+                = link_to(I18n.t(:settings), edit_setting_path)
               %li.divider{role: "separator"}
               %li
-                = link_to(I18n.t(:log_out), '/log_out')
-          %li
-            = link_to(I18n.t(:my_account), '/account')
+                = link_to(I18n.t(:log_out), destroy_user_session_path, :method => :delete)
