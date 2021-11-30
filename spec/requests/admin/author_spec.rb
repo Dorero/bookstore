@@ -1,0 +1,35 @@
+# frozen_string_literal: true
+
+RSpec.describe 'Admin', type: :request do
+  let!(:admin) { create(:admin_user) }
+
+  before do
+    sign_in admin
+  end
+
+  describe 'GET #index' do
+    before { get admin_authors_path }
+
+    it { expect(response).to have_http_status(:success) }
+  end
+
+  describe 'GET #show' do
+    before { get admin_authors_path }
+
+    it { expect(response).to have_http_status(:success) }
+  end
+
+  describe 'GET #new' do
+    before { get new_admin_author_path }
+
+    it { expect(response).to have_http_status(:success) }
+  end
+
+  describe 'GET #edit' do
+    let!(:author) { create(:author) }
+
+    before { get edit_admin_author_path(author.id) }
+
+    it { expect(response).to have_http_status(:success) }
+  end
+end

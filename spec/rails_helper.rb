@@ -10,6 +10,7 @@ SimpleCov.start 'rails' do
   add_filter 'app/models/application'
   add_filter 'app/controllers/application'
   add_filter 'app/helpers/application'
+  add_filter 'app/admin/'
   add_filter '/config/'
 
   add_group 'Controllers', 'app/controllers'
@@ -19,7 +20,9 @@ SimpleCov.start 'rails' do
 end
 
 SimpleCov.minimum_coverage 95
+
 require 'spec_helper'
+
 ENV['RAILS_ENV'] ||= 'test'
 require File.expand_path('../config/environment', __dir__)
 # Prevent database truncation if the environment is production
