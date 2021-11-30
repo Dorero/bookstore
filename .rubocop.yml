@@ -11,4 +11,5 @@ AllCops:
     - db/*/*
 
 Metrics/BlockLength:
-  Enabled: false
+  Enabled: False
+

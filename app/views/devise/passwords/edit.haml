@@ -1,19 +1,10 @@
 %main.container.general-main-wrap
   .text-center
     %h3.general-login-title= I18n.t(:set_new_password)
-  = form_for(resource, as: resource_name, url: password_path(resource_name), html: {class: 'general-form', method: :put }) do |form|
-    = render "devise/shared/error_messages", resource: resource
+  = simple_form_for resource, url: user_password_path, method: :patch, validate: true do |form|
     = form.hidden_field :reset_password_token
-    .form-group.mb-30
-      = form.label :password, I18n.t(:password), class: 'control-label input-label'
-      - if @minimum_password_length
-        %em
-          (#{@minimum_password_length} characters minimum)
-      %br/
-      = form.password_field :password, autocomplete: "new-password", id: 'password', class: 'form-control', placeholder: I18n.t(:password)
-    .form-group.mb-30
-      = form.label :password_confirmation, I18n.t(:confirm_password), class: 'control-label input-label'
-      %br/
-      = form.password_field :password_confirmation, autocomplete: "new-password", id: 'confirm', class: 'form-control', placeholder: I18n.t(:confirm_password)
+    = render "devise/shared/error_messages", resource: resource
+    = form.input :password, label: I18n.t(:password), placeholder: I18n.t(:password), confirmation: true
+    = form.input :password_confirmation, input_html: { id: 'confirm' }, label: I18n.t(:confirm_password), placeholder: I18n.t(:confirm_password), presence: true
     %button.btn.btn-default.center-block.mb-20= I18n.t(:change)
 

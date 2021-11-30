@@ -17,12 +17,12 @@
           .col-md-5.mb-40
             .visible-xs.visible-sm
               %h3.general-subtitle.mt-0= I18n.t(:billing_address)
-            = simple_form_for @billing_address, as: :billing_address, url: address_path, method: :put do |form|
+            = simple_form_for @billing_address, as: :billing_address, url: address_path, html: { class: ''}, method: :put do |form|
               = render('layouts/partials/inputs_address', form: form, errors: params[:billing_address_errors] || {})
           .col-md-5.col-md-offset-1.mb-25
             .visible-xs.visible-sm
               %h3.general-subtitle.mt-0= I18n.t(:shipping_address)
-            = simple_form_for @shipping_address, as: :shipping_address, url: address_path, method: :put do |form|
+            = simple_form_for @shipping_address, as: :shipping_address, url: address_path, html: { class: ''}, method: :put do |form|
               = render('layouts/partials/inputs_address', form: form, errors: params[:shipping_address_errors] || {})
     #privacy.tab-pane.fade{role: "tabpanel"}
       .row.mb-60
@@ -34,7 +34,7 @@
           = render('layouts/partials/user_settings_password')
         .col-sm-12
           %p.in-gold-500.font-18.mb-25= I18n.t(:remove_account)
-          = simple_form_for current_user, url: user_registration_path, html: {id: 'delete_user'},  method: :delete, validate: true do |form|
+          = simple_form_for current_user, url: user_registration_path, html: { class: ''},  method: :delete, validate: true do |form|
             .general-settings-btn
               = form.button :submit, I18n.t(:please_remove_account)
             .form-group.checkbox.general-settings-checkbox

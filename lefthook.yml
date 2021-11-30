@@ -8,6 +8,8 @@
        run: fasterer
      database_consistency:
        run: bundle exec database_consistency
+     i18n-tasks:
+       run: bundle exec i18n-tasks health
      rubocop:
        tags: backend style
        glob: "*.rb"

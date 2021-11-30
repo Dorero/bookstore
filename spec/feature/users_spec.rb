@@ -1,9 +1,9 @@
 # frozen_string_literal: true
 
 RSpec.describe 'User', type: :feature, js: true do
-  let!(:user) { create(:user, password: 'QWEasdzxc123') }
+  let!(:user) { create(:user) }
 
-  let(:user_data) { attributes_for(:user, password: '12345678Qw') }
+  let(:user_data) { attributes_for(:user) }
 
   describe '#new' do
     context 'registration new user' do
@@ -20,7 +20,8 @@ RSpec.describe 'User', type: :feature, js: true do
     end
 
     context 'registration with error' do
-      let(:user_with_bad_password) { attributes_for(:user, password: '123456Q') }
+      let(:bad_password) { /[a-zA-Z0-9].{5,}/ }
+      let(:user_with_bad_password) { attributes_for(:user, password: FFaker::String.from_regexp(bad_password)) }
 
       before do
         visit(new_user_registration_path)
@@ -85,6 +86,7 @@ RSpec.describe 'User', type: :feature, js: true do
         info: { name: "#{user_data[:first_name]}#{user_data[:last_name]}",
                 email: user_data[:email] } }
     end
+    
     context 'log in through facebook' do
       before do
         visit(new_user_session_path)

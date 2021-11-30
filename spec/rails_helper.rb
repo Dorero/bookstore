@@ -21,6 +21,8 @@ end
 
 SimpleCov.minimum_coverage 95
 
+require 'spec_helper'
+
 ENV['RAILS_ENV'] ||= 'test'
 require File.expand_path('../config/environment', __dir__)
 # Prevent database truncation if the environment is production

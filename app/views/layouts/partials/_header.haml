@@ -12,7 +12,7 @@
       - unless user_signed_in?
         %ul.nav.navbar-nav
           %li
-            = link_to('Home', root_path)
+            = link_to(I18n.t(:home), root_path)
           %li
             = link_to(I18n.t(:shop), books_path, data_toggle: "collapse", class: "article", type: 'button', aria_expanded: 'false', aria_controls: 'menu')
           %li
@@ -25,5 +25,13 @@
             = link_to(I18n.t(:home), root_path)
           %li
             = link_to(I18n.t(:shop), books_path, data_toggle: "collapse", class: "article", type: 'button', aria_expanded: 'false', aria_controls: 'menu')
-          %li
-            = link_to(I18n.t(:my_account), edit_setting_path)
+          %li.dropdown
+            %a.dropdown-toggle{href: "#", 'data-toggle': "dropdown", role: "button", 'aria-haspopup': "true", 'aria-expanded': "false"}= I18n.t(:my_account)
+            %ul.dropdown-menu
+              %li
+                = link_to(I18n.t(:orders), '/orders')
+              %li
+                = link_to(I18n.t(:settings), edit_setting_path)
+              %li.divider{role: "separator"}
+              %li
+                = link_to(I18n.t(:log_out), destroy_user_session_path, :method => :delete)
