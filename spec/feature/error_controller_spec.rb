@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 RSpec.describe 'Error', type: :feature, js: true do
   describe '#not_found' do
     before { visit(book_path('undefined')) }

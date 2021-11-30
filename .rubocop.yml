@@ -9,4 +9,6 @@ AllCops:
     - config/*/*
     - db/*
     - db/*/*
-    - spec/*/*
+
+Metrics/BlockLength:
+  Enabled: false

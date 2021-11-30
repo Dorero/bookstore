@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: addresses
@@ -18,6 +20,6 @@
 
 RSpec.describe BillingAddress, type: :model do
   describe 'model relations billing address' do
-    it { is_expected.to belong_to(:user)}
+    it { is_expected.to belong_to(:user) }
   end
 end

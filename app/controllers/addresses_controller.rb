@@ -14,5 +14,7 @@ class AddressesController < ApplicationController
     return redirect_to(edit_setting_path("#{address}": prepare_errors(form.errors))) unless form.validate(value)
 
     form.save
+    redirect_to(edit_setting_path,
+                alert: I18n.t(:address_success_save, address_name: address.to_s.split('_').first.capitalize))
   end
 end

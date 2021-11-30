@@ -13,7 +13,9 @@ RSpec.describe 'Books', type: :feature, js: true do
   describe '#show' do
     before do
       visit(book_path(books.first.id))
-      books.first.description = books.first.description[0...BooksController::MAX_SIZE_DESCRIPTION] if books.first.description.length > BooksController::MAX_SIZE_DESCRIPTION
+      if books.first.description.length > BooksController::MAX_SIZE_DESCRIPTION
+        books.first.description = books.first.description[0...BooksController::MAX_SIZE_DESCRIPTION]
+      end
     end
 
     it { expect(page).to have_current_path(book_path(books.first.id)) }

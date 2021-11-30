@@ -1,5 +1,7 @@
+# frozen_string_literal: true
+
 RSpec.describe 'Admin', type: :request do
-  let!(:admin) { create(:admin_user)}
+  let!(:admin) { create(:admin_user) }
 
   before do
     sign_in admin
@@ -66,9 +68,9 @@ RSpec.describe 'Admin', type: :request do
   end
 
   describe 'GET #edit' do
-    let!(:author) {create(:author)}
-    let!(:book) {create(:book)}
-    let!(:category) {create(:category)}
+    let!(:author) { create(:author) }
+    let!(:book) { create(:book) }
+    let!(:category) { create(:category) }
 
     context 'author' do
       before { get edit_admin_author_path(author.id) }
