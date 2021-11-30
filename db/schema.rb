@@ -30,15 +30,15 @@ ActiveRecord::Schema.define(version: 2021_11_29_045616) do
   end
 
   create_table "addresses", force: :cascade do |t|
-    t.string "type"
-    t.string "first_name"
-    t.string "last_name"
-    t.string "address"
-    t.string "city"
-    t.string "zip"
-    t.string "country"
-    t.string "phone"
-    t.bigint "user_id"
+    t.string "type", null: false
+    t.string "first_name", null: false
+    t.string "last_name", null: false
+    t.string "address", null: false
+    t.string "city", null: false
+    t.string "zip", null: false
+    t.string "country", null: false
+    t.string "phone", null: false
+    t.bigint "user_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["user_id"], name: "index_addresses_on_user_id"
@@ -95,15 +95,6 @@ ActiveRecord::Schema.define(version: 2021_11_29_045616) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
-  create_table "publishers", force: :cascade do |t|
-    t.bigint "author_id"
-    t.bigint "book_id"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["author_id"], name: "index_publishers_on_author_id"
-    t.index ["book_id"], name: "index_publishers_on_book_id"
-  end
-
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "first_name", default: "", null: false
@@ -130,6 +121,4 @@ ActiveRecord::Schema.define(version: 2021_11_29_045616) do
   add_foreign_key "author_books", "authors"
   add_foreign_key "author_books", "books"
   add_foreign_key "books", "categories"
-  add_foreign_key "publishers", "authors"
-  add_foreign_key "publishers", "books"
 end

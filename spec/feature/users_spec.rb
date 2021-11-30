@@ -86,7 +86,7 @@ RSpec.describe 'User', type: :feature, js: true do
         info: { name: "#{user_data[:first_name]}#{user_data[:last_name]}",
                 email: user_data[:email] } }
     end
-    
+
     context 'log in through facebook' do
       before do
         visit(new_user_session_path)

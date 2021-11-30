@@ -5,6 +5,9 @@ ActiveAdmin.register Category do
 
   menu priority: 4
 
+  filter :created_at
+  filter :updated_at
+
   index do
     selectable_column
     column :id
@@ -15,7 +18,4 @@ ActiveAdmin.register Category do
       span link_to link_to I18n.t(:delete_admin_button), admin_category_path(category), method: :delete
     end
   end
-
-  filter :created_at
-  filter :updated_at
 end
