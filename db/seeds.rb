@@ -21,3 +21,5 @@ Category.create(name: 'Web design')
                      materials: FFaker::Product.product)
   AuthorBook.create(author: author, book: book)
 end
+
+AdminUser.create!(email: 'admin@example.com', password: 'password', password_confirmation: 'password')
