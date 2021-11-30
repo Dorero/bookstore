@@ -29,7 +29,7 @@ ActiveAdmin.register Author do
   filter :updated_at
   filter :first_name
   filter :last_name
-  filter :books, as: :select, collection: Book.all.map { |book| [book.name, book.id] }
+  filter :books, as: :select, collection: proc { Book.all.map { |book| [book.name, book.id] } }
 
   includes(:author_books, :books)
 end
