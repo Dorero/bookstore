@@ -33,9 +33,6 @@ gem 'bootsnap', '>= 1.4.4', require: false
 # allows the use of locales
 gem 'i18n', '~> 1.8', '>= 1.8.11'
 
-# check missing translations
-gem 'i18n-tasks', '~> 0.9.35'
-
 # Template
 gem 'bootstrap', '~> 5.0.2'
 gem 'haml', '~> 5.2', '>= 5.2.2'
@@ -101,6 +98,8 @@ group :development do
   gem 'bundler-audit', '~> 0.9.0.1', require: false
   # annotation in models
   gem 'annotate', '~> 3.1', '>= 3.1.1'
+  # check missing translations
+  gem 'i18n-tasks', '~> 0.9.35', require: false
 end
 
 group :test do

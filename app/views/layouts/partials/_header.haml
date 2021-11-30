@@ -12,7 +12,7 @@
       - unless user_signed_in?
         %ul.nav.navbar-nav
           %li
-            = link_to('Home', root_path)
+            = link_to(I18n.t(:home), root_path)
           %li
             = link_to(I18n.t(:shop), books_path, data_toggle: "collapse", class: "article", type: 'button', aria_expanded: 'false', aria_controls: 'menu')
           %li
