@@ -30,10 +30,18 @@
 # available at https://guides.rubyonrails.org/i18n.html.
 
 en:
-  review_rejected: Review rejected
-  review_approved: Review approved
-  rejected: Rejected
-  approved: Approved
+  approve_review_confirm: Are you sure you want to approve the review?
+  rejected_review_confirm: Are you sure you want to rejected the review?
+  unprocessed_status: unprocessed
+  rejected_status: rejected
+  approved_status: approved
+  unprocessed_button: Unprocessed
+  rejected_button: Rejected
+  approved_button: Approved
+  processed: Processed
+  new: New
+  review_rejected_flash: Review rejected
+  review_approved_flash: Review approved
   show_button: Show
   thanks_for_review: Thanks for Review. It will be published as soon as Admin will approve it.
   long_parameters: is too long (maximum is %{maximum} characters)

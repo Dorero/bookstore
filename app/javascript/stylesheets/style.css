@@ -8908,6 +8908,9 @@ img {
   max-width: 240px;
 }
 
+.max-260 {
+  max-width: 260px;
+}
 .max-600 {
   max-width: 600px;
 }

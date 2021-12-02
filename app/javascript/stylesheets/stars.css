@@ -1,0 +1,24 @@
+.star {
+    display: inline-block;
+    font-size: 18px;
+    color: #CCCCCC;
+}
+
+.read-star {
+    display: inline-block;
+    font-size: 18px;
+    color: #CCCCCC;
+}
+
+ul.stars {
+    margin-block-start: 0;
+    padding-inline-start: 0;
+}
+
+.hovered-stars {
+    color: #FFCC36;
+}
+
+.clicked-stars {
+    color: sandybrown;
+}

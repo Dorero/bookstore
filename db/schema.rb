@@ -99,7 +99,7 @@ ActiveRecord::Schema.define(version: 2021_11_30_142740) do
     t.string "title"
     t.string "message"
     t.string "stars"
-    t.string "status", default: "Unprocessed"
+    t.integer "status", default: 0
     t.bigint "user_id", null: false
     t.bigint "book_id", null: false
     t.datetime "created_at", precision: 6, null: false

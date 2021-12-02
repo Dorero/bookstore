@@ -15,7 +15,7 @@ RSpec.describe 'Admin', type: :request do
   end
 
   describe 'GET #view' do
-    before { get view_admin_review_path(review.id) }
+    before { get admin_review_path(review.id) }
 
     it { expect(response).to have_http_status(:success) }
   end

@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-RSpec.describe 'Admin/Author', type: :feature, js: true do
+RSpec.describe 'Admin/Review', type: :feature, js: true do
   let!(:admin) { create(:admin_user) }
   let!(:review) { create(:review) }
 
@@ -15,28 +15,28 @@ RSpec.describe 'Admin/Author', type: :feature, js: true do
   end
 
   describe '#view' do
-    before { visit view_admin_review_path(review.id) }
+    before { visit admin_review_path(review.id) }
 
-    it { expect(page).to have_current_path(view_admin_review_path(review.id)) }
+    it { expect(page).to have_current_path(admin_review_path(review.id)) }
   end
 
   describe '#approved' do
     before do
-      visit view_admin_review_path(review.id)
-      click_link(I18n.t(:approved))
+      visit admin_review_path(review.id)
+      accept_confirm(I18n.t(:approve_review_confirm)) { click_link(I18n.t(:approved_button)) }
     end
 
     it { expect(page).to have_current_path(admin_reviews_path) }
-    it { expect(page).to have_content(I18n.t(:review_approved)) }
+    it { expect(page).to have_content(I18n.t(:review_approved_flash)) }
   end
 
   describe '#rejected' do
     before do
-      visit view_admin_review_path(review.id)
-      click_link(I18n.t(:rejected))
+      visit admin_review_path(review.id)
+      accept_confirm(I18n.t(:rejected_review_confirm)) { click_link(I18n.t(:rejected_button)) }
     end
 
     it { expect(page).to have_current_path(admin_reviews_path) }
-    it { expect(page).to have_content(I18n.t(:review_rejected)) }
+    it { expect(page).to have_content(I18n.t(:review_rejected_flash)) }
   end
 end

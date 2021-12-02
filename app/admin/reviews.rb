@@ -5,11 +5,11 @@ ActiveAdmin.register Review do
 
   menu priority: 5
 
-  actions :index
+  actions :index, :show
 
   scope :all
-  scope('New') { |review| review.where(status: 'Unprocessed') }
-  scope('Processed') { |review| review.where(status: %w[Approved Rejected]) }
+  scope(I18n.t(:new)) { |review| review.where(status: I18n.t(:unprocessed_status)) }
+  scope(I18n.t(:processed)) { |review| review.where(status: [I18n.t(:approved_status), I18n.t(:rejected_status)]) }
 
   filter :title
   filter :created_at
@@ -31,27 +31,32 @@ ActiveAdmin.register Review do
     column :updated_at
     column :book
     column :user do |review|
-      review.user.decorate.name
+      review.user.decorate.show_email_or_name
     end
 
     column do |review|
-      span link_to I18n.t(:show_button), view_admin_review_path(review)
+      span link_to link_to I18n.t(:view_admin_button), admin_review_path(review)
     end
   end
 
-  member_action :view, method: :get do
+  action_item :approved, only: :show do
+    link_to I18n.t(:approved_button), approved_admin_review_path, 'data-confirm': I18n.t(:approve_review_confirm),
+                                                                  method: :patch
+  end
+
+  action_item :rejected, only: :show do
+    link_to I18n.t(:rejected_button), rejected_admin_review_path, 'data-confirm': I18n.t(:rejected_review_confirm),
+                                                                  method: :patch
   end
 
   member_action :approved, method: :patch do
-    resource.status = 'Approved'
-    resource.save
-    redirect_to admin_reviews_path, alert: I18n.t(:review_approved)
+    resource.approved!
+    redirect_to admin_reviews_path, alert: I18n.t(:review_approved_flash)
   end
 
   member_action :rejected, method: :patch do
-    resource.status = 'Rejected'
-    resource.save
-    redirect_to admin_reviews_path, alert: I18n.t(:review_rejected)
+    resource.rejected!
+    redirect_to admin_reviews_path, alert: I18n.t(:review_rejected_flash)
   end
 
   includes(:user, :book)
