@@ -2,53 +2,30 @@
   %h3= I18n.t(:write_review)
   %p.general-info-text= I18n.t(:score)
   .mb-15
-    %i.fas.fa-star.rate-empty
-    %i.fas.fa-star.rate-empty
-    %i.fas.fa-star.rate-empty
-    %i.fas.fa-star.rate-empty
-    %i.fas.fa-star.rate-empty
-  %form.row
+    .rating
+  = simple_form_for ReviewForm.new(Review.new), url: review_path, html: {class: 'row'} do |review|
     .col-md-8
-      .mb-40
-        .form-group
-          %label.control-label.input-label.in-grey-600{for: "title"}= I18n.t(:title)
-          %input#title.form-control{name:"title", type: "text"}
-        .form-group
-          %label.control-label.input-label.in-grey-600{for: "review"}= I18n.t(:review)
-          %textarea#review.form-control{name:"review", type: "text"}
-      .text-right
-        %button.btn.disabled.mb-20= I18n.t(:post)
+      = review.input :title, label: I18n.t(:title), label_input: { class: 'control-label input-label in-grey-600'}, input_html: {id: 'title'}
+      = review.input :message, as: :text, label: I18n.t(:review), label_input: { class: 'control-label input-label in-grey-600'}, input_html: {id: 'review', cols: 5, rows: 8}
+      = review.input :stars, :as => :hidden, input_html: {value: 1}
+      = review.input :book_id, :as => :hidden, input_html: {value: book_id}
+      = review.input :user_id, :as => :hidden, input_html: {value: current_user ? current_user.id : 1}
+      = review.button :submit, I18n.t(:post), disabled: current_user ? false : true
   .mb-80
-    %h3.in-gold-500.mb-25= "#{I18n.t(:reviews)} (3)"
-    .general-message-wrap.divider-lg
-      .clearfix
-        %img.img-circle.logo-size.inlide-block.pull-left{src: "https://www.smashingmagazine.com/wp-content/uploads/2015/09/smashing-book-5-2-large.jpg"}
-        .ml-70
-          %div
-            .general-message-date.hidden-xs 11/11/16
-            .max-240
-              .general-message-verified= I18n.t(:verified_reviewer)
-              .general-message-name Rita J. Lewis
-          .mb-15
-            %i.fas.fa-star.rate-star
-            %i.fas.fa-star.rate-star
-            %i.fas.fa-star.rate-star
-            %i.fas.fa-star.rate-star
-            %i.fas.fa-star.rate-star
-          %p Thank you BookStore, I was very pleased to receive my order for the Moleskine diary so soon after placing the order.
-    .general-message-wrap.divider-lg
-      .clearfix
-        %span.img-circle.logo-size.inlide-block.pull-left.logo-empty M
-        .ml-70
-          %div
-            .general-message-date.hidden-xs 11/11/16
-            .max-240
-              .general-message-verified.pull-right= I18n.t(:verified_reviewer)
-              .general-message-name May J. Novoa
-          .mb-15
-            %i.fas.fa-star.rate-star
-            %i.fas.fa-star.rate-star
-            %i.fas.fa-star.rate-star
-            %i.fas.fa-star.rate-star
-            %i.fas.fa-star.rate-star.rate-empty
-          %p If ‘Get a better job’ had landed on my desk a year ago, I might have been dismissive of it. Instead I was prepared to be open-minded. There have been many occasions where I turned to career books with practical activities to look for some inspiration when developing education activities for learners or assessment.
+    .rating-stars.text-center
+    %h3.in-gold-500.mb-25= "#{I18n.t(:reviews)} #{reviews.select { |review| review.status == 'Approved' }.length}"
+    - if reviews
+      - reviews.each_with_index do |review, index|
+        - if review.status == 'Approved'
+          .general-message-wrap.divider-lg
+          .clearfix
+            %img.img-circle.logo-size.inlide-block.pull-left{src: ""}
+            .ml-70
+              %div
+                .general-message-date.hidden-xs= review.created_at.strftime("%d/%m/%Y")
+                .max-240
+                  .general-message-verified= I18n.t(:verified_reviewer)
+                  .general-message-name= review.user.decorate.name
+              .mb-15
+                .read-rating{class: "stars-#{index}",data: {stars: review.stars}}
+              %p= review.message

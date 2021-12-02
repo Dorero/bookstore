@@ -39,6 +39,7 @@ class User < ApplicationRecord
                        length: { minimum: MINIMUM_SIZE_PASSWORD }
 
   has_one :address, dependent: :destroy
+  has_many :reviews, dependent: :destroy
 
   devise :database_authenticatable, :registerable, :recoverable, :rememberable, :validatable, :confirmable,
          :omniauthable, omniauth_providers: %i[facebook]

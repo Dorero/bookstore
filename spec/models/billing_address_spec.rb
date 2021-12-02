@@ -5,15 +5,15 @@
 # Table name: addresses
 #
 #  id         :bigint           not null, primary key
-#  type       :string
-#  first_name :string
-#  last_name  :string
-#  address    :string
-#  city       :string
-#  zip        :string
-#  country    :string
-#  phone      :string
-#  user_id    :bigint
+#  type       :string           not null
+#  first_name :string           not null
+#  last_name  :string           not null
+#  address    :string           not null
+#  city       :string           not null
+#  zip        :string           not null
+#  country    :string           not null
+#  phone      :string           not null
+#  user_id    :bigint           not null
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
 #

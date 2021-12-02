@@ -51,5 +51,5 @@
         .clearfix
           %p.pull-left= I18n.t(:materials)
           %p.lead.small.pull-right= @book.materials
-  = render('layouts/partials/reviews')
+  = render('layouts/partials/reviews', reviews: @reviews, book_id: @book.id)
 

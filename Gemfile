@@ -100,7 +100,7 @@ group :development do
   # Check dependency
   gem 'bundler-audit', '~> 0.9.0.1', require: false
   # annotation in models
-  gem 'annotate', '~> 3.1', '>= 3.1.1'
+  gem 'annotate', '~> 3.1', '>= 3.1.1', require: false
   # check missing translations
   gem 'i18n-tasks', '~> 0.9.35', require: false
 end

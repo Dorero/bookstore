@@ -10,5 +10,6 @@ Rails.application.routes.draw do
 
   resource :setting, only: [:edit]
   resource :address, only: [:update]
+  resource :review, only: [:create]
   resources :books, only: [:index, :show]
 end

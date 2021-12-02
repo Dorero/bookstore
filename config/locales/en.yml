@@ -30,6 +30,12 @@
 # available at https://guides.rubyonrails.org/i18n.html.
 
 en:
+  review_rejected: Review rejected
+  review_approved: Review approved
+  rejected: Rejected
+  approved: Approved
+  show_button: Show
+  thanks_for_review: Thanks for Review. It will be published as soon as Admin will approve it.
   long_parameters: is too long (maximum is %{maximum} characters)
   is_invalid: is invalid
   resource_success_delete: '%{resource} was successfully destroyed.'

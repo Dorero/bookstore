@@ -10,6 +10,8 @@ import "channels"
 require("@popperjs/core")
 import('../src/CountPriceBook')
 import('../src/ShowFullDescriptionBook')
+import('../src/jquery.star-rating-svg')
+import('../src/StarsRating')
 import '@client-side-validations/simple-form/src'
 import '@client-side-validations/client-side-validations/src'
 import('bootstrap')

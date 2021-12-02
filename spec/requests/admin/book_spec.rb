@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-RSpec.describe 'Admin', type: :request do
+RSpec.describe 'Admin/Book', type: :request do
   let!(:admin) { create(:admin_user) }
 
   before do
