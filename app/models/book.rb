@@ -8,7 +8,6 @@
 #  depth       :string
 #  description :text
 #  height      :string
-#  image       :string
 #  materials   :string
 #  name        :string
 #  price       :decimal(8, 2)
@@ -31,4 +30,5 @@ class Book < ApplicationRecord
   has_many :author_books, dependent: :destroy
   has_many :authors, through: :author_books
   has_many :reviews, dependent: :destroy
+  has_many :images, dependent: :destroy
 end

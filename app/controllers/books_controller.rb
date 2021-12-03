@@ -12,7 +12,7 @@ class BooksController < ApplicationController
   end
 
   def show
-    @book = Book.includes(:authors).find_by(id: params[:id])&.decorate
+    @book = Book.includes(%i[authors images]).find_by(id: params[:id])&.decorate
     return redirect_to controller: :error, action: :not_found unless @book
 
     @reviews = Review.includes(:user).where(book_id: @book.id).where(status: I18n.t(:approved_status))

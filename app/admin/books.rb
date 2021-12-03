@@ -1,9 +1,11 @@
 # frozen_string_literal: true
 
 ActiveAdmin.register Book do
-  permit_params :name, :description, :image, :category_id, :price
+  permit_params :name, :description, :image, :category_id, :price, :year, :height, :width, :depth, :materials, :book
 
   menu priority: 2
+
+  includes(:category, :authors, :author_books, :images)
 
   filter :name
   filter :price
@@ -21,7 +23,10 @@ ActiveAdmin.register Book do
     column :id
     column :name
     column :description
-    column :image
+    column :image do |book|
+      book.images.map { |image| image_tag image.image(:small).url }
+    end
+
     column :category
     column :price
     column :author do |book|
@@ -35,5 +40,32 @@ ActiveAdmin.register Book do
     end
   end
 
-  includes(:category, :authors, :author_books)
+  form do |f|
+    f.semantic_errors
+    f.inputs
+    f.inputs do
+      f.input :image, as: :file
+    end
+
+    f.actions
+  end
+
+  controller do
+    def create
+      book = Book.create(params_book)
+      Image.create(image: params_image[:image], book: book)
+      redirect_to admin_books_path, alert: I18n.t(:book_success_created)
+    end
+
+    private
+
+    def params_book
+      params.require(:book).except(:image).permit(:name, :description, :year, :height, :price, :width, :depth,
+                                                  :materials, :category_id)
+    end
+
+    def params_image
+      params.require(:book).permit(:image)
+    end
+  end
 end

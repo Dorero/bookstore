@@ -8,7 +8,6 @@
 #  depth       :string
 #  description :text
 #  height      :string
-#  image       :string
 #  materials   :string
 #  name        :string
 #  price       :decimal(8, 2)
@@ -30,7 +29,6 @@ FactoryBot.define do
   factory :book do
     name { FFaker::Book.title }
     description { FFaker::Book.description }
-    image { FFaker::Image.url }
     price { rand(11.2...76.9).round(2) }
     year { rand(1521..2020) }
     height { rand(1.0...10.9).round(2) }

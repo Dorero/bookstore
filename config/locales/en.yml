@@ -30,6 +30,10 @@
 # available at https://guides.rubyonrails.org/i18n.html.
 
 en:
+  image: Image
+  create_book: Create Book
+  new_book: New Book
+  book_success_created: Book successfully created
   approve_review_confirm: Are you sure you want to approve the review?
   rejected_review_confirm: Are you sure you want to rejected the review?
   unprocessed_status: unprocessed
