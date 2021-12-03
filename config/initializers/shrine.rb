@@ -18,8 +18,8 @@ end
 
 if Rails.env.production?
   s3_options = {
-    bucket:           Rails.application.credentials.dig(:aws, :bucket), # required
-    region:            Rails.application.credentials.dig(:aws, :region), # required
+    bucket:           Rails.application.credentials.dig(:aws, :bucket),
+    region:            Rails.application.credentials.dig(:aws, :region),
     access_key_id:     Rails.application.credentials.dig(:aws, :access_key_id),
     secret_access_key: Rails.application.credentials.dig(:aws, :secret_access_key),
   }
