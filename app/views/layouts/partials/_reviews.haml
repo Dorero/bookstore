@@ -3,7 +3,7 @@
   %p.general-info-text= I18n.t(:score)
   .mb-15
     %ul.stars
-      - 5.times do |index|
+      - BooksController::RATING_STARS_SIZE.times do |index|
         %li.star
           %i.fas.fa-star{id: index + 1}
   - if current_user
@@ -24,13 +24,13 @@
           %span.img-circle.logo-size.inlide-block.pull-left.logo-empty= review.user.decorate.image_letter
           .ml-70
             %div
-              .general-message-date.hidden-xs= review.created_at.strftime("%d/%m/%Y")
+              .general-message-date.hidden-xs= I18n.l(review.created_at, format: :custom_short)
               .max-260
                 .general-message-verified= I18n.t(:verified_reviewer)
                 .general-message-name= review.user.decorate.show_email_or_name
             .mb-15
               %ul.stars
-                - 5.times do |index|
+                - BooksController::RATING_STARS_SIZE.times do |index|
                   %li.read-star
                     %i.fas.fa-star{class: "#{'clicked-stars' if index + 1 <= review.stars.to_i }"}
             %p= review.message

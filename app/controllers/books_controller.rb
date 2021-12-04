@@ -2,6 +2,7 @@
 
 class BooksController < ApplicationController
   MAX_SIZE_DESCRIPTION = 250
+  RATING_STARS_SIZE = 5
 
   before_action :permit_params
 

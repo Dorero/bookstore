@@ -3,6 +3,8 @@
 ActiveAdmin.register Review do
   permit_params :title, :message, :stars, :status, :user_id, :book_id
 
+  includes(:user, :book)
+
   menu priority: 5
 
   actions :index, :show
@@ -34,30 +36,26 @@ ActiveAdmin.register Review do
       review.user.decorate.show_email_or_name
     end
 
-    column do |review|
-      span link_to link_to I18n.t(:view_admin_button), admin_review_path(review)
-    end
+    actions
   end
 
-  action_item :approved, only: :show do
-    link_to I18n.t(:approved_button), approved_admin_review_path, 'data-confirm': I18n.t(:approve_review_confirm),
-                                                                  method: :patch
+  action_item :approve, only: :show do
+    link_to I18n.t(:approve_button), approve_admin_review_path, 'data-confirm': I18n.t(:approve_review_confirm),
+                                                                method: :patch
   end
 
-  action_item :rejected, only: :show do
-    link_to I18n.t(:rejected_button), rejected_admin_review_path, 'data-confirm': I18n.t(:rejected_review_confirm),
-                                                                  method: :patch
+  action_item :reject, only: :show do
+    link_to I18n.t(:reject_button), reject_admin_review_path, 'data-confirm': I18n.t(:reject_review_confirm),
+                                                              method: :patch
   end
 
-  member_action :approved, method: :patch do
+  member_action :approve, method: :patch do
     resource.approved!
     redirect_to admin_reviews_path, alert: I18n.t(:review_approved_flash)
   end
 
-  member_action :rejected, method: :patch do
+  member_action :reject, method: :patch do
     resource.rejected!
     redirect_to admin_reviews_path, alert: I18n.t(:review_rejected_flash)
   end
-
-  includes(:user, :book)
 end

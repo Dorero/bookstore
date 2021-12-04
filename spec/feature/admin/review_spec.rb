@@ -23,7 +23,7 @@ RSpec.describe 'Admin/Review', type: :feature, js: true do
   describe '#approved' do
     before do
       visit admin_review_path(review.id)
-      accept_confirm(I18n.t(:approve_review_confirm)) { click_link(I18n.t(:approved_button)) }
+      accept_confirm(I18n.t(:approve_review_confirm)) { click_link(I18n.t(:approve_button)) }
     end
 
     it { expect(page).to have_current_path(admin_reviews_path) }
@@ -33,7 +33,7 @@ RSpec.describe 'Admin/Review', type: :feature, js: true do
   describe '#rejected' do
     before do
       visit admin_review_path(review.id)
-      accept_confirm(I18n.t(:rejected_review_confirm)) { click_link(I18n.t(:rejected_button)) }
+      accept_confirm(I18n.t(:reject_review_confirm)) { click_link(I18n.t(:reject_button)) }
     end
 
     it { expect(page).to have_current_path(admin_reviews_path) }

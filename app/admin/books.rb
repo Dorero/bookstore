@@ -3,6 +3,8 @@
 ActiveAdmin.register Book do
   permit_params :name, :description, :image, :category_id, :price
 
+  includes(:category, :authors, :author_books)
+
   menu priority: 2
 
   filter :name
@@ -28,12 +30,6 @@ ActiveAdmin.register Book do
       book.authors.map { |author| link_to(author.decorate.name, admin_author_path(author.id)) }
     end
 
-    column do |book|
-      span link_to link_to I18n.t(:view_admin_button), admin_book_path(book)
-      span link_to link_to I18n.t(:edit_admin_button), edit_admin_book_path(book)
-      span link_to link_to I18n.t(:delete_admin_button), admin_book_path(book), method: :delete
-    end
+    actions
   end
-
-  includes(:category, :authors, :author_books)
 end
