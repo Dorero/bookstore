@@ -5,17 +5,25 @@
 # Table name: addresses
 #
 #  id         :bigint           not null, primary key
-#  type       :string
-#  first_name :string
-#  last_name  :string
-#  address    :string
-#  city       :string
-#  zip        :string
-#  country    :string
-#  phone      :string
-#  user_id    :bigint
+#  address    :string           not null
+#  city       :string           not null
+#  country    :string           not null
+#  first_name :string           not null
+#  last_name  :string           not null
+#  phone      :string           not null
+#  type       :string           not null
+#  zip        :string           not null
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
+#  user_id    :bigint           not null
+#
+# Indexes
+#
+#  index_addresses_on_user_id  (user_id)
+#
+# Foreign Keys
+#
+#  fk_rails_...  (user_id => users.id)
 #
 FactoryBot.define do
   factory :shipping_address do

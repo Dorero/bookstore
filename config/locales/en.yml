@@ -30,6 +30,23 @@
 # available at https://guides.rubyonrails.org/i18n.html.
 
 en:
+  time:
+    formats:
+      custom_short: "%d/%m/%Y"
+  approve_review_confirm: Are you sure you want to approve the review?
+  reject_review_confirm: Are you sure you want to rejected the review?
+  unprocessed_status: unprocessed
+  rejected_status: rejected
+  approved_status: approved
+  unprocessed_button: Unprocessed
+  reject_button: Reject
+  approve_button: Approve
+  processed: Processed
+  new: New
+  review_rejected_flash: Review rejected
+  review_approved_flash: Review approved
+  show_button: Show
+  thanks_for_review: Thanks for Review. It will be published as soon as Admin will approve it.
   long_parameters: is too long (maximum is %{maximum} characters)
   is_invalid: is invalid
   resource_success_delete: '%{resource} was successfully destroyed.'

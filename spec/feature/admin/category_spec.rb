@@ -47,7 +47,7 @@ RSpec.describe 'Admin/Category', type: :feature, js: true do
   describe '#delete' do
     before do
       visit admin_categories_path
-      click_link('Delete', href: admin_category_path(category.id))
+      accept_confirm { click_link(I18n.t(:delete_admin_button), href: admin_category_path(category.id)) }
     end
 
     it { expect(page).to have_content(I18n.t(:resource_success_delete, resource: 'Category')) }
