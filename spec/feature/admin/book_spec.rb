@@ -55,7 +55,7 @@ RSpec.describe 'Admin/Book', type: :feature, js: true do
   describe '#delete' do
     before do
       visit admin_books_path
-      click_link(I18n.t(:delete_admin_button), href: admin_book_path(book.id))
+      accept_confirm { click_link(I18n.t(:delete_admin_button), href: admin_book_path(book.id)) }
     end
 
     it { expect(page).to have_content(I18n.t(:resource_success_delete, resource: 'Book')) }
@@ -74,7 +74,12 @@ RSpec.describe 'Admin/Book', type: :feature, js: true do
       fill_in 'book[width]', with: book_data[:width]
       fill_in 'book[depth]', with: book_data[:depth]
       fill_in 'book[materials]', with: book_data[:materials]
-      attach_file I18n.t(:image), "#{Rails.root}/app/assets/images/seed/SmashingBook5ResponsiveWebDesign.jpg"
+      click_link(I18n.t(:add_new_image))
+      attach_file 'book[images_attributes][0][image]',
+                  "#{Rails.root}/app/assets/images/seed/SmashingBook5ResponsiveWebDesign.jpg"
+      click_link(I18n.t(:add_new_image))
+      attach_file 'book[images_attributes][1][image]',
+                  "#{Rails.root}/app/assets/images/seed/SmashingBook5ResponsiveWebDesign.jpg"
       click_button(I18n.t(:create_book))
     end
 

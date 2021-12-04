@@ -30,6 +30,7 @@
 # available at https://guides.rubyonrails.org/i18n.html.
 
 en:
+  add_new_image: Add New Image
   image: Image
   create_book: Create Book
   new_book: New Book
