@@ -6,6 +6,8 @@ ActiveAdmin.register Book do
 
   includes(:category, :authors, :author_books, :images)
 
+  includes(:category, :authors, :author_books)
+
   menu priority: 2
 
   filter :name

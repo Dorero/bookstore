@@ -21,13 +21,13 @@ RSpec.describe 'Admin', type: :request do
   end
 
   describe 'PATCH #approved' do
-    before { patch approved_admin_review_path(review.id) }
+    before { patch approve_admin_review_path(review.id) }
 
     it { expect(response).to redirect_to(admin_reviews_path) }
   end
 
   describe 'PATCH #rejected' do
-    before { patch rejected_admin_review_path(review.id) }
+    before { patch reject_admin_review_path(review.id) }
 
     it { expect(response).to redirect_to(admin_reviews_path) }
   end

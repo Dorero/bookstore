@@ -49,7 +49,7 @@ RSpec.describe 'Admin/Author', type: :feature, js: true do
   describe '#delete' do
     before do
       visit admin_authors_path
-      click_link('Delete', href: admin_author_path(author.id))
+      accept_confirm { click_link(I18n.t(:delete_admin_button), href: admin_author_path(author.id)) }
     end
 
     it { expect(page).to have_content(I18n.t(:resource_success_delete, resource: 'Author')) }
