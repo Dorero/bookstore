@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_12_03_060055) do
+ActiveRecord::Schema.define(version: 2021_12_05_162839) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -41,6 +41,8 @@ ActiveRecord::Schema.define(version: 2021_12_03_060055) do
     t.bigint "user_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.bigint "sale_id"
+    t.index ["sale_id"], name: "index_addresses_on_sale_id"
     t.index ["user_id"], name: "index_addresses_on_user_id"
   end
 
@@ -94,6 +96,16 @@ ActiveRecord::Schema.define(version: 2021_12_03_060055) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  create_table "coupons", force: :cascade do |t|
+    t.string "number", default: "59cfe1b30f1062bafda3bcf943b49bee"
+    t.integer "discount", default: 3
+    t.integer "status", default: 0
+    t.bigint "sale_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["sale_id"], name: "index_coupons_on_sale_id"
+  end
+
   create_table "images", force: :cascade do |t|
     t.text "image_data", null: false
     t.bigint "book_id"
@@ -113,6 +125,24 @@ ActiveRecord::Schema.define(version: 2021_12_03_060055) do
     t.datetime "updated_at", precision: 6, null: false
     t.index ["book_id"], name: "index_reviews_on_book_id"
     t.index ["user_id"], name: "index_reviews_on_user_id"
+  end
+
+  create_table "sale_books", force: :cascade do |t|
+    t.bigint "book_id"
+    t.bigint "sale_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["book_id"], name: "index_sale_books_on_book_id"
+    t.index ["sale_id"], name: "index_sale_books_on_sale_id"
+  end
+
+  create_table "sales", force: :cascade do |t|
+    t.string "type", null: false
+    t.integer "quantity_books"
+    t.integer "status", default: 0
+    t.string "number"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "users", force: :cascade do |t|
@@ -141,7 +171,10 @@ ActiveRecord::Schema.define(version: 2021_12_03_060055) do
   add_foreign_key "author_books", "authors"
   add_foreign_key "author_books", "books"
   add_foreign_key "books", "categories"
+  add_foreign_key "coupons", "sales"
   add_foreign_key "images", "books"
   add_foreign_key "reviews", "books"
   add_foreign_key "reviews", "users"
+  add_foreign_key "sale_books", "books"
+  add_foreign_key "sale_books", "sales"
 end

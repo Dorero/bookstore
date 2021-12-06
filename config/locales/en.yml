@@ -30,6 +30,23 @@
 # available at https://guides.rubyonrails.org/i18n.html.
 
 en:
+  coupon_spent: Coupon has already been spent
+  coupun_can_be_activated: Your coupon can be successfully activated
+  no_such_coupon: There is no such coupon
+  book_success_delete: Book success delete from cart
+  checkout: Checkout
+  order_total_summary: "Order Total:"
+  coupon_summary: "Coupon:"
+  sub_total_summary: "Subtotal:"
+  order_summary: Order Summary
+  apply_coupon: Apply Coupon
+  enter_coupon: Enter Your Coupon Code
+  product: Product
+  price: Price
+  quantity: Quantity
+  sub_total: SubTotal
+  cart: Cart
+  book_add_to_cart: The book has been successfully added to your cart
   add_new_image: Add New Image
   image: Image
   create_book: Create Book

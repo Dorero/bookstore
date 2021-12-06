@@ -15,10 +15,12 @@
 #  zip        :string           not null
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
+#  sale_id    :bigint
 #  user_id    :bigint           not null
 #
 # Indexes
 #
+#  index_addresses_on_sale_id  (sale_id)
 #  index_addresses_on_user_id  (user_id)
 #
 # Foreign Keys
@@ -27,4 +29,5 @@
 #
 class Address < ApplicationRecord
   belongs_to :user
+  belongs_to :sale
 end
