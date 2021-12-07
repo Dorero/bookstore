@@ -63,6 +63,8 @@ RSpec.describe 'Admin/Book', type: :feature, js: true do
   end
 
   describe '#create' do
+    let(:path_to_file) { "#{Rails.root}/app/assets/images/seed/SmashingBook5ResponsiveWebDesign.jpg" }
+
     before do
       visit new_admin_book_path
       select book.category.name, from: 'book_category_id'
@@ -75,15 +77,12 @@ RSpec.describe 'Admin/Book', type: :feature, js: true do
       fill_in 'book[depth]', with: book_data[:depth]
       fill_in 'book[materials]', with: book_data[:materials]
       click_link(I18n.t(:add_new_image))
-      attach_file 'book[images_attributes][0][image]',
-                  "#{Rails.root}/app/assets/images/seed/SmashingBook5ResponsiveWebDesign.jpg"
+      attach_file 'book[images_attributes][0][image]', path_to_file
       click_link(I18n.t(:add_new_image))
-      attach_file 'book[images_attributes][1][image]',
-                  "#{Rails.root}/app/assets/images/seed/SmashingBook5ResponsiveWebDesign.jpg"
+      attach_file 'book[images_attributes][1][image]', path_to_file
       click_button(I18n.t(:create_book))
     end
 
     it { expect(page).to have_content(I18n.t(:book_success_created)) }
-    it { expect(page).to have_current_path(admin_books_path) }
   end
 end

@@ -34,7 +34,7 @@ en:
   image: Image
   create_book: Create Book
   new_book: New Book
-  book_success_created: Book successfully created
+  book_success_created: Book was successfully created.
   time:
     formats:
       custom_short: "%d/%m/%Y"
