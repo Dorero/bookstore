@@ -142,6 +142,7 @@ ActiveRecord::Schema.define(version: 2021_12_03_060055) do
   add_foreign_key "author_books", "books"
   add_foreign_key "books", "categories"
   add_foreign_key "images", "books"
+
   add_foreign_key "reviews", "books"
   add_foreign_key "reviews", "users"
 end
