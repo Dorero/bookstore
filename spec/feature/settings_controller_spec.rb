@@ -98,7 +98,7 @@ RSpec.describe 'Settings', type: :feature, js: true do
                        phone: FFaker::PhoneNumberJA.international_mobile_phone_number)
       end
       let(:broken_user_data) do
-        attributes_for(:user, email: FFaker::Book.description, password: FFaker::Book.description)
+        attributes_for(:user, email: FFaker::Book.description, password: FFaker::CheesyLingo.paragraph)
       end
 
       context 'update billing address' do

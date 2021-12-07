@@ -24,9 +24,6 @@ gem 'jbuilder', '~> 2.7'
 # Use Active Model has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 
-# Use Active Storage variant
-# gem 'image_processing', '~> 1.2'
-
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.4.4', require: false
 
@@ -66,6 +63,16 @@ gem 'simple_form', '~> 5.1'
 
 # admin panel
 gem 'activeadmin', '~> 2.9'
+
+# manipulate image
+gem 'image_processing', '~> 1.12', '>= 1.12.1'
+gem 'mini_magick', '~> 4.11'
+
+# uploads files
+gem 'shrine', '~> 3.4'
+
+# sdk for amazon s3
+gem 'aws-sdk-s3', '~> 1.109'
 
 group :development, :test do
   gem 'factory_bot_rails', '~> 6.2'

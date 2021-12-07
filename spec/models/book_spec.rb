@@ -8,7 +8,6 @@
 #  depth       :string
 #  description :text
 #  height      :string
-#  image       :string
 #  materials   :string
 #  name        :string
 #  price       :decimal(8, 2)
@@ -31,6 +30,7 @@ RSpec.describe Book, type: :model do
   describe 'model relations book' do
     it { is_expected.to belong_to(:category) }
     it { is_expected.to have_many(:author_books) }
+    it { is_expected.to have_many(:images) }
     it { is_expected.to have_many(:authors).through(:author_books) }
   end
 end
