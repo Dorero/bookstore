@@ -41,8 +41,6 @@ ActiveRecord::Schema.define(version: 2021_12_05_162839) do
     t.bigint "user_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.bigint "sale_id"
-    t.index ["sale_id"], name: "index_addresses_on_sale_id"
     t.index ["user_id"], name: "index_addresses_on_user_id"
   end
 
@@ -97,13 +95,11 @@ ActiveRecord::Schema.define(version: 2021_12_05_162839) do
   end
 
   create_table "coupons", force: :cascade do |t|
-    t.string "number", default: "59cfe1b30f1062bafda3bcf943b49bee"
-    t.integer "discount", default: 3
+    t.string "number"
+    t.decimal "discount", precision: 8, scale: 2
     t.integer "status", default: 0
-    t.bigint "sale_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["sale_id"], name: "index_coupons_on_sale_id"
   end
 
   create_table "images", force: :cascade do |t|
@@ -112,6 +108,14 @@ ActiveRecord::Schema.define(version: 2021_12_05_162839) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["book_id"], name: "index_images_on_book_id"
+  end
+
+  create_table "orders", force: :cascade do |t|
+    t.string "aasm_state"
+    t.bigint "coupon_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["coupon_id"], name: "index_orders_on_coupon_id"
   end
 
   create_table "reviews", force: :cascade do |t|
@@ -127,22 +131,15 @@ ActiveRecord::Schema.define(version: 2021_12_05_162839) do
     t.index ["user_id"], name: "index_reviews_on_user_id"
   end
 
-  create_table "sale_books", force: :cascade do |t|
-    t.bigint "book_id"
-    t.bigint "sale_id"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["book_id"], name: "index_sale_books_on_book_id"
-    t.index ["sale_id"], name: "index_sale_books_on_sale_id"
-  end
-
-  create_table "sales", force: :cascade do |t|
-    t.string "type", null: false
+  create_table "saved_books", force: :cascade do |t|
     t.integer "quantity_books"
-    t.integer "status", default: 0
-    t.string "number"
+    t.decimal "total_price", precision: 8, scale: 2
+    t.bigint "book_id"
+    t.bigint "order_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.index ["book_id"], name: "index_saved_books_on_book_id"
+    t.index ["order_id"], name: "index_saved_books_on_order_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -171,10 +168,9 @@ ActiveRecord::Schema.define(version: 2021_12_05_162839) do
   add_foreign_key "author_books", "authors"
   add_foreign_key "author_books", "books"
   add_foreign_key "books", "categories"
-  add_foreign_key "coupons", "sales"
   add_foreign_key "images", "books"
   add_foreign_key "reviews", "books"
   add_foreign_key "reviews", "users"
-  add_foreign_key "sale_books", "books"
-  add_foreign_key "sale_books", "sales"
+  add_foreign_key "saved_books", "books"
+  add_foreign_key "saved_books", "orders"
 end

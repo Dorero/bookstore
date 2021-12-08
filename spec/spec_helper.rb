@@ -17,6 +17,7 @@
 # See http://rubydoc.info/gems/rspec-core/RSpec/Core/Configuration
 
 require 'rails_helper'
+require 'rack_session_access/capybara'
 
 RSpec.configure do |config|
   config.include Capybara::DSL

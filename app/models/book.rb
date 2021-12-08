@@ -31,8 +31,8 @@ class Book < ApplicationRecord
   has_many :authors, through: :author_books
   has_many :reviews, dependent: :destroy
   has_many :images, dependent: :destroy
-  has_many :sale_books
-  has_many :sales, through: :sale_books
+  has_many :saved_books
+  has_many :orders, through: :saved_books
 
   accepts_nested_attributes_for :images, allow_destroy: true
 end

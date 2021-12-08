@@ -2,34 +2,48 @@
 
 class CartsController < ApplicationController
   def create
-    cart = Cart.find_or_create_by(id: session[:current_cart])
-    add_books_to_cart(cart)
-    session[:current_cart] = cart.id
-    session[:quantity_books] = cart.books.count
+    set_cart
     redirect_to book_path(params[:book_id]), alert: I18n.t(:book_add_to_cart)
   end
 
   def show
-    @cart = Cart.find_or_initialize_by(id: session[:current_cart])
-    @books = @cart.books.distinct
+    return redirect_to empty_cart_path unless session[:quantity_books]
+
+    @cart = Order.where(id: session[:current_cart]).first
+    @books = @cart.books
   end
 
+  def empty; end
+
   def delete_book
-    SaleBook.where(book_id: params[:book_id]).destroy_all
-    redirect_to cart_path, alert: I18n.t(:book_success_delete)
+    SavedBook.where(book_id: params[:book_id]).destroy_all
+    session[:quantity_books] = nil if Order.find(session[:current_cart]).books.empty?
+    redirect_to empty_cart_path, alert: I18n.t(:book_success_delete)
   end
 
   def check_coupon
-    coupon = Coupon.where(number: params[:coupon]).first
-    return redirect_to cart_path, alert: coupon&.spent? ? I18n.t(:coupon_spent) : I18n.t(:no_such_coupon) unless coupon
+    redirect_to cart_path, alert: CouponService.new(params[:coupon], session[:current_cart]).permit_coupon
+  end
 
-    coupon.pre_use!
-    redirect_to cart_path, alert: I18n.t(:coupun_can_be_activated)
+  def increment_quantity_books
+    CartService.new(params[:book_id], params[:quantity_books]).update_by_one(:plus)
+    redirect_to cart_path
+  end
+
+  def decrement_quantity_books
+    CartService.new(params[:book_id], params[:quantity_books]).update_by_one(:minus)
+    redirect_to cart_path
+  end
+
+  def update_prices
+    render json: CartService.new(params[:book_id], params[:quantity_books], session[:current_cart]).select
   end
 
   private
 
-  def add_books_to_cart(cart)
-    params[:quantity_books].to_i.times { SaleBook.create(sale: cart, book: Book.find(params[:book_id])) }
+  def set_cart
+    cart = CartService.new(params[:book_id], params[:quantity_books], session[:current_cart]).create
+    session[:current_cart] = cart.id
+    session[:quantity_books] = cart.books.count
   end
 end

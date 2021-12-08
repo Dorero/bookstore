@@ -20,7 +20,11 @@
 #  fk_rails_...  (book_id => books.id)
 #  fk_rails_...  (sale_id => sales.id)
 #
-class SaleBook < ApplicationRecord
-  belongs_to :sale
-  belongs_to :book
+FactoryBot.define do
+  factory :saved_book do
+    quantity_books { rand(20) }
+    total_price { rand(30) }
+    order
+    book
+  end
 end

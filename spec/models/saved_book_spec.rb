@@ -20,9 +20,9 @@
 #  fk_rails_...  (book_id => books.id)
 #  fk_rails_...  (sale_id => sales.id)
 #
-FactoryBot.define do
-  factory :sale_book do
-    sale
-    book
+RSpec.describe SavedBook, type: :model do
+  describe 'model relations' do
+    it { is_expected.to belong_to(:order) }
+    it { is_expected.to belong_to(:book) }
   end
 end

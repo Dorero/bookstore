@@ -12,8 +12,10 @@
 #  created_at     :datetime         not null
 #  updated_at     :datetime         not null
 #
-FactoryBot.define do
-  factory :cart do
-    number { FFaker::PhoneNumber.imei }
+RSpec.describe Order, type: :model do
+  describe 'model relations' do
+    it { is_expected.to belong_to(:coupon).optional }
+    it { is_expected.to have_many(:saved_books) }
+    it { is_expected.to have_many(:books) }
   end
 end

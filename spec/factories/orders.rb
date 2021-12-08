@@ -12,11 +12,9 @@
 #  created_at     :datetime         not null
 #  updated_at     :datetime         not null
 #
-RSpec.describe Sale, type: :model do
-  describe 'model relations' do
-    it { is_expected.to have_one(:address) }
-    it { is_expected.to have_one(:coupon) }
-    it { is_expected.to have_many(:sale_books) }
-    it { is_expected.to have_many(:books) }
+FactoryBot.define do
+  factory :order do
+    aasm_state { 'cart' }
+    coupon
   end
 end

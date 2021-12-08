@@ -17,17 +17,20 @@
         %tr
           %td
             .general-img-wrap-table
-              %img.cart-img-shadow.pull-left{src: book.images.first.image(:small).url, alt: "design-book"}
+              = link_to book_path(book.id) do
+                %img.cart-img-shadow.pull-left{src: book.images.first.image(:small).url, alt: "design-book"}
           %td
-            %p.title= book.name
+            = link_to book_path(book.id) do
+              %p.title= book.name
           %td
-            %span.font-16.in-gold-500.price= number_to_currency(book.price, locale: :fr)
+            %span.font-16.in-gold-500= number_to_currency(book.price, locale: :fr)
           %td
-            .input-group.price-field
-              %a.input-link{href: "#"}
+            .input-group
+              = link_to decrement_quantity_books_cart_path(book_id: book.id, quantity_books: book.decorate.quantity), method: :post, class: 'input-link' do
                 %i.fa.fa-minus.line-heaght-40
-              %input.form-control.quantity-input{type: "text", value: "#{book.decorate.quantity}"}
-              %a.input-link{href: "#"}
+              %input.form-control.quantity-input.send{type: "text", value: "#{book.decorate.quantity}"}
+              %input#book_id{hidden: true, value: "#{book.id}"}
+              = link_to increment_quantity_books_cart_path(book_id: book.id, quantity_books: book.decorate.quantity), method: :post, class: 'input-link' do
                 %i.fa.fa-plus.line-heaght-40
           %td
             %span.font-16.in-gold-500.sub-total= number_to_currency(book.price * book.decorate.quantity, locale: :fr)
@@ -51,17 +54,17 @@
               %td
                 %p.font-16= I18n.t(:sub_total_summary)
               %td
-                %p.font-16= number_to_currency(@cart.decorate.price, locale: :fr)
+                %p.font-16.sub-total-order= number_to_currency(@cart.decorate.total_price, locale: :fr)
             %tr
               %td
                 %p.font-16= I18n.t(:coupon_summary)
               %td
-                %p.font-16= number_to_currency(@cart.decorate.discount, locale: :fr)
+                %p.font-16.coupon= number_to_currency(@cart.decorate.discount, locale: :fr)
             %tr
               %td
                 %strong.font-18= I18n.t(:order_total_summary)
               %td
-                %strong.font-18= number_to_currency(@cart.decorate.price_with_discount, locale: :fr)
+                %strong.font-18.order-total-price= number_to_currency(@cart.decorate.price_with_discount, locale: :fr)
           %button.btn.btn-default.mb-20.visible-xs-inline-block= I18n.t(:checkout)
   %button.btn.btn-default.mb-20.hidden-xs.center-block= I18n.t(:checkout)
 

@@ -12,8 +12,12 @@ Rails.application.routes.draw do
   resource :address, only: [:update]
   resource :review, only: [:create]
   resource :cart, only: [:create, :show] do
+    get :empty, on: :member
     post :delete_book, on: :member
     post :check_coupon, on: :member
+    post :increment_quantity_books, on: :member
+    post :decrement_quantity_books, on: :member
+    post :update_prices, on: :member
   end
 
   resources :books, only: [:index, :show]

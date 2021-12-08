@@ -30,6 +30,9 @@
 # available at https://guides.rubyonrails.org/i18n.html.
 
 en:
+  coupon_applied: Coupon has already been applied to the order
+  cart_empty: Your cart empty
+  to_shop: Go to shop
   coupon_spent: Coupon has already been spent
   coupun_can_be_activated: Your coupon can be successfully activated
   no_such_coupon: There is no such coupon
