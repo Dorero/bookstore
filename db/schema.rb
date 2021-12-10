@@ -132,8 +132,8 @@ ActiveRecord::Schema.define(version: 2021_12_05_162839) do
   end
 
   create_table "saved_books", force: :cascade do |t|
-    t.integer "quantity_books"
-    t.decimal "total_price", precision: 8, scale: 2
+    t.integer "quantity"
+    t.decimal "price", precision: 8, scale: 2
     t.bigint "book_id"
     t.bigint "order_id"
     t.datetime "created_at", precision: 6, null: false

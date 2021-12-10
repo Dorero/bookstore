@@ -12,6 +12,6 @@ class BookDecorator < Draper::Decorator
   end
 
   def quantity
-    SavedBook.where(book_id: object.id).first.quantity_books.to_i
+    SavedBook.find_by_book_id(object.id).quantity.to_i
   end
 end

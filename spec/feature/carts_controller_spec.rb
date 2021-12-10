@@ -23,7 +23,7 @@ RSpec.describe 'Cart', type: :feature, js: true do
       end
 
       it { expect(page).to have_content(I18n.t(:book_success_delete)) }
-      it { expect(page).to have_current_path(empty_cart_path) }
+      it { expect(page).to have_current_path(cart_path) }
     end
 
     describe '#check_coupon' do
@@ -35,7 +35,7 @@ RSpec.describe 'Cart', type: :feature, js: true do
         click_button(I18n.t(:apply_coupon))
       end
 
-      it { expect(page).to have_content(I18n.t(:coupun_can_be_activated)) }
+      it { expect(page).to have_content(I18n.t(:coupon_applied)) }
       it { expect(page).to have_current_path(cart_path) }
     end
 
@@ -86,12 +86,6 @@ RSpec.describe 'Cart', type: :feature, js: true do
 
       it { expect(page).to have_content(I18n.t(:book_add_to_cart)) }
       it { expect(page).to have_current_path(book_path(cart_with_book.book.id)) }
-    end
-
-    describe '#empty' do
-      before { visit cart_path }
-
-      it { expect(page).to have_current_path(empty_cart_path) }
     end
   end
 end

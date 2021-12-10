@@ -6,7 +6,7 @@
         %span.icon-bar
       = link_to(I18n.t(:title_store), root_path, class: 'navbar-brand')
     = link_to(cart_path, class: 'shop-link pull-right') do
-      %span.shop-icon{style: session[:quantity_books] ? '' : "background-color: #fff" }
+      %span.shop-icon{style: session[:current_cart] ? '' : "background-color: #fff" }
         %span.shop-quantity= session[:quantity_books]
     #navbar.navbar-collapse.collapse.pl-30{'aria-expanded': "false"}
       - unless user_signed_in?
