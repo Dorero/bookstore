@@ -65,6 +65,6 @@
                 %strong.font-18= I18n.t(:order_total_summary)
               %td
                 %strong.font-18.order-total-price= number_to_currency(@cart.decorate.price_with_discount, locale: :fr)
-          %button.btn.btn-default.mb-20.visible-xs-inline-block= I18n.t(:checkout)
-  %button.btn.btn-default.mb-20.hidden-xs.center-block= I18n.t(:checkout)
+  = link_to check_check_login_path do
+    %button.btn.btn-default.mb-20.hidden-xs.center-block= I18n.t(:checkout)
 

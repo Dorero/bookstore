@@ -1,0 +1,29 @@
+%main.container
+  .row
+    .col-md-5.mb-40
+      .text-center
+        %h3.general-subtitle= I18n.t(:returing_customer)
+        = link_to(user_facebook_omniauth_authorize_path, class: 'general-login-icon', id: 'facebook', method: :post) do
+          %i.fab.fa-facebook-square{style: "font-size: 45px"}
+        %p.general-login-text= I18n.t(:or)
+      = simple_form_for @user, url: login_check_login_path(@user), html: {id: 'new-user-login'},  validate: true do |form|
+        = render "devise/shared/error_messages", resource: @user
+        .mb-40
+          %p.mb-15= I18n.t(:login_with_password)
+          = form.input :email, label: I18n.t(:enter_email), placeholder: I18n.t(:enter_email), input_html: {id: 'user_email_login'}
+          = form.input :password, label: I18n.t(:password), placeholder: I18n.t(:password)
+          = link_to(I18n.t(:forgot_password), new_password_path(@user), class: 'help-block in-gold-500')
+        = form.button :submit, I18n.t(:login_with_password), class: 'btn btn-default mb-20'
+    .col-md-5.col-md-offset-1.mb-60
+      .text-center
+        %h3.general-subtitle= I18n.t(:new_customer)
+        = link_to(user_facebook_omniauth_authorize_path, class: 'general-login-icon', id: 'facebook', method: :post) do
+          %i.fab.fa-facebook-square{style: "font-size: 45px"}
+        %p.general-login-text= I18n.t(:or)
+      = simple_form_for @user, url: quick_register_check_login_path(@user), html: {id: 'new-user-register'}, validate: true do |form|
+        = render "devise/shared/error_messages", resource: @user
+        .mb-40
+          %p.mb-5= I18n.t(:quick_register)
+          %p.general-info-text.font-12.mb-20= I18n.t(:can_create_password_later)
+          = form.input :email, label: I18n.t(:enter_email), placeholder: I18n.t(:enter_email), input_html: {id: 'user_email_register'}
+          = form.button :submit, I18n.t(:continue_to_checkout), class: 'btn btn-default mb-20'

@@ -20,5 +20,17 @@ Rails.application.routes.draw do
     post :update_prices, on: :member
   end
 
+  devise_scope :user do
+    resource :check_login, only: [] do
+      get :check, on: :member
+      post :quick_register, on: :member
+      post :login, on: :member
+    end
+  end
+
+  resource :checking, only: [] do
+    get :check_address, on: :member
+  end
+
   resources :books, only: [:index, :show]
 end
