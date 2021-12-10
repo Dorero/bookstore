@@ -9,11 +9,11 @@ RSpec.describe 'CheckLogins', type: :feature, js: true do
   before do
     user.confirm
     page.set_rack_session(quantity_books: 2, current_cart: cart_with_book.order.id)
-    visit(check_check_login_path)
+    visit(check_login_path)
   end
 
   describe '#check' do
-    it { expect(page).to have_current_path(check_check_login_path) }
+    it { expect(page).to have_current_path(check_login_path) }
   end
 
   describe '#login' do
@@ -36,7 +36,7 @@ RSpec.describe 'CheckLogins', type: :feature, js: true do
       end
 
       it { expect(page).to have_content(I18n.t(:'devise.failure.invalid', authentication_keys: 'email')) }
-      it { expect(page).to have_current_path(check_check_login_path) }
+      it { expect(page).to have_current_path(check_login_path) }
     end
   end
 
@@ -48,7 +48,7 @@ RSpec.describe 'CheckLogins', type: :feature, js: true do
       end
 
       it { expect(page).to have_content(I18n.t(:account_exist)) }
-      it { expect(page).to have_current_path(check_check_login_path) }
+      it { expect(page).to have_current_path(check_login_path) }
     end
 
     context 'register new user' do

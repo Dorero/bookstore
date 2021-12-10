@@ -10,7 +10,7 @@ RSpec.describe 'CheckLogins', type: :request do
   end
 
   describe 'GET #check' do
-    before { get check_check_login_path }
+    before { get check_login_path }
 
     it { expect(response).to have_http_status(:success) }
   end
@@ -25,7 +25,7 @@ RSpec.describe 'CheckLogins', type: :request do
     context 'login user with wrong password' do
       before { post login_check_login_path, params: { user: { email: user.email, password: 'wrong password223' } } }
 
-      it { expect(response).to redirect_to(check_check_login_path) }
+      it { expect(response).to redirect_to(check_login_path) }
     end
   end
 
@@ -33,7 +33,7 @@ RSpec.describe 'CheckLogins', type: :request do
     context 'with exist user' do
       before { post quick_register_check_login_path, params: { user: { email: user.email } } }
 
-      it { expect(response).to redirect_to(check_check_login_path) }
+      it { expect(response).to redirect_to(check_login_path) }
     end
 
     context 'without exist user' do

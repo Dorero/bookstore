@@ -15,13 +15,11 @@ Rails.application.routes.draw do
     post :delete_book, on: :member
     post :check_coupon, on: :member
     post :update_quantity_books_by_one, on: :member
-    post :decrement_quantity_books, on: :member
     post :update_prices, on: :member
   end
 
   devise_scope :user do
-    resource :check_login, only: [] do
-      get :check, on: :member
+    resource :check_login, only: [:show] do
       post :quick_register, on: :member
       post :login, on: :member
     end
