@@ -24,8 +24,8 @@
 #
 FactoryBot.define do
   factory :saved_book do
-    quantity_books { rand(20) }
-    total_price { rand(30) }
+    quantity { rand(20) }
+    price { rand(30) }
     order
     book
   end

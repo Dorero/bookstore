@@ -1,22 +1,30 @@
 %main.container.general-main-wrap
-  %h1.general-title-margin= I18n.t(:cart)
-  .hidden-xs
-    %table.table.table-hover
-      %tr.no-hover
-        %th.col-pic.pl-0
-          %span.in-grey-600= I18n.t(:product)
-        %th.col-title
-        %th.col-price
-          %span.in-grey-600= I18n.t(:price)
-        %th.col-quantity
-          %span.in-grey-600= I18n.t(:quantity)
-        %th.col-total
-          %span.in-grey-600= I18n.t(:sub_total)
-        %th.col-close
-      - @books.each do |book|
-        %tr
-          %td
-            .general-img-wrap-table
+  - unless session[:current_cart]
+    %h1.general-title-margin.text-center= I18n.t(:cart_empty)
+    = link_to books_path do
+      %button.btn.btn-default.mb-20.hidden-xs.center-block= I18n.t(:to_shop)
+  - else
+    %h1.general-title-margin= I18n.t(:cart)
+    .hidden-xs
+      %table.table.table-hover
+        %tr.no-hover
+          %th.col-pic.pl-0
+            %span.in-grey-600= I18n.t(:product)
+          %th.col-title
+          %th.col-price
+            %span.in-grey-600= I18n.t(:price)
+          %th.col-quantity
+            %span.in-grey-600= I18n.t(:quantity)
+          %th.col-total
+            %span.in-grey-600= I18n.t(:sub_total)
+          %th.col-close
+        - @books.each do |book|
+          %tr
+            %td
+              .general-img-wrap-table
+                = link_to book_path(book.id) do
+                  %img.cart-img-shadow.pull-left{src: book.images.first.image(:small).url, alt: "design-book"}
+            %td
               = link_to book_path(book.id) do
                 %img.cart-img-shadow.pull-left{src: book.images.first.image(:small).url, alt: "design-book"}
           %td
@@ -67,4 +75,5 @@
                 %strong.font-18.order-total-price= number_to_currency(@cart.decorate.price_with_discount, locale: :fr)
   = link_to check_check_login_path do
     %button.btn.btn-default.mb-20.hidden-xs.center-block= I18n.t(:checkout)
+
 
