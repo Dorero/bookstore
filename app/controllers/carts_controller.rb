@@ -31,7 +31,9 @@ class CartsController < ApplicationController
   end
 
   def update_prices
-    render json: CartService.new(params[:book_id], params[:quantity_books], session[:current_cart]).update.select
+    cart = CartService.new(params[:book_id], params[:quantity_books], session[:current_cart])
+    cart.update
+    render json: cart.select
   end
 
   private
