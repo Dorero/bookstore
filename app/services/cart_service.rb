@@ -10,16 +10,13 @@ class CartService
   def create_or_update
     cart = Order.find_or_create_by(id: @cart_id)
     @cart_id = cart.id
-    exist = SavedBook.exists?(book_id: @book_id)
-    create unless exist
-    update if exist
+    book = SavedBook.find_by_book_id(@book_id)
+    book ? (@quantity_books += book.quantity) && update : create
     cart
   end
 
   def create
-    SavedBook.create(book_id: @book_id, order_id: @cart_id, quantity: @quantity_books,
-                     price: Book.find(@book_id).price)
-    self
+    SavedBook.create(book_id: @book_id, order_id: @cart_id, quantity: @quantity_books, price: Book.find(@book_id).price)
   end
 
   def update_by_one(direction)
@@ -31,7 +28,6 @@ class CartService
 
   def update
     SavedBook.find_by(book_id: @book_id).update(quantity: @quantity_books, price: Book.find(@book_id).price)
-    self
   end
 
   def select

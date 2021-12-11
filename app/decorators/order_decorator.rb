@@ -4,7 +4,7 @@ class OrderDecorator < Draper::Decorator
   delegate_all
 
   def total_price
-    SavedBook.where(order_id: object.id).reduce(0) { |memo, book| memo + (book.price.to_i * book.quantity.to_i) }
+    SavedBook.where(order_id: object.id).sum { |book| book.price.to_f * book.quantity.to_f }
   end
 
   def price_with_discount
