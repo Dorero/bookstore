@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class CheckLoginsController < Devise::RegistrationsController
-  before_action :permit_params
+  before_action :permit_params, :route_after_sign_in
 
   def show
     @user = build_resource
@@ -12,7 +12,7 @@ class CheckLoginsController < Devise::RegistrationsController
     return redirect_to check_login_path, alert: I18n.t(:account_exist) if User.exists?(email: email)
 
     setup_user(email)
-    redirect_to check_address_checking_path, alert: I18n.t(:'devise.sessions.signed_in')
+    redirect_to checking_path, alert: I18n.t(:'devise.sessions.signed_in')
   end
 
   def login
@@ -22,7 +22,7 @@ class CheckLoginsController < Devise::RegistrationsController
     end
 
     setup_cart(user)
-    redirect_to check_address_checking_path, alert: I18n.t(:'devise.sessions.signed_in')
+    redirect_to checking_path, alert: I18n.t(:'devise.sessions.signed_in')
   end
 
   private
@@ -35,13 +35,18 @@ class CheckLoginsController < Devise::RegistrationsController
   end
 
   def setup_user(email)
-    user = User.create(email: email, password: Devise.friendly_token[0, 20])
+    user = User.new(email: email, password: Devise.friendly_token[0, 20])
     user.skip_confirmation!
     user.send_reset_password_instructions
+    user.save
     setup_cart(user)
   end
 
   def permit_params
     params.permit(:authenticity_token, user: %i[email password])
+  end
+
+  def route_after_sign_in
+    redirect_to checking_path if user_signed_in?
   end
 end

@@ -36,8 +36,8 @@ $(document).on('change input', '.send', function() {
     $.post('/cart/update_prices', { quantity_books: $(this).val(), book_id: $('#book_id').val() }, function(data){
         $(this).val(data.quantity_books)
         subTotalPriceField.text(`${sign}${data.sub_total_price}`)
-        $('.sub-total-order').text(`${sign}${data.sub_total_order_price}`)
+        $('.sub-total-order').text(`${sign}${data.sub_total_order_price.toFixed(2)}`)
         $('.coupon').text(`${sign}${data.discount.toFixed(2)}`)
-        $('.order-total-price').text(`${sign}${data.order_total_price}`)
+        $('.order-total-price').text(`${sign}${data.order_total_price.toFixed(2)}`)
     });
 })

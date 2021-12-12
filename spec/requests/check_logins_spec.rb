@@ -19,7 +19,7 @@ RSpec.describe 'CheckLogins', type: :request do
     context 'login user with correct password' do
       before { post login_check_login_path, params: { user: { email: user.email, password: user.password } } }
 
-      it { expect(response).to redirect_to(check_address_checking_path) }
+      it { expect(response).to redirect_to(checking_path) }
     end
 
     context 'login user with wrong password' do
@@ -41,7 +41,7 @@ RSpec.describe 'CheckLogins', type: :request do
 
       before { post quick_register_check_login_path, params: { user: { email: user_data[:email] } } }
 
-      it { expect(response).to redirect_to(check_address_checking_path) }
+      it { expect(response).to redirect_to(checking_path) }
     end
   end
 end

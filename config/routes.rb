@@ -25,9 +25,6 @@ Rails.application.routes.draw do
     end
   end
 
-  resource :checking, only: [] do
-    get :check_address, on: :member
-  end
-
+  resource :checking, only: [:show]
   resources :books, only: [:index, :show]
 end

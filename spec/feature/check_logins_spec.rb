@@ -25,7 +25,7 @@ RSpec.describe 'CheckLogins', type: :feature, js: true do
       end
 
       it { expect(page).to have_content(I18n.t(:'devise.sessions.signed_in')) }
-      it { expect(page).to have_current_path(check_address_checking_path) }
+      it { expect(page).to have_current_path(checking_path) }
     end
 
     context 'login user with wrong password' do
@@ -58,7 +58,7 @@ RSpec.describe 'CheckLogins', type: :feature, js: true do
       end
 
       it { expect(page).to have_content(I18n.t(:'devise.sessions.signed_in')) }
-      it { expect(page).to have_current_path(check_address_checking_path) }
+      it { expect(page).to have_current_path(checking_path) }
     end
   end
 end
