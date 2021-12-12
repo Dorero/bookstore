@@ -5,6 +5,7 @@ module Users
     def facebook
       @user = FacebookUserCreator.new(request.env['omniauth.auth']).create
       @user.confirm
+      CartService.new(nil, nil, session[:current_cart]).add_user(@user.id) if session[:current_cart]
       auth_action(@user)
     end
 
