@@ -74,6 +74,12 @@ gem 'shrine', '~> 3.4'
 # sdk for amazon s3
 gem 'aws-sdk-s3', '~> 1.109'
 
+# state machine
+gem 'aasm', '~> 5.2'
+
+# transactional callbacks
+gem 'after_commit_everywhere', '~> 1.1'
+
 group :development, :test do
   gem 'factory_bot_rails', '~> 6.2'
   # Check style in tests
@@ -123,6 +129,10 @@ group :test do
   gem 'shoulda-matchers', '~> 5.0'
   # check coverage tests
   gem 'simplecov', '~> 0.21.2', require: false
+  # set session in tests
+  gem 'rack_session_access', '~> 0.2.0'
+  # tests controllers
+  gem 'rails-controller-testing', '~> 1.0', '>= 1.0.5'
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
