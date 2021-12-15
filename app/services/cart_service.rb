@@ -30,6 +30,10 @@ class CartService
     SavedBook.find_by(book_id: @book_id).update(quantity: @quantity_books, price: Book.find(@book_id).price)
   end
 
+  def add_user(user_id)
+    Order.find(@cart_id).update(user_id: user_id)
+  end
+
   def select
     cart = Order.find(@cart_id)
     { quantity_books: @quantity_books, sub_total_price: Book.find(@book_id).price * @quantity_books,

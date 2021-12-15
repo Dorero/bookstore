@@ -4,13 +4,13 @@
 #
 # Table name: saved_books
 #
-#  id         :bigint           not null, primary key
-#  price      :decimal(8, 2)
-#  quantity   :integer
-#  created_at :datetime         not null
-#  updated_at :datetime         not null
-#  book_id    :bigint
-#  order_id   :bigint
+#  id             :bigint           not null, primary key
+#  quantity_books :integer
+#  total_price    :decimal(8, 2)
+#  created_at     :datetime         not null
+#  updated_at     :datetime         not null
+#  book_id        :bigint
+#  order_id       :bigint
 #
 # Indexes
 #
