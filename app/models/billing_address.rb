@@ -18,10 +18,8 @@
 #  updated_at :datetime         not null
 #  order_id   :bigint
 #  place_id   :bigint
-#  user_id    :bigint           not null
 #
 # Indexes
-#
 #  index_addresses_on_order_id  (order_id)
 #  index_addresses_on_place     (place_type,place_id)
 #  index_addresses_on_user_id   (user_id)

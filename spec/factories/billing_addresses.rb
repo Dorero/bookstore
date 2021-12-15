@@ -18,7 +18,6 @@
 #  updated_at :datetime         not null
 #  order_id   :bigint
 #  place_id   :bigint
-#  user_id    :bigint           not null
 #
 # Indexes
 #
