@@ -25,6 +25,6 @@ Rails.application.routes.draw do
     end
   end
 
-  resource :checking, only: [:show]
+  resource :checking, only: [:show, :update]
   resources :books, only: [:index, :show]
 end

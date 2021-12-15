@@ -4,33 +4,25 @@
 #
 # Table name: addresses
 #
-#  id         :bigint           not null, primary key
-#  address    :string           not null
-#  city       :string           not null
-#  country    :string           not null
-#  first_name :string           not null
-#  last_name  :string           not null
-#  phone      :string           not null
-#  place_type :string
-#  type       :string           not null
-#  zip        :string           not null
-#  created_at :datetime         not null
-#  updated_at :datetime         not null
-#  order_id   :bigint
-#  place_id   :bigint
-#  user_id    :bigint           not null
+#  id             :bigint           not null, primary key
+#  address        :string           not null
+#  addressed_type :string
+#  city           :string           not null
+#  country        :string           not null
+#  first_name     :string           not null
+#  is_one_table   :integer          default(0)
+#  last_name      :string           not null
+#  phone          :string           not null
+#  type           :string           not null
+#  zip            :string           not null
+#  created_at     :datetime         not null
+#  updated_at     :datetime         not null
+#  addressed_id   :bigint
 #
 # Indexes
 #
-#  index_addresses_on_order_id  (order_id)
-#  index_addresses_on_place     (place_type,place_id)
-#  index_addresses_on_user_id   (user_id)
-#
-# Foreign Keys
-#
-#  fk_rails_...  (order_id => orders.id)
-#  fk_rails_...  (user_id => users.id)
+#  index_addresses_on_addressed  (addressed_type,addressed_id)
 #
 class Address < ApplicationRecord
-  belongs_to :place, polymorphic: true
+  belongs_to :addressed, polymorphic: true
 end

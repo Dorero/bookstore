@@ -7,6 +7,10 @@ Category.create(name: 'Web design')
 Coupon.create(number: 1234, discount: rand(20))
 Coupon.create(number: 12, discount: rand(20))
 
+Delivery.create(method: I18n.t(:delivery_next_day), price: 5, min_duration_delivery: 3, max_duration_delivery: 7 )
+Delivery.create(method: I18n.t(:pick_in_store), price: 10, min_duration_delivery: 5, max_duration_delivery: 20 )
+Delivery.create(method: I18n.t(:expressit), price: 15, min_duration_delivery: 2, max_duration_delivery: 3 )
+
 10.times do |index|
   file = File.new(Rails.root.join('app/assets/images/seed/SmashingBook5ResponsiveWebDesign.jpg'))
   uploaded_file = ImageUploader.new(:store).upload(file)

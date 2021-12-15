@@ -9,9 +9,10 @@ class AddressForm < Reform::Form
   VALIDATE_ADDRESS = /[a-zA-Z0-9 ,-]+$/.freeze
   GENERAL_VALIDATE = /[a-zA-Z]+$/.freeze
 
-  properties :first_name, :last_name, :address, :city, :country, :zip, :phone, :user_id
+  properties :first_name, :last_name, :address, :city, :country, :zip, :phone, :addressed_id, :addressed_type,
+             validates: { presence: true }
+  property :is_one_table, optional: true
 
-  validates :first_name, :last_name, :address, :city, :country, :phone, :zip, :user_id, presence: true
   validates :first_name, :last_name, :city, :address, :country, length: { maximum: MAX_LENGTH }
   validates :first_name, :last_name, :country, :city, format: { with: GENERAL_VALIDATE, multiline: true }
   validates :address, format: { with: VALIDATE_ADDRESS, multiline: true }

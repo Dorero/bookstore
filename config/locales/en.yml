@@ -30,6 +30,36 @@
 # available at https://guides.rubyonrails.org/i18n.html.
 
 en:
+  edit: edit
+  shipmets: Shipments
+  invalid_year: invalid year
+  invalid_data: This data is invalid
+  invalid_month: month must be in the range 1 to 12
+  hint_cvv: 3-digit security code, usually found on the back of your card. American Express cards has 4-digit code, located on the front
+  invalid_expiration_date: invalid expiration date format
+  fields_tables_must_be_fill_in: All fields of the tables must be filled in
+  enter_valid_number_card: Please enter a valid credit card number
+  cvv: CVV
+  month_year_on_card: MM / YY
+  name_on_card: Name on Card
+  card_number: Card Number
+  shipping_method: Shipping Method
+  necessary_select_delivery: It is necessary to select delivery
+  expressit: Expressit
+  pick_in_store: Pick Up In-Store
+  shipping: Shipping
+  duration_delivery: "%{from} to %{to} days"
+  days: Days
+  delivery_next_day: Delivery Next Day!
+  method: Method
+  credit_card: Credit Card
+  use_billing_address: Use Billing Adress
+  continue: Continue
+  complete: Complete
+  confirm: Confirm
+  payment: Payment
+  delivery: Delivery
+  all_fields_reuired: all fields are required
   account_exist: Your account already exists
   continue_to_checkout: Continue to Checkout
   login_with_password: Log In with Password

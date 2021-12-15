@@ -22,7 +22,7 @@ class CheckLoginsController < Devise::RegistrationsController
     end
 
     setup_cart(user)
-    redirect_to checking_path, alert: I18n.t(:'devise.sessions.signed_in')
+    redirect_to checking_path(state: 'address'), alert: I18n.t(:'devise.sessions.signed_in')
   end
 
   private
@@ -47,6 +47,6 @@ class CheckLoginsController < Devise::RegistrationsController
   end
 
   def route_after_sign_in
-    redirect_to checking_path if user_signed_in?
+    redirect_to checking_path(state: 'address') if user_signed_in?
   end
 end

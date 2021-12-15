@@ -18,12 +18,16 @@
             .visible-xs.visible-sm
               %h3.general-subtitle.mt-0= I18n.t(:billing_address)
             = simple_form_for @billing_address, as: :billing_address, url: address_path, html: { class: ''}, method: :put do |form|
-              = render('layouts/partials/inputs_address', form: form, errors: params[:billing_address_errors] || {})
+              = render('layouts/partials/inputs_address', addressed_id: current_user.id, addressed_type: 'User', form: form, errors: params[:billing_address_errors] || {})
+              .text-center.general-text-align
+                = form.button :submit, I18n.t(:save), name: "#{form.object_name}_button"
           .col-md-5.col-md-offset-1.mb-25
             .visible-xs.visible-sm
               %h3.general-subtitle.mt-0= I18n.t(:shipping_address)
             = simple_form_for @shipping_address, as: :shipping_address, url: address_path, html: { class: ''}, method: :put do |form|
-              = render('layouts/partials/inputs_address', form: form, errors: params[:shipping_address_errors] || {})
+              = render('layouts/partials/inputs_address', addressed_id: current_user.id, addressed_type: 'User', form: form, errors: params[:shipping_address_errors] || {})
+              .text-center.general-text-align
+                = form.button :submit, I18n.t(:save), name: "#{form.object_name}_button"
     #privacy.tab-pane.fade{role: "tabpanel"}
       .row.mb-60
         .col-sm-5

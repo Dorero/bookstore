@@ -10,5 +10,5 @@
           %p.lead= book.description
           = render('layouts/partials/authors_name', authors: book.authors)
           .general-align
-            = link_to books_path do
+            = link_to cart_path(book_id: book.id, quantity_books: 1), method: :post do
               %button.btn-primary= I18n.t(:buy_now)

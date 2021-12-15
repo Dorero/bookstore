@@ -37,7 +37,7 @@ class CartService
   def select
     cart = Order.find(@cart_id)
     { quantity_books: @quantity_books, sub_total_price: Book.find(@book_id).price * @quantity_books,
-      sub_total_order_price: cart.decorate.total_price, discount: cart.decorate.discount,
-      order_total_price: cart.decorate.price_with_discount }
+      sub_total_order_price: cart.decorate.sub_total_price, discount: cart.decorate.discount,
+      order_total_price: cart.decorate.order_total_price }
   end
 end
