@@ -4,6 +4,9 @@ Category.create(name: 'Mobile development')
 Category.create(name: 'Photo')
 Category.create(name: 'Web design')
 
+Coupon.create(number: 1234, discount: rand(20))
+Coupon.create(number: 12, discount: rand(20))
+
 10.times do |index|
   file = File.new(Rails.root.join('app/assets/images/seed/SmashingBook5ResponsiveWebDesign.jpg'))
   uploaded_file = ImageUploader.new(:store).upload(file)

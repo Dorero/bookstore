@@ -10,4 +10,8 @@ class BookDecorator < Draper::Decorator
   def dimensions
     "#{I18n.t(:hegiht)}: #{object.height} x #{I18n.t(:width)}: #{object.width} x #{I18n.t(:depth)}: #{object.depth}"
   end
+
+  def quantity
+    SavedBook.find_by_book_id(object.id).quantity.to_i
+  end
 end

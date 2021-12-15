@@ -17,6 +17,7 @@
 # See http://rubydoc.info/gems/rspec-core/RSpec/Core/Configuration
 
 require 'rails_helper'
+require 'rack_session_access/capybara'
 
 RSpec.configure do |config|
   config.include Capybara::DSL
@@ -118,4 +119,11 @@ RSpec.configure do |config|
 
   # include omniauth mock
   OmniAuth.config.test_mode = true
+
+  # controllers tests
+  %i[controller view request].each do |type|
+    config.include ::Rails::Controller::Testing::TestProcess, type: type
+    config.include ::Rails::Controller::Testing::TemplateAssertions, type: type
+    config.include ::Rails::Controller::Testing::Integration, type: type
+  end
 end
