@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_11_29_045616) do
+ActiveRecord::Schema.define(version: 2021_12_15_052930) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -38,10 +38,12 @@ ActiveRecord::Schema.define(version: 2021_11_29_045616) do
     t.string "zip", null: false
     t.string "country", null: false
     t.string "phone", null: false
-    t.bigint "user_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["user_id"], name: "index_addresses_on_user_id"
+    t.string "addressed_type"
+    t.bigint "addressed_id"
+    t.integer "is_one_table", default: 0
+    t.index ["addressed_type", "addressed_id"], name: "index_addresses_on_addressed"
   end
 
   create_table "admin_users", force: :cascade do |t|
@@ -76,7 +78,6 @@ ActiveRecord::Schema.define(version: 2021_11_29_045616) do
   create_table "books", force: :cascade do |t|
     t.string "name"
     t.text "description"
-    t.string "image"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.bigint "category_id"
@@ -93,6 +94,78 @@ ActiveRecord::Schema.define(version: 2021_11_29_045616) do
     t.string "name"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "coupons", force: :cascade do |t|
+    t.string "number"
+    t.decimal "discount", precision: 8, scale: 2
+    t.integer "status", default: 0
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "deliveries", force: :cascade do |t|
+    t.string "method"
+    t.decimal "price", precision: 8, scale: 2
+    t.integer "min_duration_delivery"
+    t.integer "max_duration_delivery"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "images", force: :cascade do |t|
+    t.text "image_data", null: false
+    t.bigint "book_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["book_id"], name: "index_images_on_book_id"
+  end
+
+  create_table "orders", force: :cascade do |t|
+    t.string "aasm_state"
+    t.bigint "coupon_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.bigint "user_id"
+    t.bigint "delivery_id"
+    t.bigint "payment_id"
+    t.index ["coupon_id"], name: "index_orders_on_coupon_id"
+    t.index ["delivery_id"], name: "index_orders_on_delivery_id"
+    t.index ["payment_id"], name: "index_orders_on_payment_id"
+    t.index ["user_id"], name: "index_orders_on_user_id"
+  end
+
+  create_table "payments", force: :cascade do |t|
+    t.string "name"
+    t.integer "number"
+    t.string "expiration_date"
+    t.integer "cvv"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "reviews", force: :cascade do |t|
+    t.string "title"
+    t.string "message"
+    t.string "stars"
+    t.integer "status", default: 0
+    t.bigint "user_id", null: false
+    t.bigint "book_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["book_id"], name: "index_reviews_on_book_id"
+    t.index ["user_id"], name: "index_reviews_on_user_id"
+  end
+
+  create_table "saved_books", force: :cascade do |t|
+    t.integer "quantity"
+    t.decimal "price", precision: 8, scale: 2
+    t.bigint "book_id"
+    t.bigint "order_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["book_id"], name: "index_saved_books_on_book_id"
+    t.index ["order_id"], name: "index_saved_books_on_order_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -117,8 +190,13 @@ ActiveRecord::Schema.define(version: 2021_11_29_045616) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
-  add_foreign_key "addresses", "users"
   add_foreign_key "author_books", "authors"
   add_foreign_key "author_books", "books"
   add_foreign_key "books", "categories"
+  add_foreign_key "images", "books"
+  add_foreign_key "orders", "users"
+  add_foreign_key "reviews", "books"
+  add_foreign_key "reviews", "users"
+  add_foreign_key "saved_books", "books"
+  add_foreign_key "saved_books", "orders"
 end

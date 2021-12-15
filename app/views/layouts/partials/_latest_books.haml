@@ -3,11 +3,12 @@
     .row
       .col-sm-5
         .general-img-wrap
-          %img.img-shadow.general-thumbnail-img{src: "http://jonathantweedy.com/resources/thumbs/SmashingBook5ResponsiveWebDesign.jpg", alt: "design-book"}
+          %img.img-shadow.general-thumbnail-img{src:  book.images.first.image(:large).url, alt: "design-book"}
       .col-sm-7
         .mb-60
           %h1= book.name
           %p.lead= book.description
           = render('layouts/partials/authors_name', authors: book.authors)
           .general-align
-            %button.btn-primary= I18n.t(:buy_now)
+            = link_to cart_path(book_id: book.id, quantity_books: 1), method: :post do
+              %button.btn-primary= I18n.t(:buy_now)

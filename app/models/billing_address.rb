@@ -4,18 +4,24 @@
 #
 # Table name: addresses
 #
-#  id         :bigint           not null, primary key
-#  type       :string
-#  first_name :string
-#  last_name  :string
-#  address    :string
-#  city       :string
-#  zip        :string
-#  country    :string
-#  phone      :string
-#  user_id    :bigint
-#  created_at :datetime         not null
-#  updated_at :datetime         not null
+#  id             :bigint           not null, primary key
+#  address        :string           not null
+#  addressed_type :string
+#  city           :string           not null
+#  country        :string           not null
+#  first_name     :string           not null
+#  is_one_table   :integer          default(0)
+#  last_name      :string           not null
+#  phone          :string           not null
+#  type           :string           not null
+#  zip            :string           not null
+#  created_at     :datetime         not null
+#  updated_at     :datetime         not null
+#  addressed_id   :bigint
+#
+# Indexes
+#
+#  index_addresses_on_addressed  (addressed_type,addressed_id)
 #
 class BillingAddress < Address
 end

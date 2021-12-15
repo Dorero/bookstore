@@ -2,19 +2,17 @@
 
 class AddressesController < ApplicationController
   def update
-    check_address(AddressForm.new(BillingAddress.new), params[:billing_address], :billing_address_errors)
-    check_address(AddressForm.new(ShippingAddress.new), params[:shipping_address], :shipping_address_errors)
+    service = CheckAddressService.new(current_user.id, session[:current_cart])
+    service.update(params[:billing_address], params[:shipping_address])
+    path_after_update(service)
   end
 
   private
 
-  def check_address(form, value, address)
-    return unless value
+  def path_after_update(service)
+    return redirect_to(edit_setting_path(prepare_errors(service.errors))) if service.errors
 
-    return redirect_to(edit_setting_path("#{address}": prepare_errors(form.errors))) unless form.validate(value)
-
-    form.save
-    redirect_to(edit_setting_path,
-                alert: I18n.t(:address_success_save, address_name: address.to_s.split('_').first.capitalize))
+    flash[:alert] = I18n.t(:address_success_save, address_name: service.address)
+    redirect_back(fallback_location: edit_setting_path)
   end
 end

@@ -1,0 +1,21 @@
+%h1.general-title-margin= I18n.t(:checkout)
+%ul.steps.list-inline
+  %li.step{class: "#{active == I18n.t(:address) ? 'active': ''}"}
+    %span.step-number 1
+    %span.step-text.hidden-xs= I18n.t(:address)
+  %li.step-divider
+  %li.step{class: "#{active == I18n.t(:delivery) ? 'active': ''}"}
+    %span.step-number 2
+    %span.step-text.hidden-xs= I18n.t(:delivery)
+  %li.step-divider
+  %li.step{class: "#{active == I18n.t(:payment) ? 'active': ''}"}
+    %span.step-number 3
+    %span.step-text.hidden-xs= I18n.t(:payment)
+  %li.step-divider
+  %li.step{class: "#{active == I18n.t(:confirm) ? 'active': ''}"}
+    %span.step-number 4
+    %span.step-text.hidden-xs= I18n.t(:confirm)
+  %li.step-divider
+  %li.step{class: "#{active == I18n.t(:complete) ? 'active': ''}"}
+    %span.step-number 5
+    %span.step-text.hidden-xs= I18n.t(:complete)

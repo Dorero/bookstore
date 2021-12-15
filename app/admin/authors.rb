@@ -3,6 +3,8 @@
 ActiveAdmin.register Author do
   permit_params :first_name, :last_name, :description
 
+  includes(:author_books, :books)
+
   menu priority: 3
 
   filter :created_at
@@ -22,13 +24,6 @@ ActiveAdmin.register Author do
     column :last_name
     column :description
     column :book, &:books
-
-    column do |author|
-      span link_to link_to I18n.t(:view_admin_button), admin_author_path(author)
-      span link_to link_to I18n.t(:edit_admin_button), edit_admin_author_path(author)
-      span link_to link_to I18n.t(:delete_admin_button), admin_author_path(author), method: :delete
-    end
+    actions
   end
-
-  includes(:author_books, :books)
 end

@@ -5,24 +5,30 @@
 # Table name: books
 #
 #  id          :bigint           not null, primary key
-#  name        :string
+#  depth       :string
 #  description :text
-#  image       :string
+#  height      :string
+#  materials   :string
+#  name        :string
+#  price       :decimal(8, 2)
+#  width       :string
+#  year        :string
 #  created_at  :datetime         not null
 #  updated_at  :datetime         not null
 #  category_id :bigint
-#  price       :decimal(8, 2)
-#  year        :string
-#  height      :string
-#  width       :string
-#  depth       :string
-#  materials   :string
+#
+# Indexes
+#
+#  index_books_on_category_id  (category_id)
+#
+# Foreign Keys
+#
+#  fk_rails_...  (category_id => categories.id)
 #
 FactoryBot.define do
   factory :book do
     name { FFaker::Book.title }
     description { FFaker::Book.description }
-    image { FFaker::Image.url }
     price { rand(11.2...76.9).round(2) }
     year { rand(1521..2020) }
     height { rand(1.0...10.9).round(2) }

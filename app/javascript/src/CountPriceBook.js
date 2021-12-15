@@ -1,39 +1,43 @@
-$(document).on('click', '.input-group.general-position', (event) => {
+$(document).on('click', '.price-field', function(event) {
     event.preventDefault()
 
-    const priceField = $("p.in-gold-500")
-    const price = priceField.text()
-    const sign = price[0]
-    const amount = parseFloat(price.slice(1, price.length))
+    const fieldQuantity = $($(this).children('input')[0])
 
-    const params = {
-        priceField: priceField,
-        originalAmount: parseFloat($(".hidden-amount").val()),
-        fieldQuantity: $(".quantity-input"),
-        price: price,
-        sign: sign,
-        amount: amount
-    }
-
-    if(event.target === $('.fa-plus').get(0)) plus(params)
-    if(event.target === $(".fa-minus").get(0)) minus(params)
+    if(event.target === $('.fa-plus').get(0))  plus(fieldQuantity)
+    if(event.target === $('.fa-minus').get(0)) minus(fieldQuantity)
 })
 
-const plus = (props) => {
-    let newQuantity = props.fieldQuantity.val() ? parseFloat(props.fieldQuantity.val()) + 1 : 1
-    let newPrice = (props.amount + props.originalAmount).toFixed(2)
 
-    props.fieldQuantity.val(newQuantity)
-    props.priceField.text(props.sign + newPrice)
+const plus = (fieldQuantity) => {
+    const newQuantity = fieldQuantity.val() ? parseFloat(fieldQuantity.val()) + 1 : 1
+
+    fieldQuantity.val(newQuantity)
 }
 
-const minus = (props) => {
-    let newQuantity = props.fieldQuantity ? props.fieldQuantity.val() - 1 : 0
-    let newPrice = props.originalAmount
+const minus = (fieldQuantity) => {
+    let newQuantity = fieldQuantity ? fieldQuantity.val() - 1 : 0
 
     if (newQuantity < 1)  newQuantity = 1;
-    if (newQuantity > 1)  newPrice = (props.amount - props.originalAmount).toFixed(2);
 
-    props.fieldQuantity.val(newQuantity)
-    props.priceField.text(props.sign + newPrice)
+    fieldQuantity.val(newQuantity)
 }
+
+$(document).on('input', '.quantity-input', function() {
+    const amount = parseInt($(this).val())
+    if (amount < 1 || !Number.isInteger(amount)) {
+        $(this).val(1)
+    }
+})
+
+$(document).on('change input', '.send', function() {
+    const subTotalPriceField = $($(this).parent().parent().siblings()[3].childNodes[1])
+    const sign = subTotalPriceField.text()[0]
+
+    $.post('/cart/update_prices', { quantity_books: $(this).val(), book_id: $('#book_id').val() }, function(data){
+        $(this).val(data.quantity_books)
+        subTotalPriceField.text(`${sign}${data.sub_total_price}`)
+        $('.sub-total-order').text(`${sign}${data.sub_total_order_price.toFixed(2)}`)
+        $('.coupon').text(`${sign}${data.discount.toFixed(2)}`)
+        $('.order-total-price').text(`${sign}${data.order_total_price.toFixed(2)}`)
+    });
+})

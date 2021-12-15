@@ -30,6 +30,85 @@
 # available at https://guides.rubyonrails.org/i18n.html.
 
 en:
+  edit: edit
+  shipmets: Shipments
+  invalid_year: invalid year
+  invalid_data: This data is invalid
+  invalid_month: month must be in the range 1 to 12
+  hint_cvv: 3-digit security code, usually found on the back of your card. American Express cards has 4-digit code, located on the front
+  invalid_expiration_date: invalid expiration date format
+  fields_tables_must_be_fill_in: All fields of the tables must be filled in
+  enter_valid_number_card: Please enter a valid credit card number
+  cvv: CVV
+  month_year_on_card: MM / YY
+  name_on_card: Name on Card
+  card_number: Card Number
+  shipping_method: Shipping Method
+  necessary_select_delivery: It is necessary to select delivery
+  expressit: Expressit
+  pick_in_store: Pick Up In-Store
+  shipping: Shipping
+  duration_delivery: "%{from} to %{to} days"
+  days: Days
+  delivery_next_day: Delivery Next Day!
+  method: Method
+  credit_card: Credit Card
+  use_billing_address: Use Billing Adress
+  continue: Continue
+  complete: Complete
+  confirm: Confirm
+  payment: Payment
+  delivery: Delivery
+  all_fields_reuired: all fields are required
+  account_exist: Your account already exists
+  continue_to_checkout: Continue to Checkout
+  login_with_password: Log In with Password
+  new_customer: New Customer
+  returing_customer: Returning Customer
+  can_create_password_later: You’ll be able to create password later
+  quick_register: Quik Register
+  coupon_applied: Coupon has already been applied to the order
+  cart_empty: Your cart empty
+  to_shop: Go to shop
+  coupon_spent: Coupon has already been spent
+  coupun_can_be_activated: Your coupon can be successfully activated
+  no_such_coupon: There is no such coupon
+  book_success_delete: Book success delete from cart
+  checkout: Checkout
+  order_total_summary: "Order Total:"
+  coupon_summary: "Coupon:"
+  sub_total_summary: "Subtotal:"
+  order_summary: Order Summary
+  apply_coupon: Apply Coupon
+  enter_coupon: Enter Your Coupon Code
+  product: Product
+  price: Price
+  quantity: Quantity
+  sub_total: SubTotal
+  cart: Cart
+  book_add_to_cart: The book has been successfully added to your cart
+  add_new_image: Add New Image
+  image: Image
+  create_book: Create Book
+  new_book: New Book
+  book_success_created: Book successfully created
+  time:
+    formats:
+      custom_short: "%d/%m/%Y"
+  approve_review_confirm: Are you sure you want to approve the review?
+  reject_review_confirm: Are you sure you want to rejected the review?
+  unprocessed_status: unprocessed
+  rejected_status: rejected
+  approved_status: approved
+  unprocessed_button: Unprocessed
+  reject_button: Reject
+  approve_button: Approve
+  processed: Processed
+  new: New
+  review_rejected_flash: Review rejected
+  review_approved_flash: Review approved
+  show_button: Show
+  thanks_for_review: Thanks for Review. It will be published as soon as Admin will approve it.
   long_parameters: is too long (maximum is %{maximum} characters)
   is_invalid: is invalid
   resource_success_delete: '%{resource} was successfully destroyed.'

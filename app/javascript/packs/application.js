@@ -10,6 +10,10 @@ import "channels"
 require("@popperjs/core")
 import('../src/CountPriceBook')
 import('../src/ShowFullDescriptionBook')
+import('../src/StarsRating')
+import('../src/OneTableInOrder')
+import('../src/CountPriceShipping')
+import('../src/HintOnPayment')
 import '@client-side-validations/simple-form/src'
 import '@client-side-validations/client-side-validations/src'
 import('bootstrap')

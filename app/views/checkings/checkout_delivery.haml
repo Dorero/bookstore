@@ -1,0 +1,52 @@
+%main.container.general-main-wrap
+  = render('layouts/partials/checkout_steps', active: I18n.t(:delivery))
+  %h3.general-subtitle= I18n.t(:shipping_method)
+  = form_with url: checking_path, method: :patch do |form|
+    .hidden-xs.mb-res-50
+    %table.table.table-hover
+      %thead
+        %tr
+          %th.col-method
+            %span.in-grey-600.ml-40= I18n.t(:method)
+          %th
+            %span.in-grey-600= I18n.t(:days)
+          %th
+            %span.in-grey-600= I18n.t(:price)
+      %tbody.deliveries
+        - @deliveries.each do |delivery|
+          %tr
+            %td
+              .form-group.radio.mt-0.mb-0
+                %label.radio-label
+                  = form.radio_button :price, delivery.price, class: 'radio-input', hidden: true
+                  %span.radio-icon
+                  %span.radio-text= delivery.method
+            %td
+              %span= I18n.t(:duration_delivery, from: delivery.min_duration_delivery, to: delivery.max_duration_delivery)
+            %td
+              %span.font-16.in-gold-500= number_to_currency(delivery.price, locale: :fr)
+    .general-text-align
+      %p.in-gold-500.font-18= I18n.t(:order_summary)
+      %table.general-summary-table
+        %tr
+          %td
+            %p.font-16= I18n.t(:sub_total_summary)
+          %td
+            %p.font-16.sub-total-order= number_to_currency(@order.decorate.sub_total_price, locale: :fr)
+        %tr
+          %td
+            %p.font-16= I18n.t(:coupon_summary)
+          %td
+            %p.font-16.coupon= number_to_currency(@order.decorate.discount, locale: :fr)
+        %tr
+          %td
+            %p.font-16= I18n.t(:shipping)
+          %td
+            %p.font-16.shipping= number_to_currency(@order.decorate.shipping, locale: :fr)
+        %tr
+          %td
+            %strong.font-18= I18n.t(:order_total_summary)
+          %td
+            %strong.font-18.order-total-price= number_to_currency(@order.decorate.order_total_price, locale: :fr)
+    .text-center
+      = form.submit I18n.t(:continue), class: 'btn btn-default mb-20'

@@ -22,10 +22,7 @@ gem 'jbuilder', '~> 2.7'
 # Use Redis adapter to run Action Cable in production
 # gem 'redis', '~> 4.0'
 # Use Active Model has_secure_password
-# gem 'bcrypt', '~> 3.1.7'
-
-# Use Active Storage variant
-# gem 'image_processing', '~> 1.2'
+gem 'bcrypt', '~> 3.1.7'
 
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.4.4', require: false
@@ -66,6 +63,19 @@ gem 'simple_form', '~> 5.1'
 
 # admin panel
 gem 'activeadmin', '~> 2.9'
+
+# manipulate image
+gem 'image_processing', '~> 1.12', '>= 1.12.1'
+gem 'mini_magick', '~> 4.11'
+
+# uploads files
+gem 'shrine', '~> 3.4'
+
+# sdk for amazon s3
+gem 'aws-sdk-s3', '~> 1.109'
+
+# state machine
+gem 'aasm', '~> 5.2'
 
 group :development, :test do
   gem 'factory_bot_rails', '~> 6.2'
@@ -116,6 +126,10 @@ group :test do
   gem 'shoulda-matchers', '~> 5.0'
   # check coverage tests
   gem 'simplecov', '~> 0.21.2', require: false
+  # set session in tests
+  gem 'rack_session_access', '~> 0.2.0'
+  # tests controllers
+  gem 'rails-controller-testing', '~> 1.0', '>= 1.0.5'
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
