@@ -20,7 +20,7 @@
 #
 FactoryBot.define do
   factory :image do
-    image { File.new(Rails.root.join('app/assets/images/seed/SmashingBook5ResponsiveWebDesign.jpg')) }
-    book
+    image { Rack::Test::UploadedFile.new('spec/fixtures/files/images/valid.jpg') }
+    book { create(:book) }
   end
 end

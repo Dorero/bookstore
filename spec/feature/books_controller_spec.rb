@@ -2,8 +2,8 @@
 
 RSpec.describe 'Books', type: :feature, js: true do
   let!(:books) { create_list(:book, 2) }
-  let!(:image) { create(:image, book: books.first) }
-  let!(:image_two) { create(:image, book: books.last) }
+  let!(:image_first) { create(:image, book: books.first) }
+  let!(:image_second) { create(:image, book: books.last) }
 
   describe '#index' do
     before { visit(books_path) }
