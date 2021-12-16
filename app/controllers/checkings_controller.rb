@@ -3,13 +3,15 @@
 class CheckingsController < ApplicationController
   before_action :authenticate_user!
 
+  BACK_TO_STATES = { 'address' => :back_to_address!, 'delivery' => :back_to_delivery!,
+                     'payment' => :back_to_payment! }.freeze
+
   def show
     service = setup_service
     instances = service.show
     return path_when_exception(service.message) if service.message
 
-    setup_instance(instances)
-    render(template: "checkings/checkout_#{order_state}")
+    render(template: "checkings/checkout_#{order_state}", locals: { instances: instances })
   end
 
   def update
@@ -28,11 +30,9 @@ class CheckingsController < ApplicationController
   end
 
   def order_state
-    Order.find(session[:current_cart]).aasm.current_state.to_s.split('_').last
-  end
-
-  def setup_instance(instances)
-    instances.each { |name, instance| instance_variable_set("@#{name}", instance) }
+    order = Order.find(session[:current_cart])
+    order.public_send(BACK_TO_STATES[params[:state]]) if BACK_TO_STATES.key?(params[:state]) && order.checking_confirm?
+    order.aasm.current_state.to_s.split('_').last
   end
 
   def setup_service

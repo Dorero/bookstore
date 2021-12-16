@@ -13,7 +13,7 @@ $(document).on('click', '.deliveries', function(event) {
         }
 
         $('.shipping').text(`€${deliveryPrice.toFixed(2)}`)
-        $('.order-total-price').text(`€${orderTotalPrice}`)
+        $('.order-total-price').text(`€${orderTotalPrice.toFixed(2)}`)
     }
 })
 

@@ -1,0 +1,20 @@
+%tr
+  %td
+    %p.font-16= I18n.t(:sub_total_summary)
+  %td
+    %p.font-16.sub-total-order= number_to_currency(order.decorate.sub_total_price, locale: :fr)
+%tr
+  %td
+    %p.font-16= I18n.t(:coupon_summary)
+  %td
+    %p.font-16.coupon= number_to_currency(order.decorate.discount, locale: :fr)
+%tr
+  %td
+    %p.font-16= I18n.t(:shipping)
+  %td
+    %p.font-16.shipping= number_to_currency(order.decorate.shipping, locale: :fr)
+%tr
+  %td
+    %strong.font-18= I18n.t(:order_total_summary)
+  %td
+    %strong.font-18.order-total-price= number_to_currency(order.decorate.order_total_price, locale: :fr)

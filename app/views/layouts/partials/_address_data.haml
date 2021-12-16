@@ -1,0 +1,13 @@
+%p.general-address
+  = address.decorate.name
+  = link_to checking_path(state: 'address') do
+    - if link
+      %span.general-edit= I18n.t(:edit)
+  %br
+  = address.address
+  %br
+  = address.decorate.city_zip
+  %br
+  = address.country
+  %br
+  = "Phone #{address.phone}"

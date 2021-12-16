@@ -5,6 +5,7 @@ class CreatePayments < ActiveRecord::Migration[6.1]
       t.integer :number
       t.string :expiration_date
       t.integer :cvv
+      t.belongs_to :order, foreign_key: true
       t.timestamps
     end
   end

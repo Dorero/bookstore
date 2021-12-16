@@ -11,6 +11,11 @@
 #  number          :integer
 #  created_at      :datetime         not null
 #  updated_at      :datetime         not null
+#  order_id        :bigint
+#
+# Indexes
+#
+#  index_payments_on_order_id  (order_id)
 #
 require 'rails_helper'
 

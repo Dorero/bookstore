@@ -1,16 +1,15 @@
 %main.container
   = render('layouts/partials/checkout_steps', active: I18n.t(:address))
-  %div
+  = simple_form_for AddressForm.new(Address.new), url: address_path, html: { class: ''},  method: :patch do |address_form|
     .row
       .col-md-5.mb-40
         %h3.general-subtitle= I18n.t(:billing_address)
         %p.general-info-text= I18n.t(:all_fields_reuired)
-        = simple_form_for @billing_address, as: :billing_address, url: address_path, html: { class: ''}, method: :put do |form|
-          = render('layouts/partials/inputs_address', addressed_id: @order.id, addressed_type: 'Order', form: form, errors: params[:billing_address_errors] || {})
-          = form.hidden_field :is_one_table, value: @billing_address.is_one_table
+        = address_form.simple_fields_for :billing_address,  instances.billing_address, html: { class: ''} do |form|
+          = render('layouts/partials/inputs_address', required: true, addressed_id: instances.order.id, addressed_type: 'Order', form: form, errors: params[:billing_address_errors] || {})
+          = form.hidden_field :is_one_table, value: instances.billing_address.is_one_table
           .text-center.general-text-align
-            = form.button :submit, I18n.t(:save), name: "#{form.object_name}_button"
-          - if @billing_address.is_one_table.zero?
+          - if instances.billing_address.is_one_table.zero?
             .form-group.checkbox.mb-30
               %label.checkbox-label
                 %input.checkbox-input{type: "checkbox", hidden: "true"}
@@ -18,17 +17,17 @@
                   %i.fa.fa-check
                 %span.checkbox-text= I18n.t(:use_billing_address)
       .col-md-5.col-md-offset-1.mb-60
-        - if @billing_address.is_one_table.zero?
+        .shipping-form-container
+        - if instances.billing_address.is_one_table.zero?
           .shipping
             %h3.general-subtitle= I18n.t(:shipping_address)
             %p.general-info-text= I18n.t(:all_fields_reuired)
-            = simple_form_for @shipping_address, as: :shipping_address, url: address_path, html: { class: ''}, method: :put do |form|
-              = render('layouts/partials/inputs_address', addressed_id: @order.id, addressed_type: 'Order', form: form, errors: params[:shipping_address_errors] || {})
+            = address_form.simple_fields_for :shipping_address, instances.shipping_address, html: { class: ''}, required: false do |form|
+              = render('layouts/partials/inputs_address', required: false, addressed_id: instances.order.id, addressed_type: 'Order', form: form, errors: params[:shipping_address_errors] || {})
               .text-center.general-text-align
-                = form.button :submit, I18n.t(:save), name: "#{form.object_name}_button"
     .general-text-align.mb-60
       %p.in-gold-500.font-18= I18n.t(:order_summary)
       %table.general-summary-table
-        = render('layouts/partials/order_summary', order: @order)
-      = link_to checking_path do
-        %button.btn.btn-default.center-block.mb-20= I18n.t(:continue)
+        = render('layouts/partials/order_summary', order: instances.order)
+    .text-center
+      = address_form.submit I18n.t(:continue), class: 'btn btn-default mb-20'

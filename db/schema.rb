@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_12_15_052930) do
+ActiveRecord::Schema.define(version: 2021_12_16_072816) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -128,10 +128,9 @@ ActiveRecord::Schema.define(version: 2021_12_15_052930) do
     t.datetime "updated_at", precision: 6, null: false
     t.bigint "user_id"
     t.bigint "delivery_id"
-    t.bigint "payment_id"
+    t.string "number"
     t.index ["coupon_id"], name: "index_orders_on_coupon_id"
     t.index ["delivery_id"], name: "index_orders_on_delivery_id"
-    t.index ["payment_id"], name: "index_orders_on_payment_id"
     t.index ["user_id"], name: "index_orders_on_user_id"
   end
 
@@ -140,8 +139,10 @@ ActiveRecord::Schema.define(version: 2021_12_15_052930) do
     t.integer "number"
     t.string "expiration_date"
     t.integer "cvv"
+    t.bigint "order_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.index ["order_id"], name: "index_payments_on_order_id"
   end
 
   create_table "reviews", force: :cascade do |t|
@@ -164,6 +165,7 @@ ActiveRecord::Schema.define(version: 2021_12_15_052930) do
     t.bigint "order_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.integer "status", default: 0
     t.index ["book_id"], name: "index_saved_books_on_book_id"
     t.index ["order_id"], name: "index_saved_books_on_order_id"
   end

@@ -22,7 +22,7 @@ class CheckLoginsController < Devise::RegistrationsController
     end
 
     setup_cart(user)
-    redirect_to checking_path(state: 'address'), alert: I18n.t(:'devise.sessions.signed_in')
+    redirect_to checking_path, alert: I18n.t(:'devise.sessions.signed_in')
   end
 
   private
@@ -31,7 +31,7 @@ class CheckLoginsController < Devise::RegistrationsController
     sign_in user
     cart = Order.find(session[:current_cart])
     cart.update(user_id: user.id)
-    cart.check_address!
+    cart.check_address! if cart.cart?
   end
 
   def setup_user(email)
@@ -47,6 +47,8 @@ class CheckLoginsController < Devise::RegistrationsController
   end
 
   def route_after_sign_in
-    redirect_to checking_path(state: 'address') if user_signed_in?
+    cart = Order.find(session[:current_cart])
+    cart.check_address! if cart.cart?
+    redirect_to checking_path if user_signed_in?
   end
 end

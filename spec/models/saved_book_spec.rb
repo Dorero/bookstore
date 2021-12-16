@@ -7,6 +7,7 @@
 #  id         :bigint           not null, primary key
 #  price      :decimal(8, 2)
 #  quantity   :integer
+#  status     :integer          default("open")
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
 #  book_id    :bigint

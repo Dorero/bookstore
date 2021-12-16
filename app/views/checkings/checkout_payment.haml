@@ -1,7 +1,8 @@
 %main.container.mb-res-50
   = render('layouts/partials/checkout_steps', active: I18n.t(:payment))
   %h3.general-subtitle= I18n.t(:credit_card)
-  = simple_form_for @payment, url: checking_path, html: {class: 'max-600 mb-600'}, method: :put do |form|
+  = simple_form_for instances.payment, url: checking_path, html: {class: 'max-600 mb-600'}, method: :put do |form|
+    = form.hidden_field :order_id, value: instances.order.id
     = form.input :number, label: I18n.t(:card_number), placeholder: I18n.t(:card_number)
     .row
       .col-sm-6
@@ -16,25 +17,6 @@
     .general-text-align
       %p.in-gold-500.font-18= I18n.t(:order_summary)
       %table.general-summary-table
-        %tr
-          %td
-            %p.font-16= I18n.t(:sub_total_summary)
-          %td
-            %p.font-16.sub-total-order= number_to_currency(@order.decorate.sub_total_price, locale: :fr)
-          %tr
-            %td
-              %p.font-16= I18n.t(:coupon_summary)
-            %td
-              %p.font-16.coupon= number_to_currency(@order.decorate.discount, locale: :fr)
-          %tr
-            %td
-              %p.font-16= I18n.t(:shipping)
-            %td
-              %p.font-16.shipping= number_to_currency(@order.decorate.shipping, locale: :fr)
-          %tr
-            %td
-              %strong.font-18= I18n.t(:order_total_summary)
-            %td
-              %strong.font-18.order-total-price= number_to_currency(@order.decorate.order_total_price, locale: :fr)
+        = render('layouts/partials/total_order_price', order: instances.order)
     .text-center
       = form.submit I18n.t(:continue), class: 'btn btn-default mb-80'

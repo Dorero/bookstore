@@ -3,135 +3,16 @@
   .row.mb-20
     .col-sm-3
       %h3.general-subtitle= I18n.t(:shipping_address)
-      %p.general-address
-        = @shipping_address.decorate.name
-        %span.general-edit= I18n.t(:edit)
-        %br
-        = @shipping_address.address
-        %br
-        = @shipping_address.decorate.city_zip
-        %br
-        = @shipping_address.country
-        %br
-        = "Phone #{@shipping_address.phone}"
+      = render('layouts/partials/address_data', address: instances.shipping_address, link: true)
     .col-sm-3
       %h3.general-subtitle= I18n.t(:billing_address)
-      %p.general-address
-        = @billing_address.decorate.name
-        %span.general-edit= I18n.t(:edit)
-        %br
-        = @billing_address.address
-        %br
-        = @billing_address.decorate.city_zip
-        %br
-        = @billing_address.country
-        %br
-        = "Phone #{@billing_address.phone}"
-    .col-sm-3
-      %h3.general-subtitle= I18n.t(:shipmets)
-      %p.general-address
-        = @delivery.method
-        %span.general-edit= I18n.t(:edit)
-        %br
-        By train
-    .col-sm-3
-      %h3.general-subtitle Payment Information
-      %p.general-address
-        ** ** ** 8756
-        %span.general-edit= I18n.t(:edit)
-        %br
-        12/2018
-  .visible-xs
-    .general-cart-item.divider-lg
-      .general-img-wrap-table
-        %img.cart-img-shadow{src: "http://jonathantweedy.com/resources/thumbs/SmashingBook5ResponsiveWebDesign.jpg", alt: "design-book"}
-      %p.title Android Programming for Beginners
-      %P.in-grey-600.fw-300 A recipe-based book to help you efficiently create amazing PHP-based applications with Laravel 5.x
-      %table.table
-        %tr
-          %td
-            %span.in-grey-600 Price
-          %td
-            %span.font-16.in-gold-500 €28.50
-        %tr
-          %td.vertical-middle
-            %span.in-grey-600 Quantity
-          %td
-            %span 1
-        %tr
-          %td
-            %span.in-grey-600 SubTotal
-          %td
-            %span.font-16.in-gold-500 €32.90
-    .general-cart-item.divider-lg.mb-55
-      .general-img-wrap-table
-        %img.cart-img-shadow{src: "http://jonathantweedy.com/resources/thumbs/SmashingBook5ResponsiveWebDesign.jpg", alt: "design-book"}
-      %p.title Android Programming for Beginners
-      %table.table
-        %tr
-          %td
-            %span.in-grey-600 Price
-          %td
-            %span.font-16.in-gold-500 €28.50
-        %tr
-          %td.vertical-middle
-            %span.in-grey-600 Quantity
-          %td
-            .input-group
-              %a.input-link{href: "#"}
-                %i.fa.fa-minus.line-heaght-40
-              %input.form-control.quantity-input{type: "text"}
-              %a.input-link{href: "#"}
-                %i.fa.fa-plus.line-heaght-40
-        %tr
-          %td
-            %span.in-grey-600 SubTotal
-          %td
-            %span.font-16.in-gold-500 €32.90
-  .hidden-xs.divider-lg.pt-20
-    %table.table.table-hover
-      %thead
-        %tr
-          %th
-            %span.in-grey-600 Book
-          %th.col-method
-          %th
-            %span.in-grey-600 Price
-          %th
-            %span.in-grey-600 Quantity
-          %th
-            %span.in-grey-600 Total
-      %tbody
-        %tr
-          %td
-            .general-img-wrap-table
-              %img.cart-img-shadow.pull-left{src: "http://jonathantweedy.com/resources/thumbs/SmashingBook5ResponsiveWebDesign.jpg", alt: "design-book"}
-          %td
-            %p.title Android Programming for Beginners
-            %p.in-grey-600.fw-300 Maximize the potential of Bootstrap with a collection of real-world site projects for better, faster, more responsive web applications
-          %td
-            %span.font-16.in-gold-500 €28.50
-          %td
-            %span.ml-30 1
-          %td
-            %span.font-16.in-gold-500 €32.90
+      = render('layouts/partials/address_data', address: instances.billing_address, link: true)
+    = render('layouts/partials/shipments_data', delivery: instances.delivery, order: instances.order, link: true)
+    = render('layouts/partials/payment_data', payment: instances.payment, link: true)
+  = render('layouts/partials/order_books', books: instances.order.books)
   .text-center.general-text-right
-    %p.in-gold-500.font-18 Order Summary
+    %p.in-gold-500.font-18= I18n.t(:order_summary)
     %table.general-summary-table.general-summary-table-right.general-text-right
-      %tr
-        %td
-          %p.font-16 Subtotal:
-        %td
-          %p.font-16 €117.69
-      %tr
-        %td
-          %p.font-16 Coupon:
-        %td
-          %p.font-16 €0.00
-      %tr
-        %td
-          %strong.font-18 Order Total:
-        %td
-          %strong.font-18 €117.69
+      = render('layouts/partials/total_order_price', order: instances.order)
   .text-center
-    %button.btn.btn-default.mb-20 Place Order
+    = link_to I18n.t(:place_order), checking_path, class: 'btn btn-default mb-20', method: :patch

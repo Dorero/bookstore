@@ -14,4 +14,13 @@ class BookDecorator < Draper::Decorator
   def quantity
     SavedBook.find_by_book_id(object.id).quantity.to_i
   end
+
+  def first_sentence
+    object.description.split('.').first
+  end
+
+  def price_by_quantity
+    book = SavedBook.find_by_book_id(object.id)
+    book.price * book.quantity
+  end
 end

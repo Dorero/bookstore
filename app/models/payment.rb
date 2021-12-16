@@ -11,7 +11,12 @@
 #  number          :integer
 #  created_at      :datetime         not null
 #  updated_at      :datetime         not null
+#  order_id        :bigint
+#
+# Indexes
+#
+#  index_payments_on_order_id  (order_id)
 #
 class Payment < ApplicationRecord
-  has_one :order
+  belongs_to :order, optional: true
 end

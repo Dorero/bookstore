@@ -3,50 +3,42 @@
 RSpec.describe 'Settings', type: :feature, js: true do
   describe '#edit' do
     let!(:user) { create(:user, password: '123QWEasd') }
+    let!(:cart_with_book) { create(:saved_book) }
+    let!(:image) { create(:image, book: cart_with_book.book) }
 
     let(:country) { 'Germany' }
+
+    before { page.set_rack_session(quantity_books: 2, current_cart: cart_with_book.order.id) }
 
     context 'success update data' do
       let(:address_data) { attributes_for(:address) }
       let(:user_data) { attributes_for(:user, password: '1234567890QWEasd') }
 
-      context 'update billing address' do
+      context 'update addresses' do
         before do
           user.confirm
           sign_in user
           visit(edit_setting_path)
           click_link(I18n.t(:address))
-          fill_in('billing_address[first_name]', with: address_data[:first_name])
-          fill_in('billing_address[last_name]', with: address_data[:last_name])
-          fill_in('billing_address[address]', with: address_data[:address])
-          fill_in('billing_address[city]', with: address_data[:city])
-          select country, from: 'billing_address[country]'
-          fill_in('billing_address[zip]', with: address_data[:zip])
-          fill_in('billing_address[phone]', with: address_data[:phone])
-          click_button('billing_address_button')
+          fill_in('address[billing_address][first_name]', with: address_data[:first_name])
+          fill_in('address[billing_address][last_name]', with: address_data[:last_name])
+          fill_in('address[billing_address][address]', with: address_data[:address])
+          fill_in('address[billing_address][city]', with: address_data[:city])
+          select country, from: 'address[billing_address][country]'
+          fill_in('address[billing_address][zip]', with: address_data[:zip])
+          fill_in('address[billing_address][phone]', with: address_data[:phone])
+
+          fill_in('address[shipping_address][first_name]', with: address_data[:first_name])
+          fill_in('address[shipping_address][last_name]', with: address_data[:last_name])
+          fill_in('address[shipping_address][address]', with: address_data[:address])
+          fill_in('address[shipping_address][city]', with: address_data[:city])
+          select country, from: 'address[shipping_address][country]'
+          fill_in('address[shipping_address][zip]', with: address_data[:zip])
+          fill_in('address[shipping_address][phone]', with: address_data[:phone])
+          click_button('commit')
         end
 
-        it { expect(page).to have_content(I18n.t(:address_success_save, address_name: 'Billing')) }
-        it { expect(page).to have_current_path(edit_setting_path) }
-      end
-
-      context 'update shipping address' do
-        before do
-          user.confirm
-          sign_in user
-          visit(edit_setting_path)
-          click_link(I18n.t(:address))
-          fill_in('shipping_address[first_name]', with: address_data[:first_name])
-          fill_in('shipping_address[last_name]', with: address_data[:last_name])
-          fill_in('shipping_address[address]', with: address_data[:address])
-          fill_in('shipping_address[city]', with: address_data[:city])
-          select country, from: 'shipping_address[country]'
-          fill_in('shipping_address[zip]', with: address_data[:zip])
-          fill_in('shipping_address[phone]', with: address_data[:phone])
-          click_button('shipping_address_button')
-        end
-
-        it { expect(page).to have_content(I18n.t(:address_success_save, address_name: 'Shipping')) }
+        it { expect(page).to have_content(I18n.t(:addresses_saved)) }
         it { expect(page).to have_current_path(edit_setting_path) }
       end
 
@@ -101,44 +93,32 @@ RSpec.describe 'Settings', type: :feature, js: true do
         attributes_for(:user, email: FFaker::Book.description, password: FFaker::CheesyLingo.paragraph)
       end
 
-      context 'update billing address' do
-        before do
-          user.confirm
-          sign_in user
-          visit(edit_setting_path)
-          click_link('Address')
-          fill_in('billing_address[first_name]', with: broken_address_data[:first_name])
-          fill_in('billing_address[last_name]', with: broken_address_data[:last_name])
-          fill_in('billing_address[address]', with: broken_address_data[:address])
-          fill_in('billing_address[city]', with: broken_address_data[:city])
-          select country, from: 'billing_address[country]'
-          fill_in('billing_address[zip]', with: broken_address_data[:zip])
-          fill_in('billing_address[phone]', with: broken_address_data[:phone])
-          click_button('billing_address_button')
-        end
-
-        it { expect(page).to have_text(I18n.t(:is_invalid)) }
-        it { expect(page).to have_current_path(edit_setting_path(billing_address_errors: errors)) }
-      end
-
-      context 'update shipping address' do
+      context 'update addresses' do
         before do
           user.confirm
           sign_in user
           visit(edit_setting_path)
           click_link(I18n.t(:address))
-          fill_in('shipping_address[first_name]', with: broken_address_data[:first_name])
-          fill_in('shipping_address[last_name]', with: broken_address_data[:last_name])
-          fill_in('shipping_address[address]', with: broken_address_data[:address])
-          fill_in('shipping_address[city]', with: broken_address_data[:city])
-          select country, from: 'shipping_address[country]'
-          fill_in('shipping_address[zip]', with: broken_address_data[:zip])
-          fill_in('shipping_address[phone]', with: broken_address_data[:phone])
-          click_button('shipping_address_button')
+          fill_in('address[billing_address][first_name]', with: broken_address_data[:first_name])
+          fill_in('address[billing_address][last_name]', with: broken_address_data[:last_name])
+          fill_in('address[billing_address][address]', with: broken_address_data[:address])
+          fill_in('address[billing_address][city]', with: broken_address_data[:city])
+          select country, from: 'address[billing_address][country]'
+          fill_in('address[billing_address][zip]', with: broken_address_data[:zip])
+          fill_in('address[billing_address][phone]', with: broken_address_data[:phone])
+
+          fill_in('address[shipping_address][first_name]', with: broken_address_data[:first_name])
+          fill_in('address[shipping_address][last_name]', with: broken_address_data[:last_name])
+          fill_in('address[shipping_address][address]', with: broken_address_data[:address])
+          fill_in('address[shipping_address][city]', with: broken_address_data[:city])
+          select country, from: 'address[shipping_address][country]'
+          fill_in('address[shipping_address][zip]', with: broken_address_data[:zip])
+          fill_in('address[shipping_address][phone]', with: broken_address_data[:phone])
+          click_button('commit')
         end
 
         it { expect(page).to have_text(I18n.t(:is_invalid)) }
-        it { expect(page).to have_current_path(edit_setting_path(shipping_address_errors: errors)) }
+        it { expect(page).to have_current_path(edit_setting_path) }
       end
 
       context 'update email' do

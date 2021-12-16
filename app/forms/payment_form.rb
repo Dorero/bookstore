@@ -11,6 +11,7 @@ class PaymentForm < Reform::Form
   VALIDATE_DATE = /[a-zA-Z0-9 ,-]+$/.freeze
 
   properties :name, :number, :expiration_date, :cvv, validates: { presence: true }
+  property :order_id
 
   validates :name, format: { with: VALIDATION_NAME_ON_CARD, multiline: true }, length: { maximum: MAX_LENGTH_NAME }
   validates :number, format: { with: VALIDATE_NUMBER_CARD, multiline: true },
@@ -24,9 +25,13 @@ class PaymentForm < Reform::Form
     errors.add(:expiration_date, I18n.t(:invalid_expiration_date)) unless expiration_date.include?('/')
 
     dates = expiration_date.split('/')
+    validate_dates(dates)
+    expiration_date
+  end
+
+  def validate_dates(dates)
     month = dates.first.to_i
     errors.add(:expiration_date, I18n.t(:invalid_month)) if month <= 0 || month > 12
     errors.add(:expiration_date, I18n.t(:invalid_year)) if dates.last.to_i <= 2000
-    expiration_date
   end
 end
