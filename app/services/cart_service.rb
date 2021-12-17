@@ -28,7 +28,8 @@ class CartService
   end
 
   def update
-    SavedBook.find_by(book_id: @book_id).update(quantity: @quantity_books, price: Book.find(@book_id).price, status: 1)
+    SavedBook.find_by(book_id: @book_id).update(quantity: @quantity_books, price: Book.find(@book_id).price,
+                                                status: :pre_order)
   end
 
   def add_user(user_id)

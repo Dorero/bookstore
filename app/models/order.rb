@@ -6,7 +6,9 @@
 #
 #  id          :bigint           not null, primary key
 #  aasm_state  :string
+#  completed   :datetime
 #  number      :string
+#  status      :integer          default("in_stock")
 #  created_at  :datetime         not null
 #  updated_at  :datetime         not null
 #  coupon_id   :bigint
@@ -72,8 +74,11 @@ class Order < ApplicationRecord
   belongs_to :delivery, optional: true
   has_one :payment
 
-  has_one :address, as: :addressed
+  has_one :billing_address, as: :addressed
+  has_one :shipping_address, as: :addressed
 
   has_many :saved_books, dependent: :destroy
   has_many :books, through: :saved_books
+
+  enum status: { in_stock: 0, in_progress: 1, in_queue: 2, in_delivery: 3, delivered: 4, canceled: 5 }
 end

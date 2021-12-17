@@ -10,10 +10,11 @@ class CheckAddressService
   end
 
   def show
-    addresses = setup_addresses
-    billing_address_form = AddressForm.new(addresses[:billing_address])
-    shipping_address_form = AddressForm.new(addresses[:shipping_address])
-    OpenStruct.new(billing_address: billing_address_form, shipping_address: shipping_address_form, order: @order)
+    billing_address = @order.billing_address || @order.user.billing_address || BillingAddress.new
+    shipping_address = @order.shipping_address || @order.user.shipping_address || BillingAddress.new
+    shipping_address = billing_address unless billing_address.is_one_table.zero?
+    OpenStruct.new(billing_address: AddressForm.new(billing_address),
+                   shipping_address: AddressForm.new(shipping_address), order: @order)
   end
 
   def update(billing_address_data, shipping_address_data)
@@ -35,22 +36,10 @@ class CheckAddressService
   def check_address(form, value, address)
     unless form.validate(value)
       @errors = form.errors
+      p @errors
       @address = address
       return false
     end
     form.save
-  end
-
-  def setup_addresses
-    user = User.find(@user_id)
-    shipping_address = ShippingAddress.where(addressed: user).first || ShippingAddress.new
-    billing_address = BillingAddress.where(addressed: user).first || BillingAddress.new
-    if @order.address
-      billing_address = @order.address
-      shipping_address = billing_address
-      shipping_address = ShippingAddress.where(addressed: @order).first if billing_address.is_one_table.zero?
-    end
-
-    { billing_address: billing_address, shipping_address: shipping_address }
   end
 end

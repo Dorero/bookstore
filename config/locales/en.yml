@@ -30,6 +30,14 @@
 # available at https://guides.rubyonrails.org/i18n.html.
 
 en:
+  cannot_set_status: You cannot set this status
+  cannot_set_delivered: You cannot set the delivered status if the order is not in the process of delivery
+  status_not_be_empty: Status cannot be empty
+  order_status_success_changed: Order status success changed
+  change_state: Change State
+  canceled_tab: Canceled
+  delivered_tab: Delivered
+  in_progress_tab: In Progress
   order_number: Order %{number}
   send_email_after_order: An order confirmation has been has been sent to %{email}
   thank_for_order: Thank You for your Order!
@@ -99,6 +107,7 @@ en:
   create_book: Create Book
   new_book: New Book
   book_success_created: Book successfully created
+  book_was_success_created: Book was successfully created.
   time:
     formats:
       custom_short: "%d/%m/%Y"

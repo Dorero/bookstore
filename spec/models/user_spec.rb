@@ -32,7 +32,10 @@ RSpec.describe User, type: :model do
   subject { build(:user) }
 
   describe 'model relations' do
-    it { is_expected.to have_one(:address) }
+    it { is_expected.to have_one(:billing_address) }
+    it { is_expected.to have_one(:shipping_address) }
+    it { is_expected.to have_one(:order) }
+    it { is_expected.to have_many(:reviews) }
   end
 
   describe 'validate' do

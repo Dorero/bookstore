@@ -5,9 +5,9 @@ class PaymentForm < Reform::Form
   MIN_LENGTH_CARD_NUMBER = 10
   MIN_LENGTH_EXPIRATION_DATE = 5
   MIN_LENGTH_CVV = 3
-  MAX_LENGTH_CVV = 4
+  MAX_LENGTH_CVV = 5
   VALIDATE_NUMBER_CARD = /^\d+$/.freeze
-  VALIDATION_NAME_ON_CARD = /^[a-zA-Z]+$/.freeze
+  VALIDATION_NAME_ON_CARD = /^[a-zA-Z ]+$/.freeze
   VALIDATE_DATE = /[a-zA-Z0-9 ,-]+$/.freeze
 
   properties :name, :number, :expiration_date, :cvv, validates: { presence: true }

@@ -3,7 +3,9 @@
 class PaymentDecorator < Draper::Decorator
   delegate_all
 
+  LAST_CARD_NUMBER = 4
+
   def number_card
-    "** ** ** #{object.number.to_s.last(4)}"
+    "** ** ** #{object.number.to_s.last(LAST_CARD_NUMBER)}"
   end
 end

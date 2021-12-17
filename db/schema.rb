@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_12_16_072816) do
+ActiveRecord::Schema.define(version: 2021_12_16_181350) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -129,6 +129,8 @@ ActiveRecord::Schema.define(version: 2021_12_16_072816) do
     t.bigint "user_id"
     t.bigint "delivery_id"
     t.string "number"
+    t.integer "status", default: 0
+    t.datetime "completed"
     t.index ["coupon_id"], name: "index_orders_on_coupon_id"
     t.index ["delivery_id"], name: "index_orders_on_delivery_id"
     t.index ["user_id"], name: "index_orders_on_user_id"
@@ -136,7 +138,7 @@ ActiveRecord::Schema.define(version: 2021_12_16_072816) do
 
   create_table "payments", force: :cascade do |t|
     t.string "name"
-    t.integer "number"
+    t.string "number"
     t.string "expiration_date"
     t.integer "cvv"
     t.bigint "order_id"
@@ -197,6 +199,7 @@ ActiveRecord::Schema.define(version: 2021_12_16_072816) do
   add_foreign_key "books", "categories"
   add_foreign_key "images", "books"
   add_foreign_key "orders", "users"
+  add_foreign_key "payments", "orders"
   add_foreign_key "reviews", "books"
   add_foreign_key "reviews", "users"
   add_foreign_key "saved_books", "books"

@@ -10,8 +10,7 @@ class CheckCompleteService
   end
 
   def show
-    shipping_address = @order.address
-    shipping_address = ShippingAddress.where(addressed: @order).first if shipping_address.is_one_table.zero?
+    shipping_address = @order.billing_address.is_one_table.zero? ? @order.shipping_address : @order.billing_address
     @order.finish! if @order.checking_complete?
     OpenStruct.new(order: @order, shipping_address: shipping_address)
   end

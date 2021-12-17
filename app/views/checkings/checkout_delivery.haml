@@ -18,8 +18,8 @@
             %td
               .form-group.radio.mt-0.mb-0
                 %label.radio-label
-                  = form.radio_button :id, delivery.id, class: 'radio-input', checked: "#{'checked' if instances.order.delivery}", hidden: true
-                  %span.radio-icon
+                  = form.radio_button :id, delivery.id, class: "radio-input", checked: "#{'checked' if instances.order.delivery}", hidden: true
+                  %span.radio-icon{class: "delivery-#{delivery.id}"}
                   %span.radio-text= delivery.method
             %td
               %span= I18n.t(:duration_delivery, from: delivery.min_duration_delivery, to: delivery.max_duration_delivery)

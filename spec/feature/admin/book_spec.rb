@@ -83,7 +83,6 @@ RSpec.describe 'Admin/Book', type: :feature, js: true do
       click_button(I18n.t(:create_book))
     end
 
-    it { expect(page).to have_content(I18n.t(:book_success_created)) }
-    it { expect(page).to have_current_path(admin_books_path) }
+    it { expect(page).to have_content(I18n.t(:book_was_success_created)) }
   end
 end

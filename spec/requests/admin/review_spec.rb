@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-RSpec.describe 'Admin', type: :request do
+RSpec.describe 'Admin/Review', type: :request do
   let!(:admin) { create(:admin_user) }
   let!(:review) { create(:review) }
 

@@ -6,7 +6,9 @@
 #
 #  id          :bigint           not null, primary key
 #  aasm_state  :string
+#  completed   :datetime
 #  number      :string
+#  status      :integer          default("in_stock")
 #  created_at  :datetime         not null
 #  updated_at  :datetime         not null
 #  coupon_id   :bigint
@@ -26,7 +28,7 @@
 FactoryBot.define do
   factory :order do
     aasm_state { 'cart' }
-    number { "##{SecureRandom.random_number(10 * 10_000)}" }
+    number { "##{SecureRandom.random_number(10_000)}" }
     user
     delivery
     coupon
