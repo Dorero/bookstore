@@ -3,18 +3,17 @@
 RSpec.describe 'Settings', type: :feature, js: true do
   describe '#edit' do
     let!(:user) { create(:user, password: '123QWEasd') }
-    let!(:cart_with_book) { create(:saved_book) }
-    let!(:image) { create(:image, book: cart_with_book.book) }
+    let!(:cart_with_book) { create(:saved_book, :book_with_image) }
 
     let(:country) { 'Germany' }
 
     before { page.set_rack_session(quantity_books: 2, current_cart: cart_with_book.order.id) }
 
-    context 'success update data' do
+    context 'when success update data' do
       let(:address_data) { attributes_for(:address) }
       let(:user_data) { attributes_for(:user, password: '1234567890QWEasd') }
 
-      context 'update addresses' do
+      context 'when update addresses' do
         before do
           user.confirm
           sign_in user
@@ -42,7 +41,7 @@ RSpec.describe 'Settings', type: :feature, js: true do
         it { expect(page).to have_current_path(edit_setting_path) }
       end
 
-      context 'update email' do
+      context 'when update email' do
         before do
           user.confirm
           sign_in user
@@ -59,7 +58,7 @@ RSpec.describe 'Settings', type: :feature, js: true do
         }
       end
 
-      context 'update password' do
+      context 'when update password' do
         before do
           user.confirm
           sign_in user
@@ -75,7 +74,7 @@ RSpec.describe 'Settings', type: :feature, js: true do
       end
     end
 
-    context 'failed update data' do
+    context 'when failed update data' do
       let(:errors) do
         { address: I18n.t(:is_invalid), city: I18n.t(:is_invalid), first_name: I18n.t(:is_invalid),
           last_name: I18n.t(:is_invalid), phone:  I18n.t(:long_parameters, maximum: 15),
@@ -93,7 +92,7 @@ RSpec.describe 'Settings', type: :feature, js: true do
         attributes_for(:user, email: FFaker::Book.description, password: FFaker::CheesyLingo.paragraph)
       end
 
-      context 'update addresses' do
+      context 'when update addresses' do
         before do
           user.confirm
           sign_in user
@@ -121,7 +120,7 @@ RSpec.describe 'Settings', type: :feature, js: true do
         it { expect(page).to have_current_path(edit_setting_path) }
       end
 
-      context 'update email' do
+      context 'when update email' do
         before do
           user.confirm
           sign_in user
@@ -137,7 +136,7 @@ RSpec.describe 'Settings', type: :feature, js: true do
         }
       end
 
-      context 'update password' do
+      context 'when update password' do
         let(:errors) { [I18n.t(:is_invalid), I18n.t(:long_parameters, maximum: 128)] }
 
         before do
@@ -155,7 +154,7 @@ RSpec.describe 'Settings', type: :feature, js: true do
       end
     end
 
-    context 'delete account' do
+    context 'when delete account' do
       before do
         user.confirm
         sign_in user

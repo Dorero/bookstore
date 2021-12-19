@@ -24,6 +24,6 @@
 
 RSpec.describe Payment, type: :model do
   describe 'model relations' do
-    it { is_expected.to belong_to(:order).optional }
+    it { is_expected.to belong_to(:order) }
   end
 end

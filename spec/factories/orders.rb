@@ -5,10 +5,9 @@
 # Table name: orders
 #
 #  id          :bigint           not null, primary key
-#  aasm_state  :string
-#  completed   :datetime
+#  canceled_at :datetime
 #  number      :string
-#  status      :integer          default("in_stock")
+#  status      :string
 #  created_at  :datetime         not null
 #  updated_at  :datetime         not null
 #  coupon_id   :bigint
@@ -27,10 +26,15 @@
 #
 FactoryBot.define do
   factory :order do
-    aasm_state { 'cart' }
+    status { 'cart' }
     number { "##{SecureRandom.random_number(10_000)}" }
     user
     delivery
     coupon
+    trait :with_all_tables do
+      billing_address
+      shipping_address
+      delivery
+    end
   end
 end

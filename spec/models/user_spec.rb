@@ -29,7 +29,7 @@
 #  index_users_on_reset_password_token  (reset_password_token) UNIQUE
 #
 RSpec.describe User, type: :model do
-  subject { build(:user) }
+  subject(:user) { build(:user) }
 
   describe 'model relations' do
     it { is_expected.to have_one(:billing_address) }
@@ -39,34 +39,34 @@ RSpec.describe User, type: :model do
   end
 
   describe 'validate' do
-    context 'not be valid without email' do
+    context 'when not be valid without email' do
       before do
-        subject.email = nil
+        user.email = nil
       end
 
-      it { expect(subject).not_to be_valid }
+      it { expect(user).not_to be_valid }
     end
 
-    context 'not be valid without password' do
+    context 'when not be valid without password' do
       before do
-        subject.password = nil
+        user.password = nil
       end
 
-      it { expect(subject).not_to be_valid }
+      it { expect(user).not_to be_valid }
     end
 
-    context 'valid with attributes' do
+    context 'when valid with attributes' do
       before do
-        subject.email = FFaker::Internet.email
-        subject.password = '1234QWEasd'
+        user.email = FFaker::Internet.email
+        user.password = '1234QWEasd'
       end
 
-      it { expect(subject).to be_valid }
+      it { expect(user).to be_valid }
     end
 
-    context 'check attributes presence' do
-      it { should validate_presence_of(:email) }
-      it { should validate_presence_of(:password) }
+    context 'when check attributes presence' do
+      it { is_expected.to validate_presence_of(:email) }
+      it { is_expected.to validate_presence_of(:password) }
     end
   end
 end

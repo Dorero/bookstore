@@ -3,6 +3,8 @@
 class CheckPaymentService
   attr_reader :message
 
+  CheckPayment = Struct.new(:order, :payment)
+
   def initialize(user_id, order_id)
     @user_id = user_id
     @order_id = order_id
@@ -11,7 +13,7 @@ class CheckPaymentService
   end
 
   def show
-    OpenStruct.new(order: @order, payment: PaymentForm.new(@payment))
+    CheckPayment.new(@order, PaymentForm.new(@payment))
   end
 
   def update(data)

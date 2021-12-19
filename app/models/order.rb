@@ -5,10 +5,9 @@
 # Table name: orders
 #
 #  id          :bigint           not null, primary key
-#  aasm_state  :string
-#  completed   :datetime
+#  canceled_at :datetime
 #  number      :string
-#  status      :integer          default("in_stock")
+#  status      :string
 #  created_at  :datetime         not null
 #  updated_at  :datetime         not null
 #  coupon_id   :bigint
@@ -28,9 +27,16 @@
 class Order < ApplicationRecord
   include AASM
 
-  aasm do
+  scope :in_progress, lambda {
+                        where(status: %i[checking_address checking_delivery checking_payment checking_confirm
+                                         checking_complete])
+                      }
+  scope :in_queue, -> { where(status: :complete) }
+
+  aasm column: :status, whiny_transitions: false, timestamps: true do
     state :cart, initial: true
-    state :checking_address, :checking_delivery, :checking_payment, :checking_confirm, :checking_complete, :complete
+    state :checking_address, :checking_delivery, :checking_payment, :checking_confirm, :checking_complete, :complete,
+          :in_delivery, :delivered, :canceled
 
     event :check_address do
       transitions from: :cart, to: :checking_address
@@ -52,7 +58,7 @@ class Order < ApplicationRecord
       transitions from: :checking_confirm, to: :checking_complete
     end
 
-    event :finish do
+    event :bought do
       transitions from: :checking_complete, to: :complete
     end
 
@@ -67,18 +73,28 @@ class Order < ApplicationRecord
     event :back_to_payment do
       transitions from: :checking_confirm, to: :checking_payment
     end
+
+    event :start_delivery do
+      transitions to: :in_delivery
+    end
+
+    event :cancel do
+      transitions to: :canceled
+    end
+
+    event :deliver do
+      transitions from: :in_delivery, to: :delivered
+    end
   end
 
   belongs_to :coupon, optional: true
   belongs_to :user, optional: true
   belongs_to :delivery, optional: true
-  has_one :payment
+  has_one :payment, dependent: :destroy
 
-  has_one :billing_address, as: :addressed
-  has_one :shipping_address, as: :addressed
+  has_one :billing_address, as: :addressed, dependent: :destroy
+  has_one :shipping_address, as: :addressed, dependent: :destroy
 
   has_many :saved_books, dependent: :destroy
   has_many :books, through: :saved_books
-
-  enum status: { in_stock: 0, in_progress: 1, in_queue: 2, in_delivery: 3, delivered: 4, canceled: 5 }
 end

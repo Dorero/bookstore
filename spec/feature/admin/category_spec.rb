@@ -17,9 +17,9 @@ RSpec.describe 'Admin/Category', type: :feature, js: true do
   end
 
   describe '#show' do
-    before { visit admin_categories_path }
+    before { visit admin_category_path(category.id) }
 
-    it { expect(page).to have_current_path(admin_categories_path) }
+    it { expect(page).to have_current_path(admin_category_path(category.id)) }
   end
 
   describe '#new' do

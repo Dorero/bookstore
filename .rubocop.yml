@@ -1,6 +1,10 @@
+require:
+  - rubocop-rails
+  - rubocop-rspec
 Style/Documentation:
   Enabled: False
 AllCops:
+  NewCops: enable
   Exclude:
     - bin/*
     - node_modules/*
@@ -12,4 +16,11 @@ AllCops:
 
 Metrics/BlockLength:
   Enabled: False
+RSpec/NestedGroups:
+  Max: 10
+RSpec/MultipleMemoizedHelpers:
+  Max: 10
+Rails/LexicallyScopedActionFilter:
+  Exclude:
+    - app/controllers/users/*
 

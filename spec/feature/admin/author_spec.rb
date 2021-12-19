@@ -17,9 +17,9 @@ RSpec.describe 'Admin/Author', type: :feature, js: true do
   end
 
   describe '#show' do
-    before { visit admin_authors_path }
+    before { visit admin_author_path(author.id) }
 
-    it { expect(page).to have_current_path(admin_authors_path) }
+    it { expect(page).to have_current_path(admin_author_path(author.id)) }
   end
 
   describe '#new' do

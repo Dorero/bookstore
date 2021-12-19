@@ -8,10 +8,10 @@ class CartService
   end
 
   def create_or_update
-    cart = Order.find_by_id(@cart_id)
+    cart = Order.find_by(id: @cart_id)
     cart = Order.create unless cart&.cart?
     @cart_id = cart.id
-    book = SavedBook.find_by_book_id(@book_id)
+    book = SavedBook.find_by(book_id: @book_id)
     book&.open? ? (@quantity_books += book.quantity) && update : create
     cart
   end

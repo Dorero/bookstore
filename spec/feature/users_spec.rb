@@ -6,7 +6,7 @@ RSpec.describe 'User', type: :feature, js: true do
   let(:user_data) { attributes_for(:user) }
 
   describe '#new' do
-    context 'registration new user' do
+    context 'when registration new user' do
       before do
         visit(new_user_registration_path)
         fill_in('user[email]', with: user_data[:email])
@@ -19,7 +19,7 @@ RSpec.describe 'User', type: :feature, js: true do
       it { expect(page).to have_current_path(root_path) }
     end
 
-    context 'registration with error' do
+    context 'when registration with error' do
       let(:bad_password) { /[a-zA-Z0-9].{5,}/ }
       let(:user_with_bad_password) { attributes_for(:user, password: FFaker::String.from_regexp(bad_password)) }
 
@@ -35,7 +35,7 @@ RSpec.describe 'User', type: :feature, js: true do
       it { expect(page).to have_current_path(user_registration_path) }
     end
 
-    context 'login user' do
+    context 'when login user' do
       before do
         user.confirm
         visit(new_user_session_path)
@@ -47,7 +47,7 @@ RSpec.describe 'User', type: :feature, js: true do
       it { expect(page).to have_current_path(root_path) }
     end
 
-    context 'forget password' do
+    context 'when forget password' do
       before do
         visit(new_user_password_path)
         fill_in('user[email]', with: user.email)
@@ -59,15 +59,16 @@ RSpec.describe 'User', type: :feature, js: true do
   end
 
   describe '#edit' do
-    context 'edit password without send email' do
+    context 'when edit password without send email' do
       before do
         visit(edit_user_password_path)
       end
+
       it { expect(page).to have_text(I18n.t(:'devise.passwords.no_token')) }
       it { expect(page).to have_current_path(new_user_session_path) }
     end
 
-    context 'update password' do
+    context 'when update password' do
       before do
         visit(new_user_password_path)
         fill_in('user[email]', with: user.email)
@@ -87,7 +88,7 @@ RSpec.describe 'User', type: :feature, js: true do
                 email: user_data[:email] } }
     end
 
-    context 'log in through facebook' do
+    context 'when log in through facebook' do
       before do
         visit(new_user_session_path)
         OmniAuth.config.mock_auth[:facebook] = OmniAuth::AuthHash.new(facebook_mock_data)
@@ -98,7 +99,7 @@ RSpec.describe 'User', type: :feature, js: true do
       it { expect(page).to have_current_path(root_path) }
     end
 
-    context 'register through facebook' do
+    context 'when register through facebook' do
       before do
         visit(new_user_registration_path)
         OmniAuth.config.mock_auth[:facebook] = OmniAuth::AuthHash.new(facebook_mock_data)

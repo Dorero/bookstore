@@ -5,10 +5,9 @@
 # Table name: orders
 #
 #  id          :bigint           not null, primary key
-#  aasm_state  :string
-#  completed   :datetime
+#  canceled_at :datetime
 #  number      :string
-#  status      :integer          default("in_stock")
+#  status      :string
 #  created_at  :datetime         not null
 #  updated_at  :datetime         not null
 #  coupon_id   :bigint
@@ -29,7 +28,7 @@ RSpec.describe Order, type: :model do
   describe 'model relations' do
     it { is_expected.to belong_to(:coupon).optional }
     it { is_expected.to belong_to(:delivery).optional }
-    it { is_expected.to belong_to(:delivery).optional }
+    it { is_expected.to belong_to(:user).optional }
     it { is_expected.to have_one(:billing_address) }
     it { is_expected.to have_one(:shipping_address) }
     it { is_expected.to have_one(:payment) }

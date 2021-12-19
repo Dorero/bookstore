@@ -2,10 +2,9 @@
 
 RSpec.describe 'Admin/Author', type: :request do
   let!(:admin) { create(:admin_user) }
+  let!(:author) { create(:author) }
 
-  before do
-    sign_in admin
-  end
+  before { sign_in admin }
 
   describe 'GET #index' do
     before { get admin_authors_path }
@@ -14,7 +13,7 @@ RSpec.describe 'Admin/Author', type: :request do
   end
 
   describe 'GET #show' do
-    before { get admin_authors_path }
+    before { get admin_author_path(author.id) }
 
     it { expect(response).to have_http_status(:success) }
   end
@@ -26,8 +25,6 @@ RSpec.describe 'Admin/Author', type: :request do
   end
 
   describe 'GET #edit' do
-    let!(:author) { create(:author) }
-
     before { get edit_admin_author_path(author.id) }
 
     it { expect(response).to have_http_status(:success) }

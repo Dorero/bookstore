@@ -17,9 +17,9 @@ RSpec.describe 'Admin/Book', type: :feature, js: true do
   end
 
   describe '#show' do
-    before { visit admin_books_path }
+    before { visit admin_book_path(book.id) }
 
-    it { expect(page).to have_current_path(admin_books_path) }
+    it { expect(page).to have_current_path(admin_book_path(book.id)) }
   end
 
   describe '#new' do
@@ -63,7 +63,7 @@ RSpec.describe 'Admin/Book', type: :feature, js: true do
   end
 
   describe '#create' do
-    let(:path_to_file) { "#{Rails.root}/app/assets/images/seed/SmashingBook5ResponsiveWebDesign.jpg" }
+    let(:path_to_file) { Rails.root.join('app/assets/images/seed/SmashingBook5ResponsiveWebDesign.jpg') }
 
     before do
       visit new_admin_book_path

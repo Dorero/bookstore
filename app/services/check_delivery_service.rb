@@ -3,6 +3,8 @@
 class CheckDeliveryService
   attr_reader :message
 
+  CheckDelivery = Struct.new(:order, :deliveries)
+
   def initialize(user_id, order_id)
     @user_id = user_id
     @order_id = order_id
@@ -10,7 +12,7 @@ class CheckDeliveryService
   end
 
   def show
-    OpenStruct.new(order: @order, deliveries: Delivery.all)
+    CheckDelivery.new(@order, Delivery.all)
   end
 
   def update(data)

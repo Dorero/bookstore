@@ -3,6 +3,8 @@
 class CheckCompleteService
   attr_reader :message
 
+  CheckComplete = Struct.new(:order, :shipping_address)
+
   def initialize(user_id, order_id)
     @user_id = user_id
     @order_id = order_id
@@ -11,7 +13,7 @@ class CheckCompleteService
 
   def show
     shipping_address = @order.billing_address.is_one_table.zero? ? @order.shipping_address : @order.billing_address
-    @order.finish! if @order.checking_complete?
-    OpenStruct.new(order: @order, shipping_address: shipping_address)
+    @order.bought! if @order.checking_complete?
+    CheckComplete.new(@order, shipping_address)
   end
 end

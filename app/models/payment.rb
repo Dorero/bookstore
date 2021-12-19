@@ -22,5 +22,5 @@
 #  fk_rails_...  (order_id => orders.id)
 #
 class Payment < ApplicationRecord
-  belongs_to :order, optional: true
+  belongs_to :order
 end

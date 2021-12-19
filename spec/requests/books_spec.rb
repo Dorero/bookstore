@@ -10,8 +10,7 @@ RSpec.describe 'Books', type: :request do
   end
 
   describe 'GET #show' do
-    let!(:book) { create(:book) }
-    let!(:image) { create(:image, book: book) }
+    let!(:book) { create(:image).book }
 
     before { get book_path(book.id) }
 

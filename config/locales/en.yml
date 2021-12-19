@@ -225,3 +225,7 @@ en:
   web_design: Web design
   photo: Photo
   mobile_development: Mobile development
+  active_admin:
+    batch_actions:
+      labels:
+        change_state: "Change State"

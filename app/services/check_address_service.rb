@@ -3,6 +3,7 @@
 class CheckAddressService
   attr_reader :address, :errors, :message
 
+  CheckAddress = Struct.new(:billing_address, :shipping_address, :order)
   def initialize(user_id, order_id)
     @user_id = user_id
     @order_id = order_id
@@ -10,11 +11,8 @@ class CheckAddressService
   end
 
   def show
-    billing_address = @order.billing_address || @order.user.billing_address || BillingAddress.new
-    shipping_address = @order.shipping_address || @order.user.shipping_address || BillingAddress.new
-    shipping_address = billing_address unless billing_address.is_one_table.zero?
-    OpenStruct.new(billing_address: AddressForm.new(billing_address),
-                   shipping_address: AddressForm.new(shipping_address), order: @order)
+    billing_address = setup_billing_address
+    CheckAddress.new(AddressForm.new(billing_address), AddressForm.new(setup_shipping_address(billing_address)), @order)
   end
 
   def update(billing_address_data, shipping_address_data)
@@ -36,10 +34,19 @@ class CheckAddressService
   def check_address(form, value, address)
     unless form.validate(value)
       @errors = form.errors
-      p @errors
       @address = address
       return false
     end
     form.save
+  end
+
+  def setup_billing_address
+    @order&.billing_address || @order.user&.billing_address || BillingAddress.new
+  end
+
+  def setup_shipping_address(billing_address)
+    shipping_address = @order&.shipping_address || @order.user&.shipping_address || ShippingAddress.new
+    shipping_address = billing_address unless billing_address.is_one_table.zero?
+    shipping_address
   end
 end

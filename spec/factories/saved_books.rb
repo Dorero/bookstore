@@ -29,5 +29,8 @@ FactoryBot.define do
     price { rand(30) }
     order
     book
+    trait :book_with_image do
+      book { create(:image).book }
+    end
   end
 end

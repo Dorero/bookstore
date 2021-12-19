@@ -16,7 +16,7 @@ class CheckLoginsController < Devise::RegistrationsController
   end
 
   def login
-    user = User.find_by_email(params[:user][:email])
+    user = User.find_by(email: params[:user][:email])
     unless user&.valid_password?(params[:user][:password])
       return redirect_to check_login_path, alert: I18n.t(:'devise.failure.invalid', authentication_keys: 'email')
     end

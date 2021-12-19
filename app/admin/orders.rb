@@ -5,10 +5,10 @@ ActiveAdmin.register Order do
 
   menu priority: 4
 
-  actions :index, :edit, :update
+  actions :index, :show
 
-  scope(:all)
-  scope(I18n.t(:in_progress_tab)) { |order| order.where(status: %i[in_progress in_queue in_delivery]) }
+  scope(:all) { |order| order.where.not(status: :cart) }
+  scope(I18n.t(:in_progress_tab)) { |order| order.where(status: %i[in_progress in_queue]) }
   scope(I18n.t(:delivered_tab)) { |order| order.where(status: :delivered) }
   scope(I18n.t(:canceled_tab)) { |order| order.where(status: :canceled) }
 
@@ -27,38 +27,33 @@ ActiveAdmin.register Order do
     column :id
     column :number
     column :status
-    column do |order|
-      link_to I18n.t(:change_state), edit_admin_order_path(order)
-    end
-  end
-
-  form do |f|
-    f.inputs do
-      f.input :status, as: :select, include_blank: false, collection: %i[delivered canceled in_delivery]
-    end
     actions
   end
 
-  controller do
-    def update
-      status = params[:order][:status]
-      return path_when_exception(I18n.t(:cannot_set_status)) unless %w[delivered canceled in_delivery].include?(status)
-
-      order = Order.find(params[:id])
-      return path_when_exception(I18n.t(:cannot_set_delivered)) if !order.in_delivery? && status == 'delivered'
-
-      change_state(order, status)
+  show title: proc { |order| order.decorate.title } do
+    attributes_table :id, :status, :number, :created_at, :updated_at do
+      row :books do
+        order.books.map { |book| link_to book.name, admin_book_path(book.id) }
+      end
     end
+  end
 
-    private
+  batch_action :change_state, form: { type: %w[in_delivery delivered canceled] } do |ids, status|
+    statuses = { 'in_delivery' => :start_delivery!, 'delivered' => :deliver!, 'canceled' => :cancel! }
+    if statuses.keys.include?(status[:type])
+      is_success = true
+      Order.find(ids).each do |order|
+        is_success = order.public_send(statuses[status[:type]].to_sym)
+        break unless is_success
+      end
 
-    def path_when_exception(message)
-      redirect_to edit_admin_order_path(params[:id]), alert: message
-    end
-
-    def change_state(order, status)
-      order.update(status: status, completed: Time.now)
-      redirect_to admin_orders_path, notice: I18n.t(:order_status_success_changed)
+      if is_success
+        redirect_to collection_path, alert: I18n.t(:order_status_success_changed)
+      else
+        redirect_to collection_path, alert: I18n.t(:cannot_set_delivered)
+      end
+    else
+      redirect_to collection_path, alert: I18n.t(:cannot_set_status)
     end
   end
 end

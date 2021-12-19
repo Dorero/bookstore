@@ -2,8 +2,7 @@
 
 RSpec.describe 'Review', type: :feature, js: true do
   let!(:user) { create(:user) }
-  let!(:book) { create(:book) }
-  let!(:image) { create(:image, book: book) }
+  let!(:book) { create(:image).book }
 
   let(:review_data) { attributes_for(:review) }
 

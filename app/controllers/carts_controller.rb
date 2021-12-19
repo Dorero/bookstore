@@ -11,6 +11,8 @@ class CartsController < ApplicationController
     return unless session[:current_cart]
 
     @cart = Order.find_by(id: session[:current_cart])
+    return session[:current_cart] = nil unless @cart
+
     @books = @cart.books
   end
 

@@ -13,12 +13,12 @@
           %th
             %span.in-grey-600= I18n.t(:price)
       %tbody.deliveries
-        - instances.deliveries.each do |delivery|
+        - instances.deliveries.each_with_index do |delivery, index|
           %tr
             %td
               .form-group.radio.mt-0.mb-0
                 %label.radio-label
-                  = form.radio_button :id, delivery.id, class: "radio-input", checked: "#{'checked' if instances.order.delivery}", hidden: true
+                  = form.radio_button :id, delivery.id, class: "radio-input", checked: "#{'checked' if instances.order.delivery&.id == index + 1}", hidden: true
                   %span.radio-icon{class: "delivery-#{delivery.id}"}
                   %span.radio-text= delivery.method
             %td

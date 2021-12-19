@@ -18,4 +18,8 @@ class OrderDecorator < Draper::Decorator
   def shipping
     object.delivery&.price.to_f
   end
+
+  def title
+    "Order #{object.number}"
+  end
 end

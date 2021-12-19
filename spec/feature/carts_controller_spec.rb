@@ -1,8 +1,7 @@
 # frozen_string_literal: true
 
 RSpec.describe 'Cart', type: :feature, js: true do
-  let!(:cart_with_book) { create(:saved_book) }
-  let!(:image) { create(:image, book: cart_with_book.book) }
+  let!(:cart_with_book) { create(:saved_book, :book_with_image) }
 
   context 'with create cart and add book' do
     before { page.set_rack_session(quantity_books: 2, current_cart: cart_with_book.order.id) }
@@ -43,15 +42,6 @@ RSpec.describe 'Cart', type: :feature, js: true do
       before do
         visit cart_path
         find('.fa-plus').click
-      end
-
-      it { expect(page).to have_current_path(cart_path) }
-    end
-
-    describe '#decrement_quantity_books' do
-      before do
-        visit cart_path
-        find('.fa-minus').click
       end
 
       it { expect(page).to have_current_path(cart_path) }

@@ -2,7 +2,7 @@
 
 class FacebookUserCreator
   def initialize(data)
-    name = data.info.name.split(' ')
+    name = data.info.name.split
     @first_name = name.first
     @last_name = name.last
     @provider = data.provider

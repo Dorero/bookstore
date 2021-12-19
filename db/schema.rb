@@ -122,15 +122,14 @@ ActiveRecord::Schema.define(version: 2021_12_16_181350) do
   end
 
   create_table "orders", force: :cascade do |t|
-    t.string "aasm_state"
+    t.string "status"
     t.bigint "coupon_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.bigint "user_id"
     t.bigint "delivery_id"
     t.string "number"
-    t.integer "status", default: 0
-    t.datetime "completed"
+    t.datetime "canceled_at"
     t.index ["coupon_id"], name: "index_orders_on_coupon_id"
     t.index ["delivery_id"], name: "index_orders_on_delivery_id"
     t.index ["user_id"], name: "index_orders_on_user_id"
