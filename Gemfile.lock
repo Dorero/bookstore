@@ -246,7 +246,7 @@ GEM
       has_scope (~> 0.6)
       railties (>= 5.2, < 6.2)
       responders (>= 2, < 4)
-    jbuilder (2.11.3)
+    jbuilder (2.11.4)
       activesupport (>= 5.0.0)
     jmespath (1.4.0)
     jquery-rails (4.4.0)
@@ -574,6 +574,7 @@ DEPENDENCIES
   rack_session_access (~> 0.2.0)
   rails (~> 6.1.4, >= 6.1.4.2)
   rails-controller-testing (~> 1.0, >= 1.0.5)
+  rake (= 13.0.6)
   reform (~> 2.6, >= 2.6.1)
   reform-rails (~> 0.2.3)
   rspec (~> 3.10)
@@ -600,4 +601,4 @@ RUBY VERSION
    ruby 2.7.4p191
 
 BUNDLED WITH
-   2.2.31
+   2.2.33
