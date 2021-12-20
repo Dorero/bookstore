@@ -31,6 +31,7 @@ commands:
           keys:
             - bookstore-bundle-v2-{{ checksum "Gemfile.lock" }}
             - bookstore-bundle-v2-
+      - run: gem install rake -v "13.0.6"      
       - run: bundle install --no-deployment
       - run: yarn install
       - save_cache:
