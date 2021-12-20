@@ -8,7 +8,7 @@ class BestsellersBooksQuery
   def call
     bestsellers_by_category(
       @relation.where(id: SavedBook.where(status: :closed).select('book_id, COUNT(book_id) as count')
-                                                         .group(:book_id).order(count: :desc).select(:book_id))
+                                                         .group(:book_id).order(count: :desc).pluck(:book_id))
     )
   end
 
