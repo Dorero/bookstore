@@ -31,9 +31,8 @@ commands:
           keys:
             - bookstore-bundle-v2-{{ checksum "Gemfile.lock" }}
             - bookstore-bundle-v2-
-      - run: gem install bundler:2.2.33   
-      - run: bundle config set --local path 'vendor/cache'         
-      - run: bundle install --no-deployment
+      - run: gem update --system    
+      - run: bundle install
       - run: yarn install
       - save_cache:
           key: bookstore-bundle-v2-{{ checksum "Gemfile.lock" }}
