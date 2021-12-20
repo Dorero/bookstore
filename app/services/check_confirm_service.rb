@@ -22,6 +22,7 @@ class CheckConfirmService
     @order.update(number: "##{SecureRandom.random_number(10_000)}") unless @order.number
     SavedBook.where(order: @order).each { |book| book.update(status: :closed) }
     @order.coupon.spent! if @order.coupon&.pre_use?
+    @order.update(completed_at: Time.zone.now)
     @order.check_complete! if @order.checking_confirm?
   end
 end

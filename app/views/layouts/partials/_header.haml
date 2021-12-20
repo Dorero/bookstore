@@ -29,7 +29,7 @@
             %a.dropdown-toggle{href: "#", 'data-toggle': "dropdown", role: "button", 'aria-haspopup': "true", 'aria-expanded': "false"}= I18n.t(:my_account)
             %ul.dropdown-menu
               %li
-                = link_to(I18n.t(:orders), '/orders')
+                = link_to(I18n.t(:orders), orders_path)
               %li
                 = link_to(I18n.t(:settings), edit_setting_path)
               %li.divider{role: "separator"}

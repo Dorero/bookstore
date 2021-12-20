@@ -1,0 +1,16 @@
+%main.container.general-main-wrap
+  %h1.general-title-margin= @order.decorate.title
+  .row.mb-20
+    .col-sm-3
+      %h3.general-subtitle= I18n.t(:shipping_address)
+      = render('layouts/partials/address_data', address: @order.shipping_address || @order.billing_address, link: true)
+    .col-sm-3
+      %h3.general-subtitle= I18n.t(:billing_address)
+      = render('layouts/partials/address_data', address: @order.billing_address, link: true)
+    = render('layouts/partials/shipments_data', delivery: @order.delivery, order: @order, link: true)
+    = render('layouts/partials/payment_data', payment: @order.payment, link: true)
+  = render('layouts/partials/order_books', books: @order.books)
+  .text-center.general-text-right
+    %p.in-gold-500.font-18= I18n.t(:order_summary)
+    %table.general-summary-table.general-summary-table-right.general-text-right
+      = render('layouts/partials/total_order_price', order: @order)

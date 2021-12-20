@@ -22,4 +22,16 @@ class OrderDecorator < Draper::Decorator
   def title
     "Order #{object.number}"
   end
+
+  def status
+    status = object.status
+    if %w[checking_address checking_delivery checking_payment checking_confirm checking_complete].include?(status)
+      status = 'in_progress'
+    end
+    status = I18n.t(:waiting_process) if status == 'complete'
+
+    return status.capitalize if status.split('_').is_a?(String)
+
+    status.split('_').map(&:capitalize).join(' ')
+  end
 end

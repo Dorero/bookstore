@@ -4,15 +4,16 @@
 #
 # Table name: orders
 #
-#  id          :bigint           not null, primary key
-#  canceled_at :datetime
-#  number      :string
-#  status      :string
-#  created_at  :datetime         not null
-#  updated_at  :datetime         not null
-#  coupon_id   :bigint
-#  delivery_id :bigint
-#  user_id     :bigint
+#  id           :bigint           not null, primary key
+#  canceled_at  :datetime
+#  completed_at :datetime
+#  number       :string
+#  status       :string
+#  created_at   :datetime         not null
+#  updated_at   :datetime         not null
+#  coupon_id    :bigint
+#  delivery_id  :bigint
+#  user_id      :bigint
 #
 # Indexes
 #

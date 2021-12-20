@@ -20,4 +20,4 @@
     .mb-35
       %h3= I18n.t(:best_sellers)
       .row
-        = render('layouts/partials/bestsellers')
+        = render('layouts/partials/bestsellers', bestsellers_books: @bestsellers_books)

@@ -30,6 +30,14 @@
 # available at https://guides.rubyonrails.org/i18n.html.
 
 en:
+  canceled: Canceled
+  delivered: Delivered
+  in_delivery: In Delivery
+  status: Status
+  completed_at: Completed at
+  number: Number
+  waiting_process: Waiting for processing
+  my_orders: My Orders
   cannot_set_status: You cannot set this status
   cannot_set_delivered: You cannot set the delivered status if the order is not in the process of delivery
   status_not_be_empty: Status cannot be empty
@@ -84,6 +92,7 @@ en:
   quick_register: Quik Register
   coupon_applied: Coupon has already been applied to the order
   cart_empty: Your cart empty
+  no_orders: You haven't ordered any books yet
   to_shop: Go to shop
   coupon_spent: Coupon has already been spent
   coupun_can_be_activated: Your coupon can be successfully activated

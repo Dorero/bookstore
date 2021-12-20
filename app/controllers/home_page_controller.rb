@@ -5,5 +5,6 @@ class HomePageController < ApplicationController
 
   def show
     @books = LatestBooksQuery.new(LIMIT_LATEST_BOOK).call
+    @bestsellers_books = BestsellersBooksQuery.new.call
   end
 end
