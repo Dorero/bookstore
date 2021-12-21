@@ -5,7 +5,6 @@
 # Table name: orders
 #
 #  id           :bigint           not null, primary key
-#  canceled_at  :datetime
 #  completed_at :datetime
 #  delivered_at :datetime
 #  number       :string

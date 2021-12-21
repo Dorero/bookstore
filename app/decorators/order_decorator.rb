@@ -3,6 +3,9 @@
 class OrderDecorator < Draper::Decorator
   delegate_all
 
+  IN_PROGRESS_STATUSES = %w[checking_address checking_delivery checking_payment checking_confirm
+                            checking_complete].freeze
+
   def sub_total_price
     SavedBook.where(order_id: object.id).sum { |book| book.price.to_f * book.quantity.to_f }
   end
@@ -25,11 +28,8 @@ class OrderDecorator < Draper::Decorator
 
   def status
     status = object.status
-    if %w[checking_address checking_delivery checking_payment checking_confirm checking_complete].include?(status)
-      status = 'in_progress'
-    end
+    status = 'in_progress' if IN_PROGRESS_STATUSES.include?(status)
     status = I18n.t(:waiting_process) if status == 'complete'
-
     return status.capitalize if status.split('_').is_a?(String)
 
     status.split('_').map(&:capitalize).join(' ')

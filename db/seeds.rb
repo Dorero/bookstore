@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+require 'factory_bot_rails'
 
 Category.create(name: 'Mobile development')
 Category.create(name: 'Photo')
@@ -30,6 +31,8 @@ Delivery.create(method: I18n.t(:expressit), price: 15, min_duration_delivery: 2,
   user.save!
 
   Review.create(title: FFaker::Book.title, message: FFaker::Book.description, user: user, book: book, stars: rand(5) + 1)
+
+  FactoryBot.create(:saved_book, book: book)
 end
 
 AdminUser.create!(email: 'admin@example.com', password: 'password', password_confirmation: 'password')
