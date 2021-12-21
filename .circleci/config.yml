@@ -5,7 +5,7 @@ executors:
     working_directory: ~/bookstore
     description: The official CircleCI Ruby Docker image
     docker:
-      - image: circleci/ruby:2.7.4-browsers
+      - image: cimg/ruby:2.7.4-node
         environment:
           BUNDLE_PATH: vendor/bundle
           PGHOST: 127.0.0.1
