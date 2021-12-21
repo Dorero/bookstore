@@ -7,7 +7,7 @@ executors:
     docker:
       - image: circleci/ruby:2.7.4-browsers
         environment:
-          BUNDLE_PATH: vendor/cache
+          BUNDLE_PATH: vendor/bundle
           PGHOST: 127.0.0.1
           PGUSER: postgres
           RAILS_ENV: test
@@ -31,13 +31,15 @@ commands:
           keys:
             - bookstore-bundle-v2-{{ checksum "Gemfile.lock" }}
             - bookstore-bundle-v2-
-      - run: bundle config set --global path 'vendor/cache'       
-      - run: bundle --full-index         
+      - run: gem update --system      
+      - run: bundle config set --global path 'vendor/bundle' 
+      - run: bundle config set --local path 'vendor/bundle'       
+      - run: bundle install --no-deployment         
       - run: yarn install
       - save_cache:
           key: bookstore-bundle-v2-{{ checksum "Gemfile.lock" }}
           paths:
-            - vendor/cache
+            - vendor/bundle
       - save_cache:
           paths:
             - ~/.cache/yarn
