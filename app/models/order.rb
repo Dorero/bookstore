@@ -5,8 +5,8 @@
 # Table name: orders
 #
 #  id           :bigint           not null, primary key
-#  canceled_at  :datetime
 #  completed_at :datetime
+#  delivered_at :datetime
 #  number       :string
 #  status       :string
 #  created_at   :datetime         not null
@@ -23,6 +23,7 @@
 #
 # Foreign Keys
 #
+#  fk_rails_...  (delivery_id => deliveries.id)
 #  fk_rails_...  (user_id => users.id)
 #
 class Order < ApplicationRecord
@@ -75,15 +76,15 @@ class Order < ApplicationRecord
       transitions from: :checking_confirm, to: :checking_payment
     end
 
-    event :start_delivery do
+    event :to_in_delivery do
       transitions to: :in_delivery
     end
 
-    event :cancel do
+    event :to_canceled do
       transitions to: :canceled
     end
 
-    event :deliver do
+    event :to_delivered do
       transitions from: :in_delivery, to: :delivered
     end
   end

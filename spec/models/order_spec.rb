@@ -5,8 +5,8 @@
 # Table name: orders
 #
 #  id           :bigint           not null, primary key
-#  canceled_at  :datetime
 #  completed_at :datetime
+#  delivered_at :datetime
 #  number       :string
 #  status       :string
 #  created_at   :datetime         not null
@@ -23,6 +23,7 @@
 #
 # Foreign Keys
 #
+#  fk_rails_...  (delivery_id => deliveries.id)
 #  fk_rails_...  (user_id => users.id)
 #
 RSpec.describe Order, type: :model do
