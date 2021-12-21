@@ -27,6 +27,8 @@ commands:
           sudo apt install nodejs
           curl -o- -L https://yarnpkg.com/install.sh | bash
           echo 'export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"' >> $BASH_ENV
+      - run: gem install bundler:2.2.33
+      - run: bundle config set --local path 'vendor/bundle'
       - run: bundle install
       - run: yarn install
       - save_cache:
