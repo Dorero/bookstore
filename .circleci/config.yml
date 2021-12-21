@@ -30,7 +30,8 @@ commands:
       - restore_cache:
           keys:
             - bookstore-bundle-v2-{{ checksum "Gemfile.lock" }}
-            - bookstore-bundle-v2-    
+            - bookstore-bundle-v2- 
+      - run: bundle --full-index         
       - run: bundle install
       - run: yarn install
       - save_cache:
