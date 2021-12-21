@@ -25,13 +25,8 @@ class PaymentForm < Reform::Form
     errors.add(:expiration_date, I18n.t(:invalid_expiration_date)) unless expiration_date.include?('/')
 
     dates = expiration_date.split('/')
-    validate_dates(dates)
-    expiration_date
-  end
-
-  def validate_dates(dates)
     month = dates.first.to_i
     errors.add(:expiration_date, I18n.t(:invalid_month)) if month <= 0 || month > 12
-    errors.add(:expiration_date, I18n.t(:invalid_year)) if dates.last.to_i <= 2000
+    expiration_date
   end
 end

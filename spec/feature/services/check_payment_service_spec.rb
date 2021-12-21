@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-RSpec.describe 'CheckPaymentService', type: :feature, js: true do
+RSpec.describe 'CheckPayment', type: :feature, js: true do
   let!(:order_with_book) do
     create(:saved_book, :book_with_image, order: create(:order, :with_all_tables, status: 'checking_payment'))
   end
@@ -19,14 +19,29 @@ RSpec.describe 'CheckPaymentService', type: :feature, js: true do
   end
 
   describe '#update' do
-    before do
-      fill_in('payment[number]', with: payment[:number])
-      fill_in('payment[name]', with: payment[:name])
-      fill_in('payment[expiration_date]', with: payment[:expiration_date])
-      fill_in('payment[cvv]', with: payment[:cvv])
-      click_button(I18n.t(:continue))
+    context 'when success' do
+      before do
+        fill_in('payment[number]', with: payment[:number])
+        fill_in('payment[name]', with: payment[:name])
+        fill_in('payment[expiration_date]', with: payment[:expiration_date])
+        fill_in('payment[cvv]', with: payment[:cvv])
+        click_button(I18n.t(:continue))
+      end
+
+      it { expect(page).to have_current_path(checking_path) }
     end
 
-    it { expect(page).to have_current_path(checking_path) }
+    context 'when failed' do
+      before do
+        fill_in('payment[number]', with: 123)
+        fill_in('payment[name]', with: payment[:name])
+        fill_in('payment[expiration_date]', with: 'qwe')
+        fill_in('payment[cvv]', with: payment[:cvv])
+        click_button(I18n.t(:continue))
+      end
+
+      it { expect(page).to have_content(I18n.t(:invalid_data)) }
+      it { expect(page).to have_current_path(checking_path) }
+    end
   end
 end

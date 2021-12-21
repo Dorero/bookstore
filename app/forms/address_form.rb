@@ -22,7 +22,9 @@ class AddressForm < Reform::Form
   private
 
   def validate_phone
-    phone_by_country = phone.slice(0, 3) == "+#{ISO3166::Country[country].country_code}" && phone =~ VALIDATE_PHONE
+    country_code = ISO3166::Country[country].country_code
+    phone_by_country = "+#{phone.slice(1, country_code.length)}" == "+#{country_code}" && phone =~ VALIDATE_PHONE
     errors.add(:phone_not_by_country, I18n.t(:phone_not_by_country)) unless phone_by_country
+    phone
   end
 end

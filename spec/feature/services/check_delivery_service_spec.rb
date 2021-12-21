@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-RSpec.describe 'CheckDeliveryService', type: :feature, js: true do
+RSpec.describe 'CheckDelivery', type: :feature, js: true do
   let!(:order_with_book) { create(:saved_book, :book_with_image, order: create(:order, status: 'checking_delivery')) }
   let!(:delivery) { create(:delivery) }
   let!(:user) { create(:user) }

@@ -48,7 +48,7 @@ ActiveAdmin.register Order do
     end
 
     if is_success
-      redirect_to collection_path, alert: I18n.t(:order_status_success_changed)
+      redirect_to collection_path, notice: I18n.t(:order_status_success_changed)
     else
       redirect_to collection_path, alert: I18n.t(:cannot_set_delivered)
     end
@@ -57,12 +57,12 @@ ActiveAdmin.register Order do
   batch_action :in_delivery, if: proc { @current_scope.name != I18n.t(:canceled_tab) } do |ids|
     Order.where(id: ids).find_each(&:to_in_delivery!)
 
-    redirect_to collection_path, alert: I18n.t(:order_status_success_changed)
+    redirect_to collection_path, notice: I18n.t(:order_status_success_changed)
   end
 
   batch_action :canceled do |ids|
     Order.where(id: ids).find_each(&:to_canceled)
 
-    redirect_to collection_path, alert: I18n.t(:order_status_success_changed)
+    redirect_to collection_path, notice: I18n.t(:order_status_success_changed)
   end
 end

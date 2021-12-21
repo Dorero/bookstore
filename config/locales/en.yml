@@ -167,6 +167,7 @@ en:
   setings: Settings
   notice_user_password_changed: We're contacting you to notify you that your password has been changed.
   title_change_password_link: Your password won't change until you access the link above and create a new one.
+  invalid_email: This email is invalid
   ignote_email: If you didn't request this, please ignore this email.
   change_user_password: Change my password
   change_user_password_title: Someone has requested a link to change your password. You can do this through the link below.
