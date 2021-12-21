@@ -34,7 +34,6 @@ commands:
             - ~/.cache/yarn
           key: yarn-cache-v4-{{ arch }}-{{ .Branch }}-{{ checksum "yarn.lock" }}
       - run: dockerize -wait tcp://localhost:5432 -timeout 1m
-      - run: bin/rails db:schema:load --trace
       - store_test_results:
           path: test_results
 
