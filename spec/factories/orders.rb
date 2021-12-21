@@ -4,15 +4,16 @@
 #
 # Table name: orders
 #
-#  id          :bigint           not null, primary key
-#  canceled_at :datetime
-#  number      :string
-#  status      :string
-#  created_at  :datetime         not null
-#  updated_at  :datetime         not null
-#  coupon_id   :bigint
-#  delivery_id :bigint
-#  user_id     :bigint
+#  id           :bigint           not null, primary key
+#  completed_at :datetime
+#  delivered_at :datetime
+#  number       :string
+#  status       :string
+#  created_at   :datetime         not null
+#  updated_at   :datetime         not null
+#  coupon_id    :bigint
+#  delivery_id  :bigint
+#  user_id      :bigint
 #
 # Indexes
 #
@@ -22,6 +23,7 @@
 #
 # Foreign Keys
 #
+#  fk_rails_...  (delivery_id => deliveries.id)
 #  fk_rails_...  (user_id => users.id)
 #
 FactoryBot.define do

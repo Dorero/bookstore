@@ -27,16 +27,8 @@ commands:
           sudo apt install nodejs
           curl -o- -L https://yarnpkg.com/install.sh | bash
           echo 'export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"' >> $BASH_ENV
-      - restore_cache:
-          keys:
-            - bookstore-bundle-v2-{{ checksum "Gemfile.lock" }}
-            - bookstore-bundle-v2-
       - run: bundle install
       - run: yarn install
-      - save_cache:
-          key: bookstore-bundle-v2-{{ checksum "Gemfile.lock" }}
-          paths:
-            - vendor/bundle
       - save_cache:
           paths:
             - ~/.cache/yarn

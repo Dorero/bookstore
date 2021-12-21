@@ -17,9 +17,9 @@ AllCops:
 Metrics/BlockLength:
   Enabled: False
 RSpec/NestedGroups:
-  Max: 10
+  Enabled: false
 RSpec/MultipleMemoizedHelpers:
-  Max: 10
+  Enabled: false
 Rails/LexicallyScopedActionFilter:
   Exclude:
     - app/controllers/users/*
