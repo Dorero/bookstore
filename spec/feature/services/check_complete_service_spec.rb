@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-RSpec.describe 'CheckCompleteService', type: :feature, js: true do
+RSpec.describe 'CheckComplete', type: :feature, js: true do
   let!(:order_with_book) do
     create(:saved_book, :book_with_image, order: create(:order, :with_all_tables,
                                                         status: 'checking_complete'))
