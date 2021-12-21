@@ -21,6 +21,6 @@
 FactoryBot.define do
   factory :image do
     image { Rack::Test::UploadedFile.new('spec/fixtures/files/images/valid.jpg') }
-    book { create(:book) }
+    book
   end
 end

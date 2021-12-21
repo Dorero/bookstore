@@ -2,6 +2,7 @@
 
 RSpec.describe 'Admin/Book', type: :request do
   let!(:admin) { create(:admin_user) }
+  let!(:book) { create(:book) }
 
   before do
     sign_in admin
@@ -14,7 +15,7 @@ RSpec.describe 'Admin/Book', type: :request do
   end
 
   describe 'GET #show' do
-    before { get admin_books_path }
+    before { get admin_book_path(book.id) }
 
     it { expect(response).to have_http_status(:success) }
   end
@@ -26,8 +27,6 @@ RSpec.describe 'Admin/Book', type: :request do
   end
 
   describe 'GET #edit' do
-    let!(:book) { create(:book) }
-
     before { get edit_admin_book_path(book.id) }
 
     it { expect(response).to have_http_status(:success) }
@@ -35,16 +34,17 @@ RSpec.describe 'Admin/Book', type: :request do
 
   describe 'POST #create' do
     let(:book_data) { attributes_for(:book) }
-    let(:image) { Rack::Test::UploadedFile.new('spec/fixtures/files/images/valid.jpg') }
+
+    let!(:image) { create(:image)[:image] }
 
     before do
       post admin_books_path, params: { book: { name: book_data[:name], description: book_data[:description],
                                                price: book_data[:price], year: book_data[:year],
                                                height: book_data[:height], width: book_data[:width],
                                                depth: book_data[:depth], materials: book_data[:materials],
-                                               image: image } }
+                                               images_attributes: image } }
     end
 
-    it { expect(response).to redirect_to(admin_books_path) }
+    it { expect(response).to have_http_status(:success) }
   end
 end

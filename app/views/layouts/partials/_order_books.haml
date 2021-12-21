@@ -1,0 +1,28 @@
+.hidden-xs.divider-lg.pt-20
+  %table.table.table-hover
+    %thead
+      %tr
+        %th
+          %span.in-grey-600= I18n.t(:book)
+        %th.col-method
+        %th
+          %span.in-grey-600= I18n.t(:price)
+        %th
+          %span.in-grey-600= I18n.t(:quantity)
+        %th
+          %span.in-grey-600= I18n.t(:total)
+    %tbody
+      - books.each do |book|
+        %tr
+          %td
+            .general-img-wrap-table
+              %img.cart-img-shadow.pull-left{src: book.images.first.image(:small).url, alt: "design-book"}
+          %td
+            %p.title= book.name
+            %p.in-grey-600.fw-300= book.decorate.first_sentence
+          %td
+            %span.font-16.in-gold-500= number_to_currency(book.price, locale: :fr)
+          %td
+            %span.ml-30= book.decorate.quantity
+          %td
+            %span.font-16.in-gold-500= number_to_currency(book.decorate.price_by_quantity, locale: :fr)

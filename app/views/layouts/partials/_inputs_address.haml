@@ -2,15 +2,15 @@
   = form.input :addressed_id, as: :hidden, input_html: { value: addressed_id }
   = form.input :addressed_type, as: :hidden, input_html: { value: addressed_type }
   = form.input :first_name, label: I18n.t(:first_name), placeholder: I18n.t(:first_name), hint: "#{errors[:first_name]}",
-  wrapper_html: { class: "#{'has-error' if errors[:first_name]}" }
+  wrapper_html: { class: "#{'has-error' if errors[:first_name]}" }, required: required
   = form.input :last_name, label: I18n.t(:last_name), placeholder: I18n.t(:last_name), hint: "#{errors[:last_name]}",
-  wrapper_html: { class: "#{'has-error' if errors[:last_name]}" }
+  wrapper_html: { class: "#{'has-error' if errors[:last_name]}" }, required: required
   = form.input :address, label: I18n.t(:address), placeholder: I18n.t(:address), hint: "#{errors[:address]}",
-  wrapper_html: { class: "#{'has-error' if errors[:address]}" }
+  wrapper_html: { class: "#{'has-error' if errors[:address]}" }, required: required
   = form.input :city, label:  I18n.t(:city), placeholder: I18n.t(:city), hint: "#{errors[:city]}",
-  wrapper_html: { class: "#{'has-error' if errors[:city]}" }
+  wrapper_html: { class: "#{'has-error' if errors[:city]}" }, required: required
   = form.input :zip, label: I18n.t(:zip), placeholder: I18n.t(:zip), hint: "#{errors[:zip]}",
-  wrapper_html: { class: "#{'has-error' if errors[:zip]}" }
-  = form.input :country, label: I18n.t(:country), selected: form.object.country
+  wrapper_html: { class: "#{'has-error' if errors[:zip]}" }, required: required
+  = form.input :country, label: I18n.t(:country), selected: form.object.country || 'GB', required: required
   = form.input :phone, label: I18n.t(:phone), placeholder: I18n.t(:example_phone), hint: "#{errors[:phone] || errors[:phone_not_by_country] || errors[:validate_phone] }",
-  wrapper_html: { class: "form-group mb-60 #{'has-error' if errors[:phone] || errors[:phone_not_by_country] || errors[:validate_phone] }" }
+  wrapper_html: { class: "form-group mb-60 #{'has-error' if errors[:phone] || errors[:phone_not_by_country] || errors[:validate_phone] }" }, required: required

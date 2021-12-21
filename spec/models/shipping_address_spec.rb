@@ -25,7 +25,7 @@
 #
 
 RSpec.describe ShippingAddress, type: :model do
-  describe 'model relations shipping address' do
-    it { is_expected.to belong_to(:place) }
+  describe 'model relations address' do
+    it { is_expected.to belong_to(:addressed) }
   end
 end

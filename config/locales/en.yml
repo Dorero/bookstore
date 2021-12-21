@@ -30,6 +30,22 @@
 # available at https://guides.rubyonrails.org/i18n.html.
 
 en:
+  cannot_set_status: You cannot set this status
+  cannot_set_delivered: You cannot set the delivered status if the order is not in the process of delivery
+  status_not_be_empty: Status cannot be empty
+  order_status_success_changed: Order status success changed
+  change_state: Change State
+  canceled_tab: Canceled
+  delivered_tab: Delivered
+  in_progress_tab: In Progress
+  order_number: Order %{number}
+  send_email_after_order: An order confirmation has been has been sent to %{email}
+  thank_for_order: Thank You for your Order!
+  total: Total
+  book: Book
+  order: Order
+  place_order: Place Order
+  payment_info: Payment Information
   edit: edit
   shipmets: Shipments
   invalid_year: invalid year
@@ -92,9 +108,11 @@ en:
   create_book: Create Book
   new_book: New Book
   book_success_created: Book successfully created
+  book_was_success_created: Book was successfully created.
   time:
     formats:
       custom_short: "%d/%m/%Y"
+      long: "%B %d, %Y"
   approve_review_confirm: Are you sure you want to approve the review?
   reject_review_confirm: Are you sure you want to rejected the review?
   unprocessed_status: unprocessed
@@ -116,7 +134,7 @@ en:
   edit_admin_button: Edit
   delete_admin_button: Delete
   phone_not_by_country: Your phone number does not match this country
-  address_success_save: '%{address_name} address success save'
+  addresses_saved: addresses saved successfully
   example_phone: Example +355 66 123 4567
   select_country: Select a country
   shipping_address: Shipping Address
@@ -140,6 +158,7 @@ en:
   setings: Settings
   notice_user_password_changed: We're contacting you to notify you that your password has been changed.
   title_change_password_link: Your password won't change until you access the link above and create a new one.
+  invalid_email: This email is invalid
   ignote_email: If you didn't request this, please ignore this email.
   change_user_password: Change my password
   change_user_password_title: Someone has requested a link to change your password. You can do this through the link below.
@@ -208,3 +227,7 @@ en:
   web_design: Web design
   photo: Photo
   mobile_development: Mobile development
+  active_admin:
+    batch_actions:
+      labels:
+        change_state: "Change State"

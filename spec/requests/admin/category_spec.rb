@@ -2,6 +2,7 @@
 
 RSpec.describe 'Admin/Category', type: :request do
   let!(:admin) { create(:admin_user) }
+  let!(:category) { create(:category) }
 
   before do
     sign_in admin
@@ -14,7 +15,7 @@ RSpec.describe 'Admin/Category', type: :request do
   end
 
   describe 'GET #show' do
-    before { get admin_categories_path }
+    before { get admin_category_path(category.id) }
 
     it { expect(response).to have_http_status(:success) }
   end
@@ -26,8 +27,6 @@ RSpec.describe 'Admin/Category', type: :request do
   end
 
   describe 'GET #edit' do
-    let!(:category) { create(:category) }
-
     before { get edit_admin_category_path(category.id) }
 
     it { expect(response).to have_http_status(:success) }

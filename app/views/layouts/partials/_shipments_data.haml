@@ -1,0 +1,9 @@
+.col-sm-3
+  %h3.general-subtitle= I18n.t(:shipmets)
+  %p.general-address
+    = delivery.method
+    = link_to checking_path(state: 'delivery') do
+      - if link
+        %span.general-edit= I18n.t(:edit)
+    %br
+    = number_to_currency(order.decorate.shipping, locale: :fr)

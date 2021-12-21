@@ -16,13 +16,13 @@ RSpec.describe 'CheckLogins', type: :request do
   end
 
   describe 'POST #login' do
-    context 'login user with correct password' do
+    context 'when login user with correct password' do
       before { post login_check_login_path, params: { user: { email: user.email, password: user.password } } }
 
       it { expect(response).to redirect_to(checking_path) }
     end
 
-    context 'login user with wrong password' do
+    context 'when login user with wrong password' do
       before { post login_check_login_path, params: { user: { email: user.email, password: 'wrong password223' } } }
 
       it { expect(response).to redirect_to(check_login_path) }

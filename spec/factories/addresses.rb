@@ -33,5 +33,7 @@ FactoryBot.define do
     country { FFaker::Address.country }
     zip { FFaker::AddressDE.zip_code }
     phone { FFaker::PhoneNumberDE.international_mobile_phone_number.gsub(' ', '') }
+    is_one_table { 0 }
+    addressed { create(:order) }
   end
 end

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_12_15_052930) do
+ActiveRecord::Schema.define(version: 2021_12_16_181350) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -122,26 +122,29 @@ ActiveRecord::Schema.define(version: 2021_12_15_052930) do
   end
 
   create_table "orders", force: :cascade do |t|
-    t.string "aasm_state"
+    t.string "status"
     t.bigint "coupon_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.bigint "user_id"
+    t.datetime "completed_at"
     t.bigint "delivery_id"
-    t.bigint "payment_id"
+    t.string "number"
+    t.datetime "delivered_at"
     t.index ["coupon_id"], name: "index_orders_on_coupon_id"
     t.index ["delivery_id"], name: "index_orders_on_delivery_id"
-    t.index ["payment_id"], name: "index_orders_on_payment_id"
     t.index ["user_id"], name: "index_orders_on_user_id"
   end
 
   create_table "payments", force: :cascade do |t|
     t.string "name"
-    t.integer "number"
+    t.string "number"
     t.string "expiration_date"
     t.integer "cvv"
+    t.bigint "order_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.index ["order_id"], name: "index_payments_on_order_id"
   end
 
   create_table "reviews", force: :cascade do |t|
@@ -164,6 +167,7 @@ ActiveRecord::Schema.define(version: 2021_12_15_052930) do
     t.bigint "order_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.integer "status", default: 0
     t.index ["book_id"], name: "index_saved_books_on_book_id"
     t.index ["order_id"], name: "index_saved_books_on_order_id"
   end
@@ -194,7 +198,9 @@ ActiveRecord::Schema.define(version: 2021_12_15_052930) do
   add_foreign_key "author_books", "books"
   add_foreign_key "books", "categories"
   add_foreign_key "images", "books"
+  add_foreign_key "orders", "deliveries"
   add_foreign_key "orders", "users"
+  add_foreign_key "payments", "orders"
   add_foreign_key "reviews", "books"
   add_foreign_key "reviews", "users"
   add_foreign_key "saved_books", "books"

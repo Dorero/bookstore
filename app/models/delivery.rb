@@ -13,5 +13,5 @@
 #  updated_at            :datetime         not null
 #
 class Delivery < ApplicationRecord
-  has_one :order
+  has_one :order, dependent: :destroy
 end

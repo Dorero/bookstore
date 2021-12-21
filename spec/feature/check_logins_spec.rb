@@ -17,7 +17,7 @@ RSpec.describe 'CheckLogins', type: :feature, js: true do
   end
 
   describe '#login' do
-    context 'login user with correct password' do
+    context 'when login user with correct password' do
       before do
         fill_in('user_email_login', with: user.email)
         fill_in('user[password]', with: user.password)
@@ -28,7 +28,7 @@ RSpec.describe 'CheckLogins', type: :feature, js: true do
       it { expect(page).to have_current_path(checking_path) }
     end
 
-    context 'login user with wrong password' do
+    context 'when login user with wrong password' do
       before do
         fill_in('user_email_login', with: user.email)
         fill_in('user[password]', with: 'wrong_password_223')
@@ -41,7 +41,7 @@ RSpec.describe 'CheckLogins', type: :feature, js: true do
   end
 
   describe '#quick_register' do
-    context 'register with exist user' do
+    context 'when register with exist user' do
       before do
         fill_in('user_email_register', with: user.email)
         click_button(I18n.t(:continue_to_checkout))
@@ -51,7 +51,7 @@ RSpec.describe 'CheckLogins', type: :feature, js: true do
       it { expect(page).to have_current_path(check_login_path) }
     end
 
-    context 'register new user' do
+    context 'when register new user' do
       before do
         fill_in('user_email_register', with: user_data[:email])
         click_button(I18n.t(:continue_to_checkout))

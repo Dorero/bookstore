@@ -27,7 +27,7 @@ module Users
       return self.resource = current_user unless resource_params[:reset_password_token].nil?
 
       token = Devise.token_generator.digest(User, :reset_password_token, resource_params[:reset_password_token])
-      self.resource = User.find_by_reset_password_token(token)
+      self.resource = User.find_by(reset_password_token: token)
       resource.reset_password_token = token
     end
 

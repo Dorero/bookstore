@@ -1,0 +1,9 @@
+.col-sm-3
+  %h3.general-subtitle= I18n.t(:payment_info)
+  %p.general-address
+    = payment.decorate.number_card
+    = link_to checking_path(state: 'payment') do
+      - if link
+        %span.general-edit= I18n.t(:edit)
+    %br
+    = payment.expiration_date

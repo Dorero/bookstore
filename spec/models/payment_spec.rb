@@ -8,12 +8,22 @@
 #  cvv             :integer
 #  expiration_date :string
 #  name            :string
-#  number          :integer
+#  number          :string
 #  created_at      :datetime         not null
 #  updated_at      :datetime         not null
+#  order_id        :bigint
 #
-require 'rails_helper'
+# Indexes
+#
+#  index_payments_on_order_id  (order_id)
+#
+# Foreign Keys
+#
+#  fk_rails_...  (order_id => orders.id)
+#
 
 RSpec.describe Payment, type: :model do
-  pending "add some examples to (or delete) #{__FILE__}"
+  describe 'model relations' do
+    it { is_expected.to belong_to(:order) }
+  end
 end

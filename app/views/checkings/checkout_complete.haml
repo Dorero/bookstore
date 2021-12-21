@@ -1,0 +1,18 @@
+%main.container.general-main-wrap
+  = render('layouts/partials/checkout_steps', active: I18n.t(:complete))
+  .text-center.mb-40
+    %h3.general-subtitle= I18n.t(:thank_for_order)
+    %p.fw-300= I18n.t(:send_email_after_order, email: current_user.email)
+  .row.mb-20
+    .col-sm-6
+      = render('layouts/partials/address_data', address: instances.shipping_address, link: false)
+    .col-sm-6.hidden-xs.text-right
+      %p.general-order-number.mb-0= I18n.t(:order_number, number: instances.order.number)
+      %p.general-address.mb-30= I18n.l(instances.order.updated_at, format: :long)
+  = render('layouts/partials/order_books', books: instances.order.books)
+  .text-center.general-text-right
+    %p.in-gold-500.font-18= I18n.t(:order_summary)
+    %table.general-summary-table.general-summary-table-right.general-text-right
+      = render('layouts/partials/total_order_price', order: instances.order)
+  .text-center
+    = link_to I18n.t(:back_to_store), books_path, class: 'btn btn-default mb-20'

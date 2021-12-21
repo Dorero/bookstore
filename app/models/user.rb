@@ -44,7 +44,8 @@ class User < ApplicationRecord
   validates :password, format: { with: VALIDATE_PASSWORD, multiline: true },
                        length: { minimum: MINIMUM_SIZE_PASSWORD }
 
-  has_one :address, as: :addressed, dependent: :destroy
+  has_one :billing_address, as: :addressed, dependent: :destroy
+  has_one :shipping_address, as: :addressed, dependent: :destroy
   has_one :order, dependent: :destroy
   has_many :reviews, dependent: :destroy
 

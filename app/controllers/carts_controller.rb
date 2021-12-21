@@ -10,7 +10,9 @@ class CartsController < ApplicationController
   def show
     return unless session[:current_cart]
 
-    @cart = Order.where(id: session[:current_cart]).first
+    @cart = Order.find_by(id: session[:current_cart])
+    return session[:current_cart] = nil unless @cart
+
     @books = @cart.books
   end
 
@@ -40,6 +42,11 @@ class CartsController < ApplicationController
 
   def setup_cart
     cart = CartService.new(params[:book_id], params[:quantity_books], session[:current_cart]).create_or_update
+    cart.update(user: current_user) unless cart.user
+    setup_session(cart)
+  end
+
+  def setup_session(cart)
     session[:current_cart] = cart.id
     session[:quantity_books] = cart.books.count
   end

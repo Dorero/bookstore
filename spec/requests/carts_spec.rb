@@ -1,8 +1,7 @@
 # frozen_string_literal: true
 
 RSpec.describe 'Carts', type: :request do
-  let!(:cart_with_book) { create(:saved_book) }
-  let!(:image) { create(:image, book: cart_with_book.book) }
+  let!(:cart_with_book) { create(:saved_book, :book_with_image) }
 
   context 'with create cart and add book' do
     before { post cart_path, params: { book_id: cart_with_book.book.id } }
@@ -34,7 +33,7 @@ RSpec.describe 'Carts', type: :request do
     end
 
     describe 'POST #update_quantity_books_by_one' do
-      context 'update on + 1' do
+      context 'when update on + 1' do
         before do
           post update_quantity_books_by_one_cart_path,
                params: { quantity: 3, book_id: cart_with_book.book.id, direction: 1 }
@@ -43,7 +42,7 @@ RSpec.describe 'Carts', type: :request do
         it { expect(response).to redirect_to(cart_path) }
       end
 
-      context 'update on - 1' do
+      context 'when update on - 1' do
         before do
           post update_quantity_books_by_one_cart_path,
                params: { quantity: 3, book_id: cart_with_book.book.id, direction: -1 }
