@@ -127,9 +127,10 @@ ActiveRecord::Schema.define(version: 2021_12_16_181350) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.bigint "user_id"
+    t.datetime "completed_at"
     t.bigint "delivery_id"
     t.string "number"
-    t.datetime "canceled_at"
+    t.datetime "delivered_at"
     t.index ["coupon_id"], name: "index_orders_on_coupon_id"
     t.index ["delivery_id"], name: "index_orders_on_delivery_id"
     t.index ["user_id"], name: "index_orders_on_user_id"
@@ -197,6 +198,7 @@ ActiveRecord::Schema.define(version: 2021_12_16_181350) do
   add_foreign_key "author_books", "books"
   add_foreign_key "books", "categories"
   add_foreign_key "images", "books"
+  add_foreign_key "orders", "deliveries"
   add_foreign_key "orders", "users"
   add_foreign_key "payments", "orders"
   add_foreign_key "reviews", "books"

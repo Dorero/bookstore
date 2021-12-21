@@ -20,6 +20,6 @@ class OrderDecorator < Draper::Decorator
   end
 
   def title
-    "Order #{object.number}"
+    "#{I18n.t(:order)} #{object.number}"
   end
 end

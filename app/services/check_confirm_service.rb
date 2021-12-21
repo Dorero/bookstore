@@ -3,6 +3,7 @@
 class CheckConfirmService
   attr_reader :message
 
+  LIMIT_RANDOM_NUMBER = 10_000
   CheckConfirm = Struct.new(:order, :billing_address, :shipping_address, :delivery, :payment)
   def initialize(user_id, order_id)
     @user_id = user_id
@@ -19,7 +20,7 @@ class CheckConfirmService
   end
 
   def update(_data)
-    @order.update(number: "##{SecureRandom.random_number(10_000)}") unless @order.number
+    @order.update(number: "##{SecureRandom.random_number(LIMIT_RANDOM_NUMBER)}") unless @order.number
     SavedBook.where(order: @order).each { |book| book.update(status: :closed) }
     @order.coupon.spent! if @order.coupon&.pre_use?
     @order.check_complete! if @order.checking_confirm?
