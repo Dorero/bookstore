@@ -35,5 +35,22 @@ RSpec.describe SortBooksQuery do
       it { expect(sort_title_asc.first).to eq(book_alphabetical_asc) }
       it { expect(sort_title_desc.first).to eq(book_alphabetical_desc) }
     end
+
+    context 'when sorting by popular' do
+      let!(:orders) { create_list(:order, 2) }
+      let!(:books) { create_list(:book, 2) }
+
+      let(:sort_popular) { described_class.new(:popular_first).call }
+
+      before do
+        create(:saved_book, order: orders.first, book: books.first)
+        create(:saved_book, order: orders.last, book: books.first)
+        create(:saved_book, order: orders.last, book: books.last)
+      end
+
+      it { expect(sort_popular).to be_a(ActiveRecord::Relation) }
+      it { expect(sort_popular.length).to eq(2) }
+      it { expect(sort_popular.first).to eq(books.first) }
+    end
   end
 end

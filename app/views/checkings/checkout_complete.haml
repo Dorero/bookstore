@@ -15,4 +15,4 @@
     %table.general-summary-table.general-summary-table-right.general-text-right
       = render('layouts/partials/total_order_price', order: instances.order)
   .text-center
-    = link_to I18n.t(:back_to_store), books_path, class: 'btn btn-default mb-20'
+    = link_to I18n.t(:back_to_store), checking_path, method: :put, class: 'btn btn-default mb-20'

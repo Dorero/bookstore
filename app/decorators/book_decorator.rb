@@ -12,7 +12,7 @@ class BookDecorator < Draper::Decorator
   end
 
   def quantity
-    SavedBook.find_by(book_id: object.id).quantity.to_i
+    SavedBook.where.not(status: :closed).find_by(book: object).quantity.to_i
   end
 
   def first_sentence
@@ -20,7 +20,7 @@ class BookDecorator < Draper::Decorator
   end
 
   def price_by_quantity
-    book = SavedBook.find_by(book_id: object.id)
+    book = SavedBook.find_by(book: object)
     book.price * book.quantity
   end
 end

@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 RSpec.describe 'CheckCompleteService', type: :request do
-  let!(:order_with_book) { create(:saved_book) }
+  let!(:order_with_book) { create(:saved_book, :book_with_image) }
   let!(:delivery) { create(:delivery) }
 
   let(:user_data) { attributes_for(:user) }
@@ -30,5 +30,14 @@ RSpec.describe 'CheckCompleteService', type: :request do
     before { get checking_path }
 
     it { expect(response).to have_http_status(:success) }
+  end
+
+  describe 'GET #update' do
+    before do
+      get checking_path
+      put checking_path
+    end
+
+    it { expect(response).to redirect_to(books_path) }
   end
 end

@@ -17,7 +17,7 @@ class CartsController < ApplicationController
   end
 
   def delete_book
-    SavedBook.where(book_id: params[:book_id]).destroy_all
+    SavedBook.where.not(status: :closed).where(book_id: params[:book_id]).destroy_all
     session[:quantity_books] -= 1
     check_empty_cart
     redirect_to cart_path, alert: I18n.t(:book_success_delete)

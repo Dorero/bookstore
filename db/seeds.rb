@@ -1,12 +1,11 @@
 # frozen_string_literal: true
-require 'factory_bot_rails'
 
 Category.create(name: 'Mobile development')
 Category.create(name: 'Photo')
 Category.create(name: 'Web design')
 
-Coupon.create(number: 1234, discount: rand(20))
-Coupon.create(number: 12, discount: rand(20))
+first_coupon = Coupon.create(number: 1234, discount: rand(20))
+second_coupon = Coupon.create(number: 12, discount: rand(20))
 
 Delivery.create(method: I18n.t(:delivery_next_day), price: 5, min_duration_delivery: 3, max_duration_delivery: 7 )
 Delivery.create(method: I18n.t(:pick_in_store), price: 10, min_duration_delivery: 5, max_duration_delivery: 20 )
@@ -31,8 +30,8 @@ Delivery.create(method: I18n.t(:expressit), price: 15, min_duration_delivery: 2,
   user.save!
 
   Review.create(title: FFaker::Book.title, message: FFaker::Book.description, user: user, book: book, stars: rand(5) + 1)
-
-  FactoryBot.create(:saved_book, book: book)
+  order = Order.create(number: "##{SecureRandom.random_number(10_000)}", status: :complete, coupon: [first_coupon, second_coupon][rand(2)])
+  SavedBook.create(quantity: rand(10), price: book.price, order: order, book: book, status: :closed)
 end
 
 AdminUser.create!(email: 'admin@example.com', password: 'password', password_confirmation: 'password')

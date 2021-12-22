@@ -16,6 +16,7 @@ class SortBooksQuery
   end
 
   def call
+    return popular if @type_sort == :popular_first
     return order(*OPTIONS[@type_sort]) if OPTIONS.include?(@type_sort)
 
     order(:name, :asc)
@@ -25,5 +26,10 @@ class SortBooksQuery
 
   def order(field, direction)
     @relation.includes(:authors).order("#{field} #{direction}")
+  end
+
+  def popular
+    @relation.includes(:authors).where(id: SavedBook.select('book_id, COUNT(book_id) as count')
+                                                    .group(:book_id).order(count: :desc).pluck(:book_id))
   end
 end

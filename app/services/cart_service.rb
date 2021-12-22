@@ -11,13 +11,14 @@ class CartService
     cart = Order.find_by(id: @cart_id)
     cart = Order.create unless cart&.cart?
     @cart_id = cart.id
-    book = SavedBook.find_by(book_id: @book_id)
-    book&.open? ? (@quantity_books += book.quantity) && update : create
+    book = SavedBook.where(book_id: @book_id, order_id: @cart_id).first
+    book&.open? || book&.pre_order? ? (@quantity_books += book.quantity) && update : create
     cart
   end
 
   def create
-    SavedBook.create(book_id: @book_id, order_id: @cart_id, quantity: @quantity_books, price: Book.find(@book_id).price)
+    SavedBook.create(book_id: @book_id, order_id: @cart_id, quantity: @quantity_books,
+                     price: Book.find(@book_id).price, status: :pre_order)
   end
 
   def update_by_one(direction)
@@ -28,8 +29,8 @@ class CartService
   end
 
   def update
-    SavedBook.find_by(book_id: @book_id).update(quantity: @quantity_books, price: Book.find(@book_id).price,
-                                                status: :pre_order)
+    SavedBook.where(book_id: @book_id, order_id: @cart_id).update(quantity: @quantity_books,
+                                                                  price: Book.find(@book_id).price, status: :pre_order)
   end
 
   def add_user(user_id)

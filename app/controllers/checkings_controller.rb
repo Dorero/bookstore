@@ -17,6 +17,7 @@ class CheckingsController < ApplicationController
   def update
     service = setup_service
     service.update(params)
+    return redirect_to books_path if Order.find(session[:current_cart]).complete?
     return path_when_exception(service.message) if service.message
 
     redirect_to checking_path
