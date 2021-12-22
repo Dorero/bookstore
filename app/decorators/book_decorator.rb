@@ -11,8 +11,8 @@ class BookDecorator < Draper::Decorator
     "#{I18n.t(:hegiht)}: #{object.height} x #{I18n.t(:width)}: #{object.width} x #{I18n.t(:depth)}: #{object.depth}"
   end
 
-  def quantity
-    SavedBook.where.not(status: :closed).find_by(book: object).quantity.to_i
+  def quantity(order)
+    SavedBook.where(book: object, order: order).first.quantity.to_i
   end
 
   def first_sentence

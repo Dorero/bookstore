@@ -31,13 +31,4 @@ RSpec.describe 'CheckCompleteService', type: :request do
 
     it { expect(response).to have_http_status(:success) }
   end
-
-  describe 'GET #update' do
-    before do
-      get checking_path
-      put checking_path
-    end
-
-    it { expect(response).to redirect_to(books_path) }
-  end
 end

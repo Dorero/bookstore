@@ -13,11 +13,7 @@ class CheckCompleteService
 
   def show
     shipping_address = @order.billing_address.is_one_table.zero? ? @order.shipping_address : @order.billing_address
-    CheckComplete.new(@order, shipping_address)
-  end
-
-  def update(_data)
     @order.bought! if @order.checking_complete?
-    SavedBook.where(order: @order).each { |book| book.update(status: :closed) }
+    CheckComplete.new(@order, shipping_address)
   end
 end

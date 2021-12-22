@@ -18,10 +18,4 @@ RSpec.describe 'CheckComplete', type: :feature, js: true do
     it { expect(page).to have_content(I18n.t(:thank_for_order)) }
     it { expect(page).to have_current_path(checking_path) }
   end
-
-  describe '#update' do
-    before { click_link(I18n.t(:back_to_store)) }
-
-    it { expect(page).to have_current_path(books_path) }
-  end
 end

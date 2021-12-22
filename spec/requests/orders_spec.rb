@@ -1,7 +1,9 @@
 # frozen_string_literal: true
 
 RSpec.describe 'Orders', type: :request do
-  let!(:order_with_book) { create(:saved_book, :book_with_image, order: create(:order, :with_all_tables)) }
+  let!(:order_with_book) do
+    create(:saved_book, :book_with_image, order: create(:order, :with_all_tables), status: :closed)
+  end
   let!(:payment) { create(:payment, order: order_with_book.order) }
   let!(:user) { create(:user) }
 

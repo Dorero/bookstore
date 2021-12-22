@@ -9,10 +9,10 @@
     .col-sm-6.hidden-xs.text-right
       %p.general-order-number.mb-0= I18n.t(:order_number, number: instances.order.number)
       %p.general-address.mb-30= I18n.l(instances.order.updated_at, format: :long)
-  = render('layouts/partials/order_books', books: instances.order.books)
+  = render('layouts/partials/order_books', order: instances.order)
   .text-center.general-text-right
     %p.in-gold-500.font-18= I18n.t(:order_summary)
     %table.general-summary-table.general-summary-table-right.general-text-right
       = render('layouts/partials/total_order_price', order: instances.order)
   .text-center
-    = link_to I18n.t(:back_to_store), checking_path, method: :put, class: 'btn btn-default mb-20'
+    = link_to I18n.t(:back_to_store), books_path, class: 'btn btn-default mb-20'

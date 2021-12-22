@@ -12,7 +12,7 @@
         %th
           %span.in-grey-600= I18n.t(:total)
     %tbody
-      - books.each do |book|
+      - order.books.each do |book|
         %tr
           %td
             .general-img-wrap-table
@@ -23,6 +23,6 @@
           %td
             %span.font-16.in-gold-500= number_to_currency(book.price, locale: :fr)
           %td
-            %span.ml-30= book.decorate.quantity
+            %span.ml-30= book.decorate.quantity(order)
           %td
             %span.font-16.in-gold-500= number_to_currency(book.decorate.price_by_quantity, locale: :fr)
