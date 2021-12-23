@@ -23,4 +23,5 @@ RSpec/MultipleMemoizedHelpers:
 Rails/LexicallyScopedActionFilter:
   Exclude:
     - app/controllers/users/*
-
+Rails/PluckInWhere:
+  Enabled: false

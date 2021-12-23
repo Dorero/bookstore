@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 RSpec.describe 'CheckConfirmService', type: :request do
-  let!(:order_with_book) { create(:saved_book) }
+  let!(:order_with_book) { create(:saved_book, :book_with_image) }
   let!(:delivery) { create(:delivery) }
 
   let(:user_data) { attributes_for(:user) }

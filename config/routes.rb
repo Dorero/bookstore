@@ -27,4 +27,5 @@ Rails.application.routes.draw do
 
   resource :checking, only: [:show, :update]
   resources :books, only: [:index, :show]
+  resources :orders, only: [:index, :show]
 end

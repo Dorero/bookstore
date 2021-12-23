@@ -11,8 +11,8 @@ class BookDecorator < Draper::Decorator
     "#{I18n.t(:hegiht)}: #{object.height} x #{I18n.t(:width)}: #{object.width} x #{I18n.t(:depth)}: #{object.depth}"
   end
 
-  def quantity
-    SavedBook.find_by(book_id: object.id).quantity.to_i
+  def quantity(order)
+    SavedBook.where(book: object, order: order).first.quantity.to_i
   end
 
   def first_sentence
@@ -20,7 +20,7 @@ class BookDecorator < Draper::Decorator
   end
 
   def price_by_quantity
-    book = SavedBook.find_by(book_id: object.id)
+    book = SavedBook.find_by(book: object)
     book.price * book.quantity
   end
 end

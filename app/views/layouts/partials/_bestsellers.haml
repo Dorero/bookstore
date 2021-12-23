@@ -1,17 +1,17 @@
-- 4.times do |index|
+- bestsellers_books.each do |book|
   .col-sm-6.col-md-3
     .general-thumb-wrap
       .thumbnail.general-thumbnail
-        %img.img-shadow.general-thumbnail-img{src: "http://jonathantweedy.com/resources/thumbs/SmashingBook5ResponsiveWebDesign.jpg", alt: "design-book"}
+        %img.img-shadow.general-thumbnail-img{src:  book.images.first.image(:large).url, alt: "design-book"}
         .thumb-hover
           .general-thumb-link-wrap
-            = link_to('/show', id: '1', class: "thumb-hover-link") do
+            = link_to book_path(book.id), class: "thumb-hover-link" do
               %i.fas.fa-eye.thumb-icon{'aria-hidden': "true"}
-            = link_to('/buy', id: '1', class: "thumb-hover-link") do
+            = link_to cart_path(book_id: book.id, quantity_books: 1), method: :post, class: 'thumb-hover-link' do
               %i.fas.fa-shopping-cart.thumb-icon
     .mb-35
       .clearfix
-        %p.pull-right.font-16.in-gold-500 €28.50
-        %p.title.mr-55 Android Programming for Beginners
+        %p.pull-right.font-16.in-gold-500= number_to_currency(book.price, locale: :fr)
+        %p.title.mr-55= book.name
       %span.divider-sm
-      %p.lead.small John Horton
+      = render('layouts/partials/authors_name', authors: book.authors)

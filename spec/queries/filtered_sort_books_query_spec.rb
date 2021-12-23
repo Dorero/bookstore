@@ -40,5 +40,22 @@ RSpec.describe FilteredSortBooksQuery do
       it { expect(sort_title_asc.first.category).to eq(book_alphabetical_asc.category) }
       it { expect(sort_title_desc.first.category).to eq(book_alphabetical_desc.category) }
     end
+
+    context 'when sorting and filtering by popular' do
+      let!(:orders) { create_list(:order, 2) }
+      let!(:books) { create_list(:book, 2, category: categories.first) }
+
+      let(:sort_popular) { described_class.new(categories.first.id, :popular_first).call }
+
+      before do
+        create(:saved_book, order: orders.first, book: books.first)
+        create(:saved_book, order: orders.last, book: books.first)
+        create(:saved_book, order: orders.last, book: books.last)
+      end
+
+      it { expect(sort_popular).to be_a(ActiveRecord::Relation) }
+      it { expect(sort_popular.length).to eq(2) }
+      it { expect(sort_popular.first).to eq(books.first) }
+    end
   end
 end

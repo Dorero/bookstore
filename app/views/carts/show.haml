@@ -31,14 +31,14 @@
               %span.font-16.in-gold-500= number_to_currency(book.price, locale: :fr)
             %td
               .input-group
-                = link_to update_quantity_books_by_one_cart_path(book_id: book.id, quantity_books: book.decorate.quantity, direction: -1), method: :post, class: 'input-link' do
+                = link_to update_quantity_books_by_one_cart_path(book_id: book.id, quantity_books: book.decorate.quantity(session[:current_cart]), direction: -1), method: :post, class: 'input-link' do
                   %i.fa.fa-minus.line-heaght-40
-                %input.form-control.quantity-input.send{type: "text", value: "#{book.decorate.quantity}"}
+                %input.form-control.quantity-input.send{type: "text", value: "#{book.decorate.quantity(session[:current_cart])}"}
                 %input#book_id{hidden: true, value: "#{book.id}"}
-                = link_to update_quantity_books_by_one_cart_path(book_id: book.id, quantity_books: book.decorate.quantity, direction: 1), method: :post, class: 'input-link' do
+                = link_to update_quantity_books_by_one_cart_path(book_id: book.id, quantity_books: book.decorate.quantity(session[:current_cart]), direction: 1), method: :post, class: 'input-link' do
                   %i.fa.fa-plus.line-heaght-40
             %td
-              %span.font-16.in-gold-500.sub-total= number_to_currency(book.price * book.decorate.quantity, locale: :fr)
+              %span.font-16.in-gold-500.sub-total= number_to_currency(book.price * book.decorate.quantity(session[:current_cart]), locale: :fr)
             %td
               = link_to delete_book_cart_path(book_id: book.id),  method: :post, class: 'close general-cart-close' do
                 %span{'aria-hidden': "true"} &times;

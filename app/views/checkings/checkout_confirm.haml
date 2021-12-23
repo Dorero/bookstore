@@ -9,7 +9,7 @@
       = render('layouts/partials/address_data', address: instances.billing_address, link: true)
     = render('layouts/partials/shipments_data', delivery: instances.delivery, order: instances.order, link: true)
     = render('layouts/partials/payment_data', payment: instances.payment, link: true)
-  = render('layouts/partials/order_books', books: instances.order.books)
+  = render('layouts/partials/order_books', order: instances.order, status: false)
   .text-center.general-text-right
     %p.in-gold-500.font-18= I18n.t(:order_summary)
     %table.general-summary-table.general-summary-table-right.general-text-right

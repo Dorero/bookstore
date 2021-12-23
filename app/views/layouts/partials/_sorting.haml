@@ -1,0 +1,13 @@
+%ul.dropdown-menu
+  %li
+    = link_to(I18n.t(:newest_first), books_path(sort: :newest_first, sort_name: I18n.t(:newest_first), category: params[:category]))
+  %li
+    = link_to(I18n.t(:popular_first),  books_path(sort: :popular_first, sort_name: I18n.t(:popular_first), category: params[:category]))
+  %li
+    = link_to(I18n.t(:sort_price, start: 'low', end: 'hight'),  books_path(sort: :price_low, sort_name: I18n.t(:sort_price, start: 'low', end: 'hight'), category: params[:category]))
+  %li
+    = link_to(I18n.t(:sort_price, start: 'hight', end: 'low'),  books_path(sort: :price_hight, sort_name: I18n.t(:sort_price, start: 'hight', end: 'low'), category: params[:category]))
+  %li
+    = link_to(I18n.t(:sort_title_asc),  books_path(sort: :title_asc, sort_name: I18n.t(:sort_title_asc), category: params[:category]))
+  %li
+    = link_to(I18n.t(:sort_title_desc), books_path(sort: :title_desc, sort_name: I18n.t(:sort_title_desc), category: params[:category]))

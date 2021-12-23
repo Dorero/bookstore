@@ -18,6 +18,7 @@
         %p= I18n.t(:we_pore)
       = link_to(I18n.t(:get_started), books_path, class: 'btn btn-default')
     .mb-35
-      %h3= I18n.t(:best_sellers)
-      .row
-        = render('layouts/partials/bestsellers')
+      - if @bestsellers_books.any?
+        %h3= I18n.t(:best_sellers)
+        .row
+          = render('layouts/partials/bestsellers', bestsellers_books: @bestsellers_books)

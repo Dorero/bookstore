@@ -24,7 +24,7 @@ RSpec.describe BookDecorator do
   end
 
   describe '#quantity' do
-    it { expect(book.quantity).to eq(order_with_book.quantity) }
+    it { expect(book.quantity(order_with_book.order)).to eq(order_with_book.quantity) }
   end
 
   describe '#first_sentence' do
